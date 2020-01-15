@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# MAC files
+.DS_Store
+
+# Doc files
+.docx
+.doc
+.xlsx
