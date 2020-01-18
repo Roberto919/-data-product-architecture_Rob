@@ -1,4 +1,4 @@
-![](/docs/images/itam_logopng)
+![](/docs/images/itam_logo.png)
 
 ## Data Product Architercture
 
@@ -196,13 +196,13 @@ Checkpoint:
 + Mostrar shallow *front* con alguna funcionalidad
 Tarea:
 + Implementación de tu entregable *front*
-+ Actualización al documento de entrega `README.md` y requirements.txt
++ Actualización al documento de entrega `README.md` y `requirements.txt`
 
 **Semana 17: Proyecto**
 + Últimos detalles a tu implementación a tu producto de datos
 
 Checkpoint:
-+ Revisión de tu `READMEmd` y requirementstxt
++ Revisión de tu `READMEmd` y `requirements.txt`
 Deliverable:
 + Entrega de documentación de tu producto de datos en tu repositorio
 Tarea:
