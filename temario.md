@@ -147,7 +147,7 @@ Tarea:
 + Deuda técnica
 + Cálculos éticos: Bias and Fairness
 
-Delivery:
+Deliverable:
 + Storage de datos de modelo (al menos 1)
 Tarea
 + Selección de métrica de *bias* y *fairness* a ocupar de acuerdo a tu proyecto

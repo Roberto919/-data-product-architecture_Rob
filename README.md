@@ -5,7 +5,7 @@ Web: http://itam-ds.github.io/data-product-architecture
 
 ## Descripción del curso
 
-Este curso esta diseñado para que puedas desarrollar un producto de datos de inicio a fin. Esto implica conocer todas las partes que están involucradas en un producto de datos, así como el desarrollo de muchas pequeñas piezas que hacen un todo. 
+Este curso esta diseñado para que puedas desarrollar un producto de datos de inicio a fin. Esto implica conocer todas las partes que están involucradas en un producto de datos, así como el desarrollo de muchas pequeñas piezas que hacen un todo.
 
 ### Objetivos
 
@@ -61,3 +61,9 @@ El diseño de los temas, el contenido y las lecturas están basados en la clase 
 
 + Optativa de Proyectos de Ciencia de Datos de Política Pública
 + Introducción a Ciencia de Datos
+
+
+### Bases de datos disponibles
+
++ [Ecobici](https://www.ecobici.cdmx.gob.mx/es/informacion-del-servicio/open-data)
++ [RITA](http://stat-computing.org/dataexpo/2009/the-data.html)
