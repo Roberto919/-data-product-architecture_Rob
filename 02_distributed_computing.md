@@ -133,7 +133,7 @@ HDFS tiene una arquitectura maestro/esclavo con los siguientes elementos:
 -   Realiza operaciones de apertura, cierre y renombramiento de archivos y directorios.
 -   Determina el mapeo de los bloques a los *data nodes* -*JobTracker*-.
 
-1.  **Data Nodes:** Normalmente 1 por cada nodo, administran lo que está guardado en ellos.
+2.  **Data Nodes:** Normalmente 1 por cada nodo, administran lo que está guardado en ellos.
 
 -   Responsables de atender las peticiones de escritura y lectura de los clientes del sistema de archivos.
 -   Llevan a cabo la creación de bloques, borrado y replicación bajo instrucción del *Name Node*.
