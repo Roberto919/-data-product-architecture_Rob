@@ -39,7 +39,7 @@ En un sistema de computo distribuido no se pueden cumplir más de 2 de las sigui
 
 -   **Consistencia:** (Consistency) Todos los nodos ven la misma información al mismo tiempo
 -   **Disponibilidad:** (Availability) Garantía de confirmar que la petición hecha a cada nodo fue resuelta, aunque ésta no haya sido satisfactoria
--   **Tolerancia a la partición:** (Partition tolerance) Si algun(os) nodo(s) en el cluster fallan, el sistema seguirá funcionando
+-   **Tolerancia a la partición:** (Partition tolerance) Si algun(os) nodo(s) en el *cluster fallan*, el sistema seguirá funcionando
 
 Estas hablidades se aplican a sistemas de base de datos distribuidos, por ejemplo: Cassandra, MongoDB, etc.
 
@@ -64,7 +64,7 @@ En los sistemas distribuidos la A se logra replicando los datos entre todas las 
 -   Apache lo adopta.
 -   Ya se indexa texto ... ahora conquistaremos el mundo: indexado de **toda** la web, enter [Mike Cafarella](https://en.wikipedia.org/wiki/Mike_Cafarella) → Nutch: *Open source web crawler*.
 -   Nutch + Lucene.
--   Nutch: 1 máquina, 1 solo core, 1 GB RAM, RAID -*Redundant Array of Independent Disks* (1987), un sistema de administración de datos que utiliza múltiples unidades de disco duro ... paréntesis cultural- nivel 1 en 8 discos duros (1 TB) → 100 páginas por segundo.
+-   Nutch: 1 máquina, 1 solo core, 1 GB RAM, RAID -*Redundant Array of Independent Disks* (1987) -un sistema de administración de datos que utiliza múltiples unidades de disco duro- nivel 1 en 8 discos duros (1 TB) → 100 páginas por segundo.
     -   Artículo ["A Case for Redundant Arrays of Inexpensive Disks (RAID)"](https://www.cs.cmu.edu/~garth/RAIDpaper/Patterson88.pdf).
     -   IBM 1977.
     -   Un arreglo de discos barato podía superar el desempeño del mejor disco en la época.
@@ -87,21 +87,24 @@ En los sistemas distribuidos la A se logra replicando los datos entre todas las 
 -   Construyen lo descrito en el paper en Java → les toma todo 2004, se crea NDFS -*Nutch Distributed File System*-.
 -   NDFS agregaba una capa que abstrae la complejidad de administrar los *nuances* del almacenaje de datos distribuido.
 -   Los problemas de durabilidad y tolerancia a fallos se resolvieron partiendo archivos en *chunks* de 64MB guardando cada uno en 3 nodos diferentes ← regresaremos a este punto.
--   Habiendo arreglado todo lo anterior se concentraron ahora en encontrar un algoritmo que hiciera un buen *match* con lo ya desarrollado en el NDFS por lo que se requería que el algoritmo aplicara paralelismo, escalable linealmente (casi) es decir, 8 máquinas corriendo un algoritmo que fuera paralelizable tendrían que ser 2 veces más rápido que 4 máquinas (sin paralelización).
+-   Habiendo arreglado todo lo anterior se concentraron ahora en encontrar un algoritmo que fuera compatible con la filosofía de lo ya desarrollado en el NDFS, por lo que se requería que el algoritmo aplicara paralelismo, escalable linealmente (casi) es decir, 8 máquinas corriendo un algoritmo que fuera paralelizable tendrían que ser 2 veces más rápido que 4 máquinas (sin paralelización).
     -   La idea del algoritmo era que de alguna forma se pudieran enviar pedazos de un programa a todos los nodos en un *cluster*, procesarlos por separado, recolectar las salidas y juntarlos para obtener un resultados final. Enter *MapReduce*.
     -   Google al rescate de nuevo publica en diciembre de 2004 ["MapReduce: Simplified Data Processing on Large Clusters"](https://ai.google/research/pubs/pub62)
 -   Durante 2005 se ponen a chambear en integrar MapReduce a Nutch.
 -   Febrero 2006 nace Hadoop integrango Nutch, HDFS y MapReduce bajo el apoyo de Apache.
--   Al mismo tiempo el equipo de Yahoo! es "obligado" a pasar su ya eficiente buscador hecho en C++ a ocupar la implementación de Google de MapReduce open source -a.k.a. MapReduce de Hadoop, ergo Hadoop-, el prinicipal engineer de Yahoo! se niega -¿cómo puede ser posible que quieran pasar del eficiente C++ al ineficiente Java? su pregunta principal... :/- y sus jefes contratan a Cutting para que implemente su buscador ocupando Hadoop ... pum. → Esta es la decisión que salva a Yahoo!.
+-   Al mismo tiempo el equipo de Yahoo! es "obligado" a pasar su ya eficiente buscador hecho en C++ a ocupar la implementación de Google de MapReduce *open source* -a.k.a. MapReduce de Hadoop, ergo Hadoop-, el prinicipal engineer de Yahoo! se niega -¿cómo puede ser posible que quieran pasar del eficiente C++ al ineficiente Java? su pregunta principal... :/- y sus jefes contratan a Cutting para que implemente su buscador ocupando Hadoop ... pum. → Esta es la decisión que salva a Yahoo!.
 -   Para 2007 compañías como Facebook, LindekIn, Twitter ocupaban Hadoop y contribuyeron con *frameworks* y herramientas al ecosistema *open source*. Yahoo! ya cuenta con 1,000 nodos en su Hadoop *cluster*.
 -   Para 2008 Hadoop deja de ser un subproyecto de Lucene para convertirse en uno de los top en Apache y siendo el paraguas para muchos subproyectos como HBase, ZooKeeper, Pig (contribución de Yahoo!), Hive (contribución de Facebook)
 -   2008 nace Cloudera fundado por alguien de BerkeleyDB, Google, Facebook y Yahoo!.
--   2009 Amazon proveé servicio de MapReduce en su producto ElasticMapReduce. Cutting se mueve de Yahoo! a Clouderra como *Chief Architect*.
+-   2009 Amazon provee servicio de MapReduce en su producto ElasticMapReduce. Cutting se mueve de Yahoo! a Clouderra como *Chief Architect*.
 -   2010 la demanda por ingenieros en Hadoop (de datos) crece considerablemente.
 -   2011 la gente que quedó en Yahoo! abre su propia empresa Hortonworks.
 -   2012 el *cluster* de Hadoop llega a 42,000 nodos.
 
 → Para leer en detalle sobre las configuraciones de los RAIDS y sus detalles puedes ir [aquí](https://searchstorage.techtarget.com/definition/RAID)
+
+Acá una [infografía](http://blog.soydata.net/wp-content/uploads/hadoop-10th-birthday-infographic.gif) de la historia de Hadoop MUY resumida
+
 
 ### HDFS
 
@@ -118,15 +121,15 @@ En los sistemas distribuidos la A se logra replicando los datos entre todas las 
 -   Tiene un modelo de acceso a archivos de escribir una vez y leer múltiples veces. Esta propiedad implica que **no** se puede agregar datos a un archivo una vez que es creado, escrito y cerrado.
 -   Está diseñado para ser portado entre plataformas diferentes de manera sencilla.
 
-**Fact:** Uno de los principios fundamentales en el procesamiento de datos a gran escala es el concepto *"code moving to data rather than data to code"*. Cuando una aplicación solicita hacer algún procesamiento, éste es más eficiente si sucede “cerca” de donde están los datos a los que se tienen que procesar -sobretodo si los datos son de gran escala!-. HDFS proveé interfaces para que la aplicación se muevan cerca de donde están los datos que se requieren procesar.
+**Fact:** Uno de los principios fundamentales en el procesamiento de datos a gran escala es el concepto *"code moving to data rather than data to code"*. Cuando una aplicación solicita hacer algún procesamiento, éste es más eficiente si sucede “cerca” de donde están los datos a los que se tienen que procesar -sobretodo si los datos son de gran escala!-. HDFS provee interfaces para que la aplicación se muevan cerca de donde están los datos que se requieren procesar.
 
 #### Arquitectura
 
 HDFS tiene una arquitectura maestro/esclavo con los siguientes elementos:
 
-1.  **Name Node:** El server maestro que administra el sistema de archivos y regula el acceso de los clientes a los archivos.
+1.  **Name Node:** El servidor maestro que administra el sistema de archivos y regula el acceso de los clientes a los archivos.
 
--   Tiene la metadata, la información de cómo los datos fueron divididos -en qué *data nodes* se encuentran- por lo que puede recrear todo el set de datos.
+-   Tiene la *metadata*, la información de cómo los datos fueron divididos -en qué *data nodes* se encuentran- por lo que puede recrear todo el set de datos.
 -   Realiza operaciones de apertura, cierre y renombramiento de archivos y directorios.
 -   Determina el mapeo de los bloques a los *data nodes* -*JobTracker*-.
 
@@ -149,7 +152,7 @@ Un despliegue típico de una arquitectura de Hadoop ocupa un nodo para el *Name 
 -   HDFS puede trabajar con una organización de archivos jerárquica tradicional -aunque físicamente no se guardan de esta manera-.
 -   Como en los sistemas de archivos tradicionales en HDFS se pueden crear, borrar, renombrar y mover archivos.
 -   Se puede utilizar *user quotas* y permisos de acceso.
--   No acepta los *soft* o *hard* links.
+-   No acepta los [*soft* o *hard* links](https://www.ostechnix.com/explaining-soft-link-and-hard-link-in-linux-with-examples/).
 
 El *Name Node* es el responsable de mantener este *file system namespace*, cualquier cambio realizado en el sistema de archivos o en sus propiedades queda almacenado en el *Name Node*. El *Name node* también es responsable de administrar el número de réplicas que se generar por archivo -*replication factor*-.
 
