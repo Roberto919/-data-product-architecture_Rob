@@ -12,11 +12,13 @@ Enero 2020
 + Conceptos de cómputo distribuido
   + Escalamiento vertical
   + Escalamiento horizontal  
+  + Teorema CAP
   + HDFS
-  +
+  + MapReduce
+  + Diseño de esquemas en HDFS
 
 
-**Contexto**
+### Contexto
 
 El procesamiento de grandes escalas de datos está basado en avances computacionales que se han dado en las últimas décadas. Dos de los más importantes son:
 
@@ -29,6 +31,27 @@ Además, se ha modificado la forma en la que "optimizamos" el uso de los recurso
 2.  **Escalamiento horizonal:** Agregar más computadoras para aumentar la capacidad de procesamiento en conjunto. Cuando juntamos varias computadoras decimos que forman un *cluster* donde cada computadora es un **nodo**. El *cluster* puede ser físico, por ejemplo, si hacemos que todas las computadoras de este salón se comuniquen y compartan su poder de cómputo; o en la nube -eso de todas maneras es físico!- en donde las máquinas no son "nuestras", solo las ocupamos por el tiempo necesario y con las características necesarias.
 
 No sería posible tener escalamiento horizontal, sin poder tener formas de distribuir datos y procesar en paralelo.
+
+
+**Teorema CAP**
+
+En un sistema de computo distribuido no se pueden cumplir más de 2 de las siguientes características simultáneamente:
+
+-   **Consistencia:** (Consistency) Todos los nodos ven la misma información al mismo tiempo
+-   **Disponibilidad:** (Availability) Garantía de confirmar que la petición hecha a cada nodo fue resuelta, aunque ésta no haya sido satisfactoria
+-   **Tolerancia a la partición:** (Partition tolerance) Si algun(os) nodo(s) en el cluster fallan, el sistema seguirá funcionando
+
+Estas hablidades se aplican a sistemas de base de datos distribuidos, por ejemplo: Cassandra, MongoDB, etc.
+
+![](./docs/images/cap_theorem.png)
+<br>
+
+Es importante aclarar que este teorema aplica **temporalmente** en bases de datos distribuidas -a veces mal llamadas NoSQL- el teorema se cumple temporalmente, solo mientras se realiza la replicación en todos los nodos.
+
+En los sistemas distribuidos la A se logra replicando los datos entre todas las máquinas que forman parte del cluster, la C se logra actualizando varios nodos antes de permitir más lecturas y la P se refiere a que si hay una falla en alguna parte del sistema el sistema sigue procesando correctamente. Si hay un *delay* entonces es cuando tenemos que escoger entre la A y la C temporlamente:
+
+-   En sistemas en donde durante el *particionamiento temporal* se permite leer datos de los nodos antes de actualizarlos se privilegia la A
+-   En sistemas en donde durante el *particionamiento temporal* se actualizan los nodos antes de permitir la lectura se privilegia la C
 
 ### Un poco de historia de Hadoop
 
@@ -70,19 +93,19 @@ No sería posible tener escalamiento horizontal, sin poder tener formas de distr
 -   Durante 2005 se ponen a chambear en integrar MapReduce a Nutch.
 -   Febrero 2006 nace Hadoop integrango Nutch, HDFS y MapReduce bajo el apoyo de Apache.
 -   Al mismo tiempo el equipo de Yahoo! es "obligado" a pasar su ya eficiente buscador hecho en C++ a ocupar la implementación de Google de MapReduce open source -a.k.a. MapReduce de Hadoop, ergo Hadoop-, el prinicipal engineer de Yahoo! se niega -¿cómo puede ser posible que quieran pasar del eficiente C++ al ineficiente Java? su pregunta principal... :/- y sus jefes contratan a Cutting para que implemente su buscador ocupando Hadoop ... pum. → Esta es la decisión que salva a Yahoo!.
--   Para 2007 compañías como Facebook, LindekIn, Twitter ocupaban Hadoop y contribuyeron con *frameworks* y herramientas al ecosistema *open source*. Yahoo! ya cuenta con 1,000 nodos en su Hadoop cluster.
--   Para 2008 Hadoop deja de ser un subproyecto de Lucene para convertirse en uno de los top en Apache y siendo el paraguas para muchos subproyectos como HBase, ZooKeeper, Pig (contribución de Yahoo!), Hive (contribución de Facebook),
+-   Para 2007 compañías como Facebook, LindekIn, Twitter ocupaban Hadoop y contribuyeron con *frameworks* y herramientas al ecosistema *open source*. Yahoo! ya cuenta con 1,000 nodos en su Hadoop *cluster*.
+-   Para 2008 Hadoop deja de ser un subproyecto de Lucene para convertirse en uno de los top en Apache y siendo el paraguas para muchos subproyectos como HBase, ZooKeeper, Pig (contribución de Yahoo!), Hive (contribución de Facebook)
 -   2008 nace Cloudera fundado por alguien de BerkeleyDB, Google, Facebook y Yahoo!.
--   2009 Amazon provee servicio de MapReduce en su producto ElasticMapReduce. Cutting se mueve de Yahoo! a Clouderra como Chief Architect.
+-   2009 Amazon proveé servicio de MapReduce en su producto ElasticMapReduce. Cutting se mueve de Yahoo! a Clouderra como *Chief Architect*.
 -   2010 la demanda por ingenieros en Hadoop (de datos) crece considerablemente.
--   2011 ;a gente que quedó en Yahoo! abre su propia empresa Hortonworks.
--   2012 el cluster de Hadoop llega a 42,000 nodos.
+-   2011 la gente que quedó en Yahoo! abre su propia empresa Hortonworks.
+-   2012 el *cluster* de Hadoop llega a 42,000 nodos.
 
 → Para leer en detalle sobre las configuraciones de los RAIDS y sus detalles puedes ir [aquí](https://searchstorage.techtarget.com/definition/RAID)
 
 ### HDFS
 
-Hadoop Distributed File System. Sistema de almacenaje de archivos de forma distribuida, es el punto de entrada al ecosistema Hadoop pues es donde almacenamos los datos que queremos procesar en múltiples archivos. Cuando se carga a HDFS un set de datos éste es dividido en múltiples bloques que serán almacenados de forma distribuida replicándose al menos en **3 nodos** que forman parte del cluster.
+*Hadoop Distributed File System*. Sistema de almacenaje de archivos de forma distribuida, es el punto de entrada al ecosistema Hadoop pues es donde almacenamos los datos que queremos procesar en múltiples archivos. Cuando se carga a HDFS un set de datos, éste es dividido en múltiples bloques que serán almacenados de forma distribuida replicándose al menos en **3 nodos** que forman parte del *cluster*.
 
 **Características:**
 
@@ -92,10 +115,10 @@ Hadoop Distributed File System. Sistema de almacenaje de archivos de forma distr
 -   Escalabilidad.
 -   Almacenamiento distribuido.
 -   Está diseñado para procesamiento en *batch* **no** para el uso interactivo de usuarios → no está diseñado para *streaming*!.
--   Tiene un modelo de acceso a archivos de escribir una vez y leer múltiples veces. Esta propiedad implica que no se puede agregar datos a un archivo una vez que es creado, escrito y cerrado.
+-   Tiene un modelo de acceso a archivos de escribir una vez y leer múltiples veces. Esta propiedad implica que **no** se puede agregar datos a un archivo una vez que es creado, escrito y cerrado.
 -   Está diseñado para ser portado entre plataformas diferentes de manera sencilla.
 
-**Fact:** Uno de los principios fundamentales en el procesamiento de datos a gran escala es el concepto *"code moving to data rather than data to code"*. Cuando una aplicación solicita hacer algún procesamiento, éste es más eficiente si sucede “cerca” de donde están los datos a los que se tienen que procesar -sobretodo si los datos son de gran escala!-. HDFS provee interfaces para que la aplicación se muevan cerca de donde están los datos que se requieren procesar.
+**Fact:** Uno de los principios fundamentales en el procesamiento de datos a gran escala es el concepto *"code moving to data rather than data to code"*. Cuando una aplicación solicita hacer algún procesamiento, éste es más eficiente si sucede “cerca” de donde están los datos a los que se tienen que procesar -sobretodo si los datos son de gran escala!-. HDFS proveé interfaces para que la aplicación se muevan cerca de donde están los datos que se requieren procesar.
 
 #### Arquitectura
 
@@ -117,9 +140,9 @@ HDFS tiene una arquitectura maestro/esclavo con los siguientes elementos:
 
 Fuente: <http://blog.raremile.com/hadoop-demystified/>
 
-Ambos tipos de nodo están diseñados para correr en máquinas que usualmente tienen Linux como sistema operativo, y debido a que Hadoop está hecho en Java las máquinas que forman parte del cluster con Hadoop requieren de tener Java.
+Ambos tipos de nodo están diseñados para correr en máquinas que usualmente tienen Linux como sistema operativo, y debido a que Hadoop está hecho en Java las máquinas que forman parte del *cluster* con Hadoop requieren de tener Java.
 
-Un despliegue típico de una arquitectura de Hadoop ocupa un nodo para el *Name Node* mientras que el resto de las máquinas -nodos- en el cluster corren 1 instancia del programa *Data Node*.
+Un despliegue típico de una arquitectura de Hadoop ocupa un nodo para el *Name Node* mientras que el resto de las máquinas -nodos- en el *cluster* corren 1 instancia del programa *Data Node*.
 
 **File system namespace**
 
@@ -132,16 +155,16 @@ El *Name Node* es el responsable de mantener este *file system namespace*, cualq
 
 **Data Replication**
 
--   HDFS almacena cada archivo como una sequencia de bloques, estos bloques son replicados en el cluster para tener tolerancia a fallas -físicas-. El tamaño de los bloques y el número de réplicas son configurables por archivo -aunque se puede establecer una configuración de ambos por default-.
+-   HDFS almacena cada archivo como una sequencia de bloques, estos bloques son replicados en el *cluster* para tener tolerancia a fallas -físicas-. El tamaño de los bloques y el número de réplicas son configurables por archivo -aunque se puede establecer una configuración de ambos por *default*-.
 
 ![](./docs/images/hdfs_blocks_1.png) <br>
 
--   **Todos** los bloques de un archivo excepto el último son del mismo tamaño ... ¿por qué?. El tamaño por default es de 64MB por bloque, pero el tamaño 'óptimo' depende de la naturaleza del data set y de cómo se utilizarán los datos en la aplicación
+-   **Todos** los bloques de un archivo excepto el último son del mismo tamaño ... ¿por qué?. El tamaño por *default* es de **64MB** por bloque, pero el tamaño 'óptimo' depende de la naturaleza del *dataset* y de cómo se utilizarán los datos en la aplicación
 -   Se puede especificar el número de réplicas de un archivo -normalmente se pone mínimo 3- ... ¿por qué?
 -   El factor de replicación se puede especificar en el momento de la creación del archivo y se puede cambiar después. Los archivos en HDFS se escriben **una vez** (excepto por *appends* y *truncates*) y tienen estrictamente un solo *writer* por vez
--   El *Name Node* es el que toma las decisiones relacionadas a la replicación de los bloques y periódicamente recibe un *heartbeat* y un reporte de los bloques -*Blockreport*- de cada *Data Node* en el cluster. Al recibir el *heartbeat* el *Name Node* se asegura que ese nodo está "vivo" y que está funcionando correctamente, y el *Blockreport* contiene la lista de todos los bloques contenidos por *Data Node*
+-   El *Name Node* es el que toma las decisiones relacionadas a la replicación de los bloques y periódicamente recibe un *heartbeat* y un reporte de los bloques -*Blockreport*- de cada *Data Node* en el *cluster*. Al recibir el *heartbeat* el *Name Node* se asegura que ese nodo está "vivo" y que está funcionando correctamente, y el *Blockreport* contiene la lista de todos los bloques contenidos por *Data Node*
 
-![](../images/block_replication.png) Fuente: <https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Data_Replication>
+![](./docs/images/block_replication.png) Fuente: <https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Data_Replication>
 
 **Anatomía de la replicación**
 
@@ -149,15 +172,15 @@ El *Name Node* es el responsable de mantener este *file system namespace*, cualq
 
 Dónde se ponen las réplicas de cada bloque es un tema muy importante porque afecta el desempeño y confiabilidad -*reliability*- de HDFS. Optimizar el lugar en donde poner cada réplica requiere de mucho *tuneo* y experiencia! ... → acérquense a su ingeniero de datos de cabecera :P.
 
-Si el cluster de Hadoop es tan grande que se requiere de ocupar *racks*, el protocolo de replicación más simple consiste en poner cada réplica en diferentes *racks* esto evitará que perdamos datos si un *rack* completo se cae. Este protocolo balancea la distribución de las réplicas en el cluster pero incrementa el costo de escritura ya que se requieren transferir bloques a varios racks.
+Si el *cluster* de Hadoop es tan grande que se requiere de ocupar *racks*, el protocolo de replicación más simple consiste en poner cada réplica en diferentes *racks* esto evitará que perdamos datos si un *rack* completo se cae. Este protocolo balancea la distribución de las réplicas en el *cluster* pero incrementa el costo de escritura ya que se requieren transferir bloques a varios *racks*.
 
 Cuándo se deja la réplica de 3 -con *racks*- se deja 1 réplica en la máquina local -si el *writer* está en el *Data Node*- o en cualquier nodo en otro caso, otra réplica en un nodo en otro *rack*, y la última en un nodo diferente en el mismo *rack* del anterior.
 
-![](../images/replication_racks.png)
+![](./docs/images/replication_racks.png)
 
-Si el factor de replicación es mayor a 3, el *placement* de cada réplica a partir de la 4 se determina de forma aleatoria cuidando que el número de réplicas por *rack* se encuentre por debajo de su límite máximo: (replicas -1)/(racks + 2)$.
+Si el factor de replicación es mayor a 3, el *placement* de cada réplica a partir de la 4 se determina de forma aleatoria cuidando que el número de réplicas por *rack* se encuentre por debajo de su límite máximo: $(replicas -1)/(racks + 2)$.
 
-**NOTA:** Debido a que el *Name Node* no permite que haya más de una réplica de un mismo bloque en un mismo *Data Node* el máximo número de réplicas corresponde al número de *Data Nodes* en el cluster de hadoop.
+**NOTA:** Debido a que el *Name Node* no permite que haya más de una réplica de un mismo bloque en un mismo *Data Node* el máximo número de réplicas corresponde al número de *Data Nodes* en el *cluster* de hadoop.
 
 -   *Replica selection*
 
@@ -170,6 +193,181 @@ Cuando se levanta el cluster de Hadoop el *Name Node* entra en un estado especia
 El *Blockreport* contiene la lista de los *data blocks* que contiene, cada bloque tiene especificado el número mínimo de réplicas que requiere. Se considera que un bloque está replicado correctamente cuando su mínimo número de réplicas ha sido notificado al *Name Node*. Después de que se cumple un % -configurable- de notificaciónes de réplica de un bloque al *Name Node* y después de 30 segundos el *Name Node* sale de este estado *Safemode*, luego determina cuáles bloques no cumplen con el mínimo % de replicación para iniciar su replicación a otros *Data Node*.
 
 [Socrative Room: LILIANA2205](http://www.socrative.com/login/student)
+
+### MapReduce
+
+Es un concepto introducido por primera vez en 2004 en un paper publicado por Google [MapReduce: Simplified Data Procesing on Large Clusters](http://static.googleusercontent.com/media/research.google.com/en/us/archive/mapreduce-osdi04.pdf).
+
+MapReduce es un paradigma de programación -un modelo de programación- creado para el procesamiento de grandes cantidades de datos a través de su procesamiento en paralelo en un *cluster*. El algoritmo de procesamiento está compuesto por dos fases: la fase *map* y la fase *reduce*, para ambas fases la entrada y la salida son pares `<llave, valor>`.
+
+1.  Fase *Map*
+
+A los procesos que ejecutan el *map* se les conoce como *mappers* -proceso de Java-, normalmente hay 1 por nodo y se ejecutan en los nodos que tengan los datos sobre los que se quiere hacer el procesamiento -recordemos que en procesamiento distribuido se prefiere mover el proceso a mover los datos por el *cluster* ya que es muy costoso en recursos-
+
+**Características**
+
+-   Los *mappers* procesan entradas únicamente en la estructura `<llave, valor>`.
+-   Los *mappers* solo pueden procesar **un** par `<llave, valor>` a la vez.
+-   El número de *mappers* en el *cluster* es configurado por el *framework* no por el desarrollador -aunque es posible que el desarrollador ponga un \#-, el \# de *mappers* depende del tamaño del *set* de datos de entrada del *job* y del tamaño de los bloques, 1 bloque por *mapper* → **el \# de *mappers* de un trabajo de MapReduce es igual al número de bloques en el set de datos a procesar**. Por ejemplo: Si tenemos 10TB como entrada y un *block size* de 128MB ¿cuántos *mappers* tenemos?
+    -   1 TB = 1,099,511,627,776 bytes
+    -   1 MB = 1,048,576 bytes
+-   La salida de los *mappers* son pares `<llave, valor>` que son enviados únicamente a los *reducers*.
+-   Los *mappers* no se pueden comunicar entre ellos.
+-   Los *mappers* no ocupan mucha memoria y el tamaño del *heap* -*heap size*- de la JVM (Java Virtual Machine) es relativamente bajo.
+
+1.  Fase *Reduce*
+
+Una vez que el procesamiento de datos se ha hecho en los *mappers*, los datos se pasan a un proceso de *sort* y *shuffle* en donde los datos son ordenados y particionados, una vez que los datos son ordenados y particionados se mandan a los *reducers*. Los procesos de *sort* y *shuffle* forman parte de la fase *reduce* (aunque no suceden físicamente en los *reducers*).
+
+Los *reducers* -también procesos de Java- reciben los datos **ordenados** y particionados, hacen alguna operación(es) sobre ellos -normalmente alguna agregación- y escriben la salida a HDFS o a la opción elegida como sistema de archivos distribuidos.
+
+**Características**
+
+-   Los *reducers* no se pueden comunicar entre ellos, solo con los *mappers*.
+-   La salida de los *reducers* como en los *mappers* son pares `<llave, valor>`.
+-   Usualmente cada *reducer* tiene un solo flujo de salida -aunque no siempre-.
+-   La salida por default es guardada en disco en archivos con un prefijo `part-r-0000` bajo un mismo directorio de HDFS.
+-   Los *reducers* normalmente no ocupan mucha memoria y el tamaño del *heap* de la JVM es relativamente bajo.
+-   Si la salida del *reducer* requiere procesamiento adicional el data set completo será escrito a disco y vuelto a leer de nuevo :/.
+-   El \# de *reducers* se establece a nivel del *cluster*, aunque se puede sobreescribir este valor para ciertos *jobs* cuando se tiene mucha experiencia con los datos a procesar -conocemos el tamaño de los datos y cómo se particionan-.
+-   El \# de particiones es igual al \# de *reducers*.
+-   Para particionar el set se ocupa una función de *hash*.
+
+![](./docs/images/map_reduce.png)
+<br>
+Fuente: Libro *Hadoop Application Architectures*
+
+**Desventajas**
+
+MapReduce no es una buena solución para algoritmos iterativos pues tiene las siguientes desventajas:
+
+-   Tiempo de "arranque": Aunque no estemos haciendo nada de procesamiento con MapReduce en el *cluster*, se pierden entre 10 y 30 segundos para iniciar MapReduce.
+-   MapReduce escribe constantemente a disco para facilitar el cumplir con la propiedad de tolerancia a fallos → la evolución fue Spark! y por eso se prefiere ocupar Spark ... lo veremos más adelante.
+
+**Recomendaciones**
+
+-   El \# de *mappers* depende del \# total de bloques de los archivos de entrada como lo vimos anteriormente, es posible poner más *mappers* configurando `Configuration.set(MRJobConfig.NUM_MAPS, int)` (en Java).
+-   Se recomienda tener entre 10 y 100 *mappers* por nodo para tener el nivel óptimo de paralelismo para los procesos *map*, aunque se puede aumentar este número, no se recomienda ya que con más **mappers** la ejecución de un *mapper* puede tomar más de un minuto.
+-   Incrementar el \# de *reducers* incrementa el balanceo de carga, baja los costos de fallas pero incrementa el uso de recursos del *framework*.
+-   Se puede poner el \# de *reducers* en 0 si no es necesario hacer un procesamiento *reduce* → la salida de los *mappers* **no** será ordenada ni particionada (y sería muy extraño).
+
+#### Modelo de programación MapReduce
+
+La inspiración de MapReduce viene de la programación funcional, bajo este modelo de progamación, la entrada es particionada en pequeñas partes, se ejecuta el código del *mapper* en cada parte, luego junta todos los resultados de los *mappers* en uno o más *reducers* que juntan/combinan los resultados para entregar uno final.
+
+-   *Map* corresponde a una función que aplica una función a cada elemento en una lista -[lambda functions](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions), listas comprehensivas, apply por ejemplo (python).
+-   *Reduce* corresponde a una función que analiza una estructura de datos recursiva a la que aplica las operaciones definidas para combinarlas y devolver una sola respuesta.
+
+En `dplyr` cuando hacemos un `group_by() %>% summarise()` la parte del `group_by` corresponde al *mapper* y la parte del `summarise` al *reducer*
+→ La forma en la que corremos procesos de MapReduce es a través de un programa escrito en Java (╯°□°)╯︵ ┻━┻ con los siguientes parámetros de entrada:
+
+-   Un método `main` desde donde configuramos un *job* de MapReduce y lo "levantamos"
+    -   Establecemos \# de *reducers*.
+    -   Configuramos las clases de *mapper* y *reducer*.
+    -   Configuramos el particionador (¿Qué tipo de particionador?).
+    -   Configuramos otras cosas de Hadoop.
+-   Una clase *Mapper*
+    -   Toma como entrada tuplas de `<llave, valor>` y escribe tuplas de `<llave, valor>`.
+
+Debido a que la librería de Hadoop de *streaming* implementa estas chivas mencionadas arriba, nos servirá como API para escribir el proceso de MapReduce en otros lenguajes, para ello solo hay que leer de `STDIN` y escribir a `STDOUT` ＼(＾O＾)／. Solo debemos tener en cuenta que esta librería **supone que las tuplas `<llave,valor>` están separadas por un tab `\t`**.
+
+Para correr un job de *streaming* en Hadoop solo debemos indicarle a hadoop de dónde sacar el `.jar` de *streaming* ... depende de la versión de Hadoop que hayamos instalado pero como nosotros estamos en la 2.7.x, el `.jar` se encuentra en el siguiente directorio: `/usr/local/hadoop/share/hadoop/tools/lib/`
+
+**Ejemplo:** El *Hello world!* de MapReduce es hacer un conteo de palabras de algún texto... juguemos con el *Hello World*.
+
+**Objetivo:** Contar la frecuencia de operación de cada palabra en un texto
+
+- ![](./docs/images/pointer.png) ¿Cómo diseñamos el conteo de palabras para hacer en modelo de programación MapReduce?
+
+- ![](./docs/images/pointer.png) → ¿Qué harían los *mappers*? ¿Qué harían los *reducers*? (¿más de uno?)
+
+![](./docs/images/word_count_map_reduce.png)
+<br>
+Fuente: <https://www.researchgate.net/figure/Word-count-program-flow-executed-with-MapReduce-5_270448794>
+
+##### Python
+
+Haremos "trampa"" porque no queremos programar en Java ni en *Jython* para poder ejecutar procesos de MapReduce, en lugar de esto ocuparemos la librería de *Hadoop streaming* para poder escribir el código en Python y poder ejecutar el código en Hadoop :P.
+
+En mi máquina tengo "La Ilíada" de Homero en un txt plano que bajé del proyecto [Gutenberg](http://www.gutenberg.org/cache/epub/6130/pg6130.txt).
+
+Empezaremos con algo sencillo, sin pensar en MapReduce cómo contaríamos la frecuencia de aparación por palabra en *plain vanilla* python?.
+
+```
+    #!/usr/bin/python
+
+    import sys
+    import re
+
+    sums = {}
+
+    for line in sys.stdin:
+      line = re.sub('^\W+|\W+$', '', line) #elimina lo que no sean alfanumérico al inicio y fin de la línea
+      words = re.split('\W+', line)
+
+      for word in words:
+        word = word.lower()
+        sums[word] = sums.get(word, 0) + 1
+
+    print(sums)
+```
+
+Pasemos esto a *map* y *reduce*.
+
+**Mapper**
+
+```
+    #!/usr/bin/python
+
+    import sys
+    import re
+
+    for line in sys.stdin:
+      line = re.sub('^\W+|\W+$', '', line) #elimina lo que no sean alfanumérico al inicio y fin de la línea
+      words = re.split('\W+', line)
+
+      for word in words:
+        print(word.lower() + "\t1") #mandamos a la salida la palabra separada por un tab y un 1
+```
+
+**Reducer**
+
+Recuerda que al *reducer* le llegan los pares de `<llave,valor>` **ordenados!**
+
+```
+    #!/usr/bin/python
+
+    import sys
+
+    previous = None
+    sum = 0
+
+    for line in sys.stdin:
+      key, value = line.split('\t')
+      if key != previous:
+          if previous is not None:
+            print(previous + '\t' + str(sum))
+          previous = key
+          sum = 0
+
+      sum += int(value)
+
+    print(previous + '\t' + str(sum))
+```
+
+Probemos esto en python sin MapReduce para ver cómo demonios funciona esto ... (`ctr+d` para terminar el stdin)
+
+Ahora probemos con MapReduce! ๏◡๏
+
+```
+    $bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.7.4.jar \
+    -input /iliada/input.txt \
+    -output /iliada/output \
+    -file /home/lmillan/Documents/itam/metodos_gran_escala/datasets/mapper.py \
+    -mapper mapper.py \
+    -file /home/lmillan/Documents/itam/metodos_gran_escala/datasets/reducer.py \
+    -reducer reducer.py
+```
 
 #### Schema design
 
@@ -253,14 +451,17 @@ En las bases de datos tradicionales SQL para hacer una búsqueda más rápida se
 
 La estrategia de partición requiere de hacer unas modificaciones a la forma en la que organizamos los datos en HDFS. Para hacer una partición ocupamos el `=` dentro del nombre del directorio al que queremos particionar -piénsalo como hacer índices de forma manual-. Por ejemplo: con los datos de ecobici tenemos la intuición de que será mejor separarlos por día ya que es muy seguro que queramos hacer preguntas con respecto a comportamientos por día... para hacer esta partición agregaríamos al directorio donde guardemos los datos de Ecobici:
 
+```
     |- data
     |-- ecobici
     |---- date=20170101
     |------ datos_1.csv
     |------ datos_2.csv
+```
 
 O mejor aún
 
+```
     |- data
     |-- ecobici
     |---- year=2017
@@ -268,6 +469,7 @@ O mejor aún
     |-------- day=01
     |----------- datos_1.csv
     |----------- datos_2.csv
+```
 
 Puedes pensar que la segunda opción es demasiado específica, pero en mi experiencia funciona mucho mejor ser más específico -de nuevo es como tener un índice por año, uno para mes, uno para día- y es más eficiente para recuperar datos → recuerda que estamos trabajando con datos de gran escala, cada optimización por más pequeña que sea es un beneficio enorme en todo el proceso :).
 
@@ -291,4 +493,4 @@ En una BD tradicional los datos se guardan en tercera forma normal -3NF- asegura
 
 El simil más parecido a lo que estamos haciendo con estas estrategias en BD tradicional operativa son las famosas vistas materializadas...
 
-![](../images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de alamacenamiento... nos importa la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.
+![](./docs/images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de alamacenamiento... nos importa la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.
