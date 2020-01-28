@@ -217,6 +217,7 @@ A los procesos que ejecutan el *map* se les conoce como *mappers* -proceso de Ja
 -   La salida de los *mappers* son pares `<llave, valor>` que son enviados únicamente a los *reducers*.
 -   Los *mappers* no se pueden comunicar entre ellos.
 -   Los *mappers* no ocupan mucha memoria y el tamaño del *heap* -*heap size*- de la JVM (Java Virtual Machine) es relativamente bajo.
++ Un *mapper* requiere de 1 a 1.5 cores para correr por lo que el número de *mappers* que puede haber en un nodo *slave* dependerá del número de cores disponibles en ese nodo *slave*.
 
 1.  Fase *Reduce*
 
@@ -235,6 +236,7 @@ Los *reducers* -también procesos de Java- reciben los datos **ordenados** y par
 -   El \# de *reducers* se establece a nivel del *cluster*, aunque se puede sobreescribir este valor para ciertos *jobs* cuando se tiene mucha experiencia con los datos a procesar -conocemos el tamaño de los datos y cómo se particionan-.
 -   El \# de particiones es igual al \# de *reducers*.
 -   Para particionar el set se ocupa una función de *hash*.
++ Un *reducer* requiere de 1 a 1.5 cores para correr por lo que el número de *reducers* que puede haber en un nodo *slave* dependerá del número de cores disponibles en ese nodo *slave*.
 
 ![](./docs/images/map_reduce.png)
 <br>
