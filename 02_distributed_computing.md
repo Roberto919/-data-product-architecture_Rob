@@ -264,7 +264,8 @@ La inspiración de MapReduce viene de la programación funcional, bajo este mode
 -   *Reduce* corresponde a una función que analiza una estructura de datos recursiva a la que aplica las operaciones definidas para combinarlas y devolver una sola respuesta.
 
 En `dplyr` cuando hacemos un `group_by() %>% summarise()` la parte del `group_by` corresponde al *mapper* y la parte del `summarise` al *reducer*
-→ La forma en la que corremos procesos de MapReduce es a través de un programa escrito en Java (╯°□°)╯︵ ┻━┻ con los siguientes parámetros de entrada:
+
+La forma en la que corremos procesos de MapReduce es a través de un programa escrito en Java (╯°□°)╯︵ ┻━┻ con los siguientes parámetros de entrada:
 
 -   Un método `main` desde donde configuramos un *job* de MapReduce y lo "levantamos"
     -   Establecemos \# de *reducers*.
@@ -284,7 +285,7 @@ Para correr un job de *streaming* en Hadoop solo debemos indicarle a hadoop de d
 
 - ![](./docs/images/pointer.png) ¿Cómo diseñamos el conteo de palabras para hacer en modelo de programación MapReduce?
 
-- ![](./docs/images/pointer.png) → ¿Qué harían los *mappers*? ¿Qué harían los *reducers*? (¿más de uno?)
+- ![](./docs/images/pointer.png) ¿Qué harían los *mappers*? ¿Qué harían los *reducers*? (¿más de uno?)
 
 ![](./docs/images/word_count_map_reduce.png)
 <br>
@@ -292,7 +293,7 @@ Fuente: <https://www.researchgate.net/figure/Word-count-program-flow-executed-wi
 
 ##### Python
 
-Haremos "trampa"" porque no queremos programar en Java ni en *Jython* para poder ejecutar procesos de MapReduce, en lugar de esto ocuparemos la librería de *Hadoop streaming* para poder escribir el código en Python y poder ejecutar el código en Hadoop :P.
+Haremos "trampa" porque no queremos programar en Java ni en *Jython* para poder ejecutar procesos de MapReduce, en lugar de esto ocuparemos la librería de *Hadoop streaming* para poder escribir el código en Python y poder ejecutar el código en Hadoop :P.
 
 En mi máquina tengo "La Ilíada" de Homero en un txt plano que bajé del proyecto [Gutenberg](http://www.gutenberg.org/cache/epub/6130/pg6130.txt).
 
