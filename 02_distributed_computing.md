@@ -252,7 +252,7 @@ MapReduce no es una buena solución para algoritmos iterativos pues tiene las si
 **Recomendaciones**
 
 -   El \# de *mappers* depende del \# total de bloques de los archivos de entrada como lo vimos anteriormente, es posible poner más *mappers* configurando `Configuration.set(MRJobConfig.NUM_MAPS, int)` (en Java).
--   Se recomienda tener entre 10 y 100 *mappers* por nodo para tener el nivel óptimo de paralelismo para los procesos *map*, aunque se puede aumentar este número, no se recomienda ya que con más **mappers** la ejecución de un *mapper* puede tomar más de un minuto.
+-   Conforme aumenta le número de *mappers* en un nodo, la ejecución de un *mapper* puede tomar más de un minuto.
 -   Incrementar el \# de *reducers* incrementa el balanceo de carga, baja los costos de fallas pero incrementa el uso de recursos del *framework*.
 -   Se puede poner el \# de *reducers* en 0 si no es necesario hacer un procesamiento *reduce* → la salida de los *mappers* **no** será ordenada ni particionada (y sería muy extraño).
 
@@ -260,7 +260,7 @@ MapReduce no es una buena solución para algoritmos iterativos pues tiene las si
 
 La inspiración de MapReduce viene de la programación funcional, bajo este modelo de progamación, la entrada es particionada en pequeñas partes, se ejecuta el código del *mapper* en cada parte, luego junta todos los resultados de los *mappers* en uno o más *reducers* que juntan/combinan los resultados para entregar uno final.
 
--   *Map* corresponde a una función que aplica una función a cada elemento en una lista -[lambda functions](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions), listas comprehensivas, apply por ejemplo (python).
+-   *Map* corresponde a una función que aplica una función a cada elemento en una lista -[lambda functions](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions), *list comprehension*, *apply*.
 -   *Reduce* corresponde a una función que analiza una estructura de datos recursiva a la que aplica las operaciones definidas para combinarlas y devolver una sola respuesta.
 
 En `dplyr` cuando hacemos un `group_by() %>% summarise()` la parte del `group_by` corresponde al *mapper* y la parte del `summarise` al *reducer*
