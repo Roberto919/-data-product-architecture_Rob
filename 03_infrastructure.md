@@ -89,7 +89,7 @@ Este servicio de AWS nos permite crear instancias de computadoras con sistemas o
 
 + Redes públicas y privadas: Las redes privadas tienen definidas IPs específicas que tienen acceso a los recursos dentro de ella, una VPC genera una red privada.
 
-+ *Elastic IPs*: Es una IP estática a través de la cual podemos acceder a nuestro VPC sin importar la IP interna a la VPC/Subnets. Esta IP es la misma para nosotros pero por abajo cambia dinámicamente a la instancia que se encuentre "levantada". Este tipo de IP se utiliza para asegurar que sin importar si una instancia está disponible o no, la accesibilidad a nuestra aplicación está asegurada. 
++ *Elastic IPs*: Es una IP estática a través de la cual podemos acceder a nuestro VPC sin importar la IP interna a la VPC/Subnets. Esta IP es la misma para nosotros pero por abajo cambia dinámicamente a la instancia que se encuentre "levantada". Este tipo de IP se utiliza para asegurar que sin importar si una instancia está disponible o no, la accesibilidad a nuestra aplicación está asegurada.
 
 + AMI *Amazon Machine Image*: Máquina de Amazon que ya tienen imagenes de sistemas operativos o configuraciones específicas instaladas. Por ejemplo, existe un AMI para *deep learning* en donde ya no te tienes que pelear con instalar las librerías en las versiones correctas o configurar los *drivers* de NVIDIA, etc.
 
@@ -110,7 +110,15 @@ La arquitectura que construiremos en DPA es la siguiente:
 
 Para corroborar que el usuario fue creado puedes cambiar de usuario de  `ubuntu` al recién creado utilizando `sudo su username`.
 
-#### Agregar credenciales
+#### Agregar llaves al server
+
+Para que todos los usuarios se puedan conectar necesitarán agregar sus respectivas llaves públicas al servidor para que formen parte del archivo de llaves autorizadas.
+
+Para hacer esto, necesitarás:
+
+1. Modificar en la instancia EC2 de Bastión, el archivo `/etc/ssh/sshd_config` para poner el atributo `PubkeyAuthentication` en `yes` -seguramente tendrás que descomentar esa línea-, modificar la opción de `PasswordAuthentication` a `yes`. Hay que hacer un *restart* del servicio de `sshd` para que el cambio se tome en cuenta utilizando el comando `sudo service sshd restart`.
+2. Salir del servidor, ir al cliente y desde ahí copiar tu llave pública con el comando: `ssh-copy-id -i la_llave_publica username@ip_del_ec2`
+3. Una vez que hayas copiado todas las llaves de los usuarios tendremos que volver a cambiar el archivo `/etc/ssh/sshd_config` modificando únicamente la parte de `PasswordAuthentication` a `no` y volver a hacer un *restart* al servicio de `sshd`.
 
 
 ### CI/CD
