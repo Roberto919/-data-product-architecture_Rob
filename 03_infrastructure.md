@@ -81,10 +81,45 @@ Si tienes varias cuentas de AWS -tu trabajo y la escuela- puedes crear un archiv
 
 Este servicio de AWS nos permite crear instancias de computadoras con sistemas operativos instalados, y dependiendo de nuestras necesidades podemos escoger entre instancias optimizadas a procesamiento, a almacenamiento, a CPU, a memoria, etc. Debido a todas estas posibles combinaciones hay muchos tipos de instancias disponibles en AWS por lo que te servirá conocer los [tipos de instancia de EC2](https://aws.amazon.com/ec2/instance-types/).
 
-+ VPC *Virtual Private Cloud*: 
++ VPC *Virtual Private Cloud*: Nos permite aprovisionar un espacio lógico en la nube de AWS para que podamos poner nuestras instancias EC2 a las que solo quienes definamos tengan acceso. Cuando cread una VPC tienes que definir un rango de direcciones IP4 en la forma de un *CIDR block (Classles Inter-Domain Routing)*, por ejemplo: `10.0.0.0/16`.
+
++ *Subnet*: Dentro de la VPC puedes crear un rango de direcciones para poner instancias EC2 específicas. El acceso a estas subredes se determina a través de los *Inbounds* y *Outbounds*.
+
++ IPs *Inbounds* y *Outbounds*: Las IPs *Inbound* indican las IPs que tienen acceso a una *subnet*, mientras que las *Outbound* indican las IPs hacia las que puede ser enviada la salida, un asterisco \* indica cualquier IP.
+
++ Redes públicas y privadas: Las redes privadas tienen definidas IPs específicas que tienen acceso a los recursos dentro de ella, una VPC genera una red privada.
+
++ *Elastic IPs*: Es una IP estática a través de la cual podemos acceder a nuestro VPC sin importar la IP interna a la VPC/Subnets. Esta IP es la misma para nosotros pero por abajo cambia dinámicamente a la instancia que se encuentre "levantada". Este tipo de IP se utiliza para asegurar que sin importar si una instancia está disponible o no, la accesibilidad a nuestra aplicación está asegurada. 
+
++ AMI *Amazon Machine Image*: Máquina de Amazon que ya tienen imagenes de sistemas operativos o configuraciones específicas instaladas. Por ejemplo, existe un AMI para *deep learning* en donde ya no te tienes que pelear con instalar las librerías en las versiones correctas o configurar los *drivers* de NVIDIA, etc.
+
+La arquitectura que construiremos en DPA es la siguiente:
+
+![](./docs/images/ec2_subnets.png)
+<br>
+
+![](./docs/images/ec2_architecture.png)
+<br>
+
+#### Creación de usuarios en buntu
+
+[Pasos](https://www.cyberciti.biz/faq/create-a-user-account-on-ubuntu-linux/)
+
+1. Como usuario `ubuntu` crea los usuarios de cada miembro del equipo.  
+2. Crea cada usuario a través del comando `sudo adduser username`, conforme se crea el usuario ubuntu te pedirá un password **no** olvides ese password! cada usuario lo necesitará para conectarse al bastión. Entre los datos que te pedirá para el usuario está el nombre y otros datos particulares, no ingreses ninguno.
+
+Para corroborar que el usuario fue creado puedes cambiar de usuario de  `ubuntu` al recién creado utilizando `sudo su username`.
+
+#### Agregar credenciales
 
 
 ### CI/CD
 
 + *Continuous Integration* CI
 + *Continuous Delivery* CD
+
+
+### Referencias, ligas de interés
+
++ [AWS VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#vpc-subnet-basics)
++ [CIDR Block](https://tools.ietf.org/html/rfc4632)
