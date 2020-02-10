@@ -123,11 +123,47 @@ Para hacer esto, necesitarás:
 
 ### CI/CD
 
-+ *Continuous Integration* CI
-+ *Continuous Delivery* CD
+Conceptos as asociados a procesos de desarrollo de software.
 
++ *Continuous Integration* CI: Asociados a procesos con metodologías ágiles en dónde los cambios desarrollados se integran a la rama principal (`master`) frecuentemente. El pincipio es evitar esperar hasta 1 día antes (u horas antes) para que todos integren los cambios y luego se libere a producción <- eso es un infierno y no funciona! las integraciones nunca son correctas, alguien siempre la cajetea en algún lado.
+
+Para evitar esto, CI pone mucho énfasis en hacer pruebas unitarias, pruebas de integración, pruebas funcionales, etc. y todas son **automatizadas** para identificar que cuando se integra algo, nada se rompe, o más bien identificar rápidamente qué se rompe cuando integramos o subimos cambios.   
+
+
++ *Continuous Delivery* CD: Es como la segunda fase del CI, pues una vez que podemos integrar cambios frecuentemente y de manera rápida, también queremos que estos cambios lleguen lo más rápido posible a nuestros clientes -¡siempre asegurando calidad!- de manera sustentable! (no queremos desvelarnos continuamente para que las liberaciones a producción salgan bien... eso no es sustentable).
+
+Este proceso implica que además de pruebas automatizadas, tengamos que tener el proceso de liberación automatizado por lo que podemos hacer *deploy* de la "aplicación" en cualquier momento, cualquier día con solo apretar un botón.
+
++ *Continuous Deployment*: El siguiente paso de CD, resulta que no queremos apretar un botón, queremos que todo se libere a producción (hacer *deploy*) sin intervención de un humano. Para esta fase, todas las pruebas que se desarrollan son los únicos filtros para no liberar algo a producción con efecto inmediato a los clientes. (*^▽^*)
+
+![](./docs/images/CI_CD.png)
+<br>
+Fuente: [CodeMaze](https://code-maze.com/what-is-continuous-integration/)
+
+Lo que nosotros hicimos de levantar una instancia, generar usuarios en la instancia, pasar llaves para que estos usuarios pudieran entrar a la instancia ... se debería hacer de manera automatizada.
+
+Existen herramientas que nos permiten controlar estos procesos:
+
+**CI/CD**
+
++ [Jenkins](https://jenkins.io/): *Open source* escrito en Java, gratis.  
++ [Travis](https://travis-ci.org/): Gratis solo para proyectos que sean *open source* o sus primeros 1000 *builts*.
++ [GitLab](https://about.gitlab.com/): Opción gratis y empresarial.
+
+**Continuous Deployment**
+
++ [Puppet](https://puppet.com/): Automatiza flujos de trabajo de infraestructura.
++ [Chef](https://www.chef.io/products/chef-infra/): Herramienta de gestión de configuración
++ [Ansible](https://www.ansible.com/): Plataforma de gestión de infraestructura
++ [Terraform](https://www.terraform.io/): Plataforma de gestión de infraestructura.
+
+Amabas plataformas nos permiten crear, cambiar y administrar infraestructura de manera automatizada a través de *scripts*. Nosotros definimos el plan de ejecución para el despliegue de la infraestructura en los *scripts*, y luego se ejecuta.
+
+Estas 2 herramientas están hechas específicamente para trabajar infraestructura de a nube (AWS).
 
 ### Referencias, ligas de interés
 
 + [AWS VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#vpc-subnet-basics)
 + [CIDR Block](https://tools.ietf.org/html/rfc4632)
++ [AWS 10 minute Tutorials](https://aws.amazon.com/getting-started/tutorials/)
++ [Remotely run commands on an EC2 Instance](https://aws.amazon.com/getting-started/tutorials/remotely-run-commands-ec2-instance-systems-manager/?trk=gs_card)
