@@ -121,6 +121,16 @@ Para hacer esto, necesitarás:
 3. Una vez que hayas copiado todas las llaves de los usuarios tendremos que volver a cambiar el archivo `/etc/ssh/sshd_config` modificando únicamente la parte de `PasswordAuthentication` a `no` y volver a hacer un *restart* al servicio de `sshd`.
 
 
+#### Elastic IP
+
+En tu consola de AWS en el servicio `Network & Security` ve a la opción `Elastic IPs` -para este momento tu instancia de EC2 de bastión debe estar corriendo!-.
+
+Selecciona la opción `Allocate Elastic IP address`, asegúrate que la región de donde sacarás la IP corresponde a la región donde se encuentra tu EC2 Bastión, selecciona una que se encuentre disponible del `Amazon's pool of IPv4 addresses` y ponle `Allocate`.
+
+Esto te pasará a una ventana donde hay la opción de vincular esta IP Elástica a tu instancia de Bastión -hasta arriba en verde!-, ahí viene la opción `Associate this Elastic IP address`, selecciónala. En la siguiente ventana te mostrará las instancias (tuyas) a las que puedes vincular esta IP, selecciona tu instancia EC2 donde está el Bastión.
+
+Ahora ve a la consola de servicios de EC2 y selecciona tu instancia, en la variable `IPv4 Public IP` debe aparecer la IP Elástica a la que la vinculaste. Ahora, solo para probar que todo estuvo bien configurado, deberás conectarte a tu EC2 por ssh pero en lugar de utilizar la ip gigantesca que antes ocupábamos, ocupa ahora tu IP elástica (primero prueba con el usuario ubuntu).  
+
 ### CI/CD
 
 Conceptos as asociados a procesos de desarrollo de software.
