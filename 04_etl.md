@@ -36,7 +36,9 @@ Febrero 2020
 
 **Ejemplo:**
 
-![](./docs/images/columnar_format.png) Fuente: [NoSQL Database Concepts, Bhaskar Gunda](https://www.slideshare.net/BhaskarGunda/nosqldatabaseconcepts-64494185)
+![](./docs/images/columnar_format.png)
+<br>
+Fuente: [NoSQL Database Concepts, Bhaskar Gunda](https://www.slideshare.net/BhaskarGunda/nosqldatabaseconcepts-64494185)
 
 **Ejercicio 1:** ¿Cómo quedaría la siguiente tabla con un formato columnar?
 
@@ -133,7 +135,7 @@ Normalmente los archivos en HDFS son almacenados en formato comprimido -recordem
 
 -   **GZip:** Provee muy buen nivel de compresión a costa de la velocidad de compresión -2.5 veces lo que tarde Snappy, pero casi reduce a la mitad de lo de snappy-. Es igual de bueno en desempeño de lecturas sobre Hadoop pero al igual que snappy no es *splittable* por lo que requiere de ocuparse con algún formato que lo sea -avro, parquet-
 
--   **bzip2:** Provee un nivel de compresión excelente -9% mejor que GZip- pero es mucho más lento que cualquier otro formato, además de que en desempeño de lectura/escritura ya que en promedio puede tardar 10 veces más que Gzip. Este formato es *splittable* sin embargo no es recomendado para ocuparse en Hadoop por el performance mencionado, se recomienda ocupar solo si es necesario reducir el espacio ocupado en hadoop → eso solo ocurriría si se ocupa Hadoop como simple almacenador de datos.
+-   **bzip2:** Provee un nivel de compresión excelente -9% mejor que GZip- pero es mucho más lento que cualquier otro formato, además de que en desempeño de lectura/escritura ya que en promedio puede tardar 10 veces más que Gzip. Este formato es *splittable* sin embargo no es recomendado para ocuparse en Hadoop por el performance mencionado, se recomienda ocupar solo si es necesario reducir el espacio ocupado en hadoop $\rightarrow$ eso solo ocurriría si se ocupa Hadoop como simple almacenador de datos.
 
 -   Si utilizamos avro y/o parquet haremos que cualquier formato de compresión se haga *splittable* ＼(＾O＾)／.
 
@@ -142,4 +144,16 @@ Se recomienda tener un solo formato de archivo en el cluster, y la recomendació
 
 ### ETL
 
-*Extract Transform Load*
+Acrónimo de *Extract Transform Load*, no siempre se ejecutan en este orden, por ejemplo es posible tener un ELT, o solo partes del proceso como EL.
+
+En sus productos de datos, la parte de **extracción** estará asociada a ingestar los datos de algúna repositorio: *bucket*, API, *web scraping*, consultas a un FTP, etc. Es importante mencionar que las fuentes de datos pueden ser diversas y en diversos formatos o protocolos.
+
+Por ejemplo, para los datos de NYC 311 existe el [API](https://dev.socrata.com/foundry/data.cityofnewyork.us/erm2-nwe9) desde donde se pueden hacer solicitudes para bajar sus datos de forma diaria, incluso se incluye el *snippet* de código asociado en diferentes lenguajes.
+
+La parte de **transfomración** está asociada a los cambios que se les tienen que hacer a estos datos para que después puedan ser ocupados por otros (aplicaciones, servicios, scripts, otras personas, etc.). Estas transformaciones están más relacionadas a transformaciones de tipos de datos, formatos, estructura; que a transformción de datos para la parte de modelado.
+
+Finalmente la parte de **cargado** está relacionada a tener los datos ordenados y estructurados en algún lugar para que todos los demás los puedan ocupar, generalmente esta parte está asociada a alamcenar los datos en bases de datos, sin embargo, en productos de datos pueden estar asociados a *DataLakes*, bases de datos no estructuradas, servicios de almacenamiento en la nube, servidios de DFS, etc.
+
+Cuando estos 3 procesos ocurren en secuencia de forma automatizada se genera un *pipeline*, aunque todo el mundo le decimos ETL.
+
+![](./docs/images/pointer.png) Generemos el pipeline del ETL de un proyecto ejemplo.
