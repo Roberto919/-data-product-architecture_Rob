@@ -157,3 +157,29 @@ Finalmente la parte de **cargado** está relacionada a tener los datos ordenados
 Cuando estos 3 procesos ocurren en secuencia de forma automatizada se genera un *pipeline*, aunque todo el mundo le decimos ETL.
 
 ![](./docs/images/pointer.png) Generemos el pipeline del ETL de un proyecto ejemplo.
+
+Tenemos los datos de la línea de petición de servicios del [311 de Chicago](https://311.chicago.gov/s/article/Sanitation-code-violations?language=en_US).
+
+Nuestro producto estará asociado a poder priorizar los lugares que requerirán de inspección por alguna violación al codigo sanitario en propiedad privada (*Garbage and recycling*).
+
++ ¿Con qué frecuencia se publican los datos?
++ ¿Cada cuánto ingestaremos los datos?
++ ¿Cómo ingestaremos los datos?
++ ¿Dónde guardaremos los datos?
++ ¿En qué formato?
++ ¿Los transformamos antes de guardarlos?
+
+
+### AWS a través de Python
+
+#### Boto3
+
+Es la librería de Python que nos permite interactuar de manera programática con AWS, es decir, podemos crear scripts de python que nos permitan conectarnos a diferentes servicios de AWS.
+
+Para instalar boto hay que ocupar pip `pip install boto3`, recuerda instalarlo en tu ambiente de la clase!! (`pyenv`).
+
+Para poder acceder de forma programática a AWS requeriremos también de tener un IAM *user* de AWS y roles o permisos asociados a este usuario, estos roles estará determinados por los servicios a los que accederemos a través de boto. Por ejemplo, si almacenarás los datos de tu ingestión en un *bucket* de S3, entonces tendrás que darle acceso a tu usuario IAM al permiso `AmazonS3FullAccess`.
+
+**Configuración**
+
+Para ocupar boto3 necesitarás tener tu archivo de `.aws/credentials` en done tengas los `aws_access_key_id` y `aws_secret_access_key` asociados a tu usuario IAM.
