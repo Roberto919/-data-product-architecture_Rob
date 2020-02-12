@@ -59,6 +59,7 @@ Deliverable: Equipo de trabajo, dataset a ocupar
 + Conceptos de CI/CD (Terraform)
 
 Tarea:
+
 + Bastión funcionando para el equipo Dirección ip, usuarios que están, mi llave
 + Definición de proyecto a realizar
 + Diseño del producto de datos (mockup), incluir el entregable: BD, API, Dashboard
@@ -71,63 +72,83 @@ Tarea:
 + Storage: Parquet, AVRO
 
 Checkpoint:
+
 + Bastión funcionando
+
 Deliverables:
+
 + Definición de proyecto a realizar
 + Diseño del producto de datos (mockup)
+
 Tarea:
+
 + Definir el mockup de ETL de su proyecto (sección ingestión de datos)
-+ Creación de tu archivo `READMEmd` con la sección de ETL
++ Creación de tu archivo `README.md` con la sección de ETL
 
 **Semana 5: Orquestadores**
 + Orquestadores: DAG, Luigi  (Airflow, DataFactory, AWS Data Pipeline)
 
 Tarea:
+
 + Definir DAG primera iteración de su proyecto con tasks de ETL empezando a desarrollarse
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 6: Gobernanza de datos**
 + Gobernanza de datos: DB (esquema, índices), DWH, Data Lake
 + Linaje de datos
 
 Deliverable:
+
 + Diseño de DAG, tareas DAG para ETL en desarrollo
+
 Tarea:
+
 + Diseño de tu linaje de datos
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 7: CI/CD**
 + Unit testing ETLs (python, pandas, marbles)
 + Unit testing: ejemplos
 
 Checkpoint:
+
 + Al menos 2 tareas del ETL de ingestión de datos implementadas en Luigi Correr el DAG
+
 Deliverable:
+
 + Linaje de datos
+
 Tarea:
+
 + Definición de funciones del ETL a probar
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 8: Feature engineering**
 + Pipelines de transformación de datos
 + Spark, Modin, Koalas, SQL window functions, WITH (CTE)
 
 Deliverable:
+
 + Unit Testing de algunas funciones del ETL
+
 Tarea:
+
 + Diseño de las funciones para transformación de datos
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 9: Gobernanza de modelos**
 + Unit testing (Python/Pandas)
 + Gobernanza de modelos
 
 Deliverable:
+
 + Implementación de algunas funciones de transformación de datos
+
 Tarea:
+
 + Diseño de las funciones unit test para las funciones de transformación de datos
 + Diseño de tablas para gobernanza de modelos
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 10: Modelling**
 + Pyspark, sklearn, H2O, Rapids
@@ -135,23 +156,31 @@ Tarea:
 + Cómo abordar el modelo: ventajas y desventajas
 
 Checkpoint:
+
 + Corrida de tu DAG
+
 Deliverables:
+
 + Diseño de tablas para gobernanza de modelos  
 + Implementación de algunas funciones unit test para transformación de datos
+
 Tarea:
+
 + Implementación de al menos 1 de los modelos haciendo storage
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 11: Modelling**
 + Deuda técnica
 + Cálculos éticos: Bias and Fairness
 
 Deliverable:
+
 + Storage de datos de modelo (al menos 1)
+
 Tarea
+
 + Selección de métrica de *bias* y *fairness* a ocupar de acuerdo a tu proyecto
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 12: ASUETO**
 
@@ -159,11 +188,14 @@ Tarea
 + Pipeline de ejecución
 
 Checkpoint:
+
 + Corrida del DAG hasta la corrida y storage de al menos 1 algoritmo (al menos 3 modelos), incluyendo el cálculo de *bias* y *faireness* seleccionado
+
 Tarea:
+
 + Actualización del diseño del pipeline de training
 + Pipeline de ejecución en producción (diseño)
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 14: Delivery**
 + BD
@@ -171,30 +203,39 @@ Tarea:
 + API: Ejemplo
 
 Deliverable:
+
 + Pipelines de ejecución para trainin y producción
+
 Tarea:
+
 + Actualización del diseño de tu entregable
 + Inicio de implementación de tu entregable *front*
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 15: Delivery**
 + Dashboards: Bokeh, Dash
 + Monitoreo de desempeño (1/2)
 
 Deliverable:
+
 + Pipeline de ejecución productiva funcional integrado al DAG
+
 Tarea:
+
 + Continuar implementación de tu entregable *front*
-+ Actualización de tu archivo `READMEmd`
++ Actualización de tu archivo `README.md`
 
 **Semana 16: Post-modelling**
 + Monitoreo de desempeño (2/2)
 + SLAs
 
 Checkpoint:
+
 + Corrida de pipeline productivo desde DAG
 + Mostrar shallow *front* con alguna funcionalidad
+
 Tarea:
+
 + Implementación de tu entregable *front*
 + Actualización al documento de entrega `README.md` y `requirements.txt`
 
@@ -202,10 +243,15 @@ Tarea:
 + Últimos detalles a tu implementación a tu producto de datos
 
 Checkpoint:
-+ Revisión de tu `READMEmd` y `requirements.txt`
+
++ Revisión de tu `README.md` y `requirements.txt`
+
 Deliverable:
+
 + Entrega de documentación de tu producto de datos en tu repositorio
+
 Tarea:
+
 + Crear el video de la corrida funcional completa del pipeline productivo
 
 **Semana 18: Proyecto**
