@@ -143,6 +143,8 @@ Para hacer esto, necesitarás:
 + Prueba de acceso a EC2 desde Bastión
 + Prueba de acceso denegado a EC2 desde local
 
+![](./docs/images/pointer.png) En AWS.
+
 ### CI/CD
 
 Conceptos as asociados a procesos de desarrollo de software.
