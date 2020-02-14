@@ -182,4 +182,10 @@ Para poder acceder de forma programática a AWS requeriremos también de tener u
 
 **Configuración**
 
-Para ocupar boto3 necesitarás tener tu archivo de `.aws/credentials` en done tengas los `aws_access_key_id` y `aws_secret_access_key` asociados a tu usuario IAM.
+Para ocupar boto3 necesitarás tener tu archivo de `.aws/credentials` en donde tengas los `aws_access_key_id` y `aws_secret_access_key` asociados a tu usuario IAM.
+
+En boto hay 2 tipos de objetos base: `client` y `resource`. El objeto `client` nos permite tener un acceso de más bajo nivel y su interaccion es casi siempre a través de diccionarios o jsons. El objeto `resource` es de más alto nivel y por lo tanto más sencillo de interactuar con él, sin embargo muchas operaciones básicas son más sencillas de hacer a través del objeto `client`.
+
+En nuestro caso ocuparemos el objeto `resource` para las interacciones más generales con el *bucket* y luego ocuparemos `cliente` para gestionar el contenido del *bucket*. Para tener un `client` a partir de un `resource` se necesita acceder a los metadatos: `resource_object.meta.client.metodo_de_elección`.
+
+![](./docs/images/pointer.png) Ir a `scripts/aws.ipynb`.
