@@ -120,24 +120,28 @@ Para hacer esto, necesitarás:
 2. Salir del servidor, ir al cliente y desde ahí copiar tu llave pública con el comando: `ssh-copy-id -i la_llave_publica username@ip_del_ec2`
 3. Una vez que hayas copiado todas las llaves de los usuarios tendremos que volver a cambiar el archivo `/etc/ssh/sshd_config` modificando únicamente la parte de `PasswordAuthentication` a `no` y volver a hacer un *restart* al servicio de `sshd`.
 
+#### Infraestructura VPC con subnets pública y privada
 
-#### Elastic IP
+¿Por qué necesitamos esta arquitectura?
 
-En tu consola de AWS,en el servicio `Network & Security` ve a la opción `Elastic IPs` -para este momento tu instancia de EC2 de bastión debe estar corriendo!-.
+![](./docs/images/pointer.png) En el pizarrón.
 
-Selecciona la opción `Allocate Elastic IP address`, asegúrate que la región de donde sacarás la IP corresponde a la región donde se encuentra tu EC2 Bastión, selecciona una que se encuentre disponible del `Amazon's pool of IPv4 addresses` y ponle `Allocate`.
-
-Esto te pasará a una ventana donde hay la opción de vincular esta IP Elástica a tu instancia de Bastión -hasta arriba en verde!-, ahí viene la opción `Associate this Elastic IP address`, selecciónala. En la siguiente ventana te mostrará las instancias (tuyas) a las que puedes vincular esta IP, selecciona tu instancia EC2 donde está el Bastión.
-
-Ahora ve a la consola de servicios de EC2 y selecciona tu instancia, en la variable `IPv4 Public IP` debe aparecer la IP Elástica a la que la vinculaste. Ahora, solo para probar que todo estuvo bien configurado, deberás conectarte a tu EC2 por ssh pero en lugar de utilizar la ip gigantesca que antes ocupábamos, ocupa ahora tu IP elástica (primero prueba con el usuario ubuntu).  
-
-#### VPC
-
-Acrónimo de *Virtual Private Cloud*, nuestra cerca para delimitar lo que vamos a ocupar en la infraestructura de AWS, todo lo que esté dentro de este VPC será nuestro, aunque depende de nosotros configurar la seguridad que queremos.
-
-En el servicio de *VPC* de AWS, selecciona la opción de *VPC Dashboard*, seleccionar la opción `Launch VPC Wizard` y luego la opción `VPC with Public and Private Subnets`. Una vez en esta opción te solicitará que ingreses los diferentes CIDR asociados a tu red pública y privada, puedes ocupar los que vienen indicados en los diagramas de la arquitectura que realizaremos.
-
-
++ ElasticIP
++ VPC con *subnet* pública y privada
++ Asociación de VCP con ElasticIP
++ Configuración de *subnet* pública
++ Creación y configuración de *security group* para la *subnet* pública
++ Asociación de *security group* con *subnet* pública
++ Creación de Bastión
++ Asociación de Bastión a *subnet* pública
++ Prueba de acceso
++ Creación y configuración de *security group* para la *subnet* privada
++ Asociación de *security group* con *subnet* privada
++ Creación de EC2 para procesamiento
++ Asociación de EC2 a subnet privada
++ Copiado de llave privada a Bastión
++ Prueba de acceso a EC2 desde Bastión
++ Prueba de acceso denegado a EC2 desde local
 
 ### CI/CD
 
