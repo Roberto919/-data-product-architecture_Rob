@@ -154,11 +154,25 @@ La parte de **transfomración** está asociada a los cambios que se les tienen q
 
 Finalmente la parte de **cargado** está relacionada a tener los datos ordenados y estructurados en algún lugar para que todos los demás los puedan ocupar, generalmente esta parte está asociada a alamcenar los datos en bases de datos, sin embargo, en productos de datos pueden estar asociados a *DataLakes*, bases de datos no estructuradas, servicios de almacenamiento en la nube, servidios de DFS, etc.
 
-Cuando estos 3 procesos ocurren en secuencia de forma automatizada se genera un *pipeline*, aunque todo el mundo le decimos ETL.
+Cuando estos 3 procesos ocurren en secuencia de forma automatizada se genera un *pipeline*, aunque todo el mundo le decimos ETL (específicamente a esta parte).
+
+Existen varias arquitecturas disponibles para las partes de ETL, las más comunes son las siguientes:
+
+![](./docs/images/etl.png)
+<br>
+Fuente: [Databricks blog](https://databricks.com/glossary/extract-transform-load)
+
++ Almacenamiento en S3
++ Extracción de S3 y almacenamiento en BD
++ Extracción de S3 y almacenamiento en S3
+
+\*Donde S3 puede ser cualquier servicio de almacenamiento de otras plataformas: Azure, Google Cloud Platform, IBM, etc.
+
+Puedes revisar la documentación del servicio [AWS Pipeline](https://aws.amazon.com/datapipeline/?hp=tile&so-exp=below).
 
 ![](./docs/images/pointer.png) Generemos el pipeline del ETL de un proyecto ejemplo.
 
-Tenemos los datos de la línea de petición de servicios del [311 de Chicago](https://311.chicago.gov/s/article/Sanitation-code-violations?language=en_US).
+Tenemos los datos de registro de queja sanitaria en propiedad privada [311 de Chicago](https://311.chicago.gov/s/article/Sanitation-code-violations?language=en_US).
 
 Nuestro producto estará asociado a poder priorizar los lugares que requerirán de inspección por alguna violación al codigo sanitario en propiedad privada (*Garbage and recycling*).
 
