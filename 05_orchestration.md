@@ -110,7 +110,7 @@ Asi como el visualizador del grafo de dependencias en tiempo de ejecución para 
 
 ![](./docs/images/luigi_graph.png) <br> Fuente: [Documentación de Luigi](https://github.com/spotify/luigi)
 
-Si bien Luigi ya tiene templates para tasks que generalmente se ocupan en *pipelines* de Ciencia de Datos, también es posible definir nuestros propios *templates*.
+Si bien Luigi ya tiene *templates* para tasks que generalmente se ocupan en *pipelines* de Ciencia de Datos, también es posible definir nuestros propios *templates*.
 
 #### ¿Cómo funciona Luigi?
 
@@ -125,6 +125,7 @@ Luigi tiene 2 objetos principales para construir su DAG:
 + `MySqlTarget`
 + `RedshiftTarget`
 + `PostrgresTarget`
++ ... otros
 
 2.  **Task**: La tarea que queremos que Luigi administre como parte del *pipeline*. Para declarar un *task* en Luigi tenemos que hacer un *script* que tenga los siguientes 4 métodos requeridos -algunos son opcionales-: `run()`, `input()` ,`output()` y `requires()`.
 
@@ -175,13 +176,17 @@ Para ocupar el *Central Scheduler* tienes que correr el comando `luigid` en una 
 
 $\rightarrow$ La forma en la que tu la ocuparás generalmente será por línea de comando a través de un script en *shell* para ejecutar con un cron cada $x$ tiempo.
 
+#### Ejemplos de Luigi
 
++ Clase sencilla, pasando parámetros (`ex1_luigi.py`)
++ Output a un archivo local (`ex2_luigi.py`)
++ Output a un archivo de S3 (`ex3_luigi.py`)
 
 ### Otros orquestadores
 
-+ [Airflow](https://airflow.apache.org/)
-+ [Pachyderm](https://www.pachyderm.com/)
-+ [Oozie][http://oozie.apache.org/]: Para orquestamiento de trabajos de *map/reduce*
++ [Airflow](https://airflow.apache.org/): Más utilizado por Data Engineers.
++ [Pachyderm](https://www.pachyderm.com/): Agrega trazabilidad
++ [Oozie](http://oozie.apache.org/): Para orquestamiento de trabajos de *map/reduce*.
 
 ### Referencias
 
