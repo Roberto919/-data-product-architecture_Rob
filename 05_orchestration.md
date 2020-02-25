@@ -154,13 +154,15 @@ Podemos correr procesos de Luigi de 2 maneras:
 
 `luigi --module nombre_script nombre_Task --local-scheduler` o `luigi -m nombre_script nombre_Task --local-scheduler`. Si la tarea requiere de algún parámetro, se envía desde aquí. Por ejemplo:
 
-![](./docs/images/luigi_run_parameters.png) <br> Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/running_luigi.html)
+![](./docs/images/luigi_run_parameters.png)
+<br>
+Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/running_luigi.html)
 
-El *task* anterior se correría con `luigi -m my_module MyTask --x 123 --y 456 --local-scheduler`
+El *task* anterior se correría con `luigi -m ex1 MyTask --x 123 --y 456 --local-scheduler`
 
 Otra manera de ejecutar un *pipeline* de Luigi desde línea de comando es:
 
-`python -m luigi --module my_module MyTask --x 123 --y 345 --local-scheduler`.
+`python -m luigi --module ex1 MyTask --x 123 --y 345 --local-scheduler`.
 
 ![](./docs/images/pointer.png) Si el nombre del parámetro tiene un guión bajo `_` se tiene que reemplazar por un guión alto `-` en la llamada desde línea de comando -no hace falta cambiarlo internamente-.
 
