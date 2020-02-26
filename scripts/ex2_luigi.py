@@ -8,11 +8,6 @@ import os
 class LocalFileSystemTask(luigi.Task):
 
     def run(self):
-        ses = boto3.session.Session(profile_name='mge', region_name='us-west-2')
-        s3_resource = ses.resource('s3')
-
-        obj = s3_resource.Bucket(self.bucket)
-        print(ses)
 
         with self.output().open('w') as output_file:
             output_file.write("test,luigi,s3")
