@@ -199,6 +199,8 @@ Ahora, para cuando estemos en producción, necesitaremos de otro conjunto de tab
 
 + `individual_importances`: Almacenamos la importancia de variables por predicción realizada.
 
+Seguramente para tu problema en particular necesitarás generar algunas tablas adicionales que almacenen *metadata* importante. Por ejemplo, deltas de cambios de estado: de intervenir a no intervenir, delta de rankeo, etc.
+
 ![](./docs/images/pointer.png) ¿Por qué almacenamos todo esta *metadata* en una BD relacional?
 
 Hacerlo en una RDBMS nos permitirá almacenar miles de millones de registros, indexarlos y analizarlos en cuestión de segundos.
