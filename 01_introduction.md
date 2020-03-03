@@ -40,9 +40,6 @@ Fuente: [Mckinsey Enterprise Architecture View](https://enterprisearchitectview.
 <br>
 <br>
 
-![](./docs/images/ml_pipeline.png)
-
-
 Un producto de datos a.k.a. *intelligent system* tiene al menos un componente *machine learning* o modelo (bayesiano, PGM, etc.) y nos permite conectarlo con el usuario para alcanzar los objetivos para los que el modelo -inteligencia- fue creado. Además, este  sistema debe evolucionar y mejorar con el tiempo sobretodo a través del *feedback* generado a través de la interacción que los usuarios tienen con él.
 
 
