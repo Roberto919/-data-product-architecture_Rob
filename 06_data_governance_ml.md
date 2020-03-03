@@ -95,15 +95,19 @@ La administración de esta *metadata* resulta crucial para mantener disciplina y
 
 **Data Steward**
 
-Un nuevo rol dentro de *data governance* que se encarga de
+Un nuevo rol dentro de *data governance* que se enfoca más a la zonas *sensitive* y *gold* para asegurar que los datos que viven ahí cumplan con la regulación de la compañian y de la gobernanza de datos.
 
-+ Crear y documentar las definiciones de datos por cada  
-+ Identificar las relaciones de negocio y arquitectura entre objetos
-+ Certificar la exactitud, completéz,
+**Gobernanza de datos por zona**
+
+![](./docs/images/data_governance_per_zone.png)
+<br>
+Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-enterprise-big/9781491931547/ch01.html)
 
 
 
 #### Data Lineage
+
+El linaje de tus datos.
 
 De acuerdo a la *International Association of Data Management Professionals* ([DAMA](https://dama.org/), existe un [capítulo para México](http://dama.gxpsites.com/)), *data lineage* está definido como el camino a través del cual los datos se mueven desde su punto de origen a su puto de uso (dentro de una empresa), así como la descripción de lo que pasa a los datos conforme fluyen a través de la organización.
 
@@ -125,16 +129,73 @@ Fuente: [The Blond Coummunicator Blog](https://theblondecommunicator.wordpress.c
 + Cumplir con regulaciones oficiales: General Data Protection Regulation (GDPR), California Consume Privacy Act (CCPA) etc.
 + Permite mantenernos alerta (como empresa) de vulnerabilidades y amenazas a nuestros datos. $\leftarrow$ En caso de tener una brecha de seguridad, la empresa debe poder responder en minutos al saber dónde vive qué y por dónde pasa.
 
-Cómo aplicar Data Lineage
+**Metadata para habilitar data lineage en tu data pipeline**
 
-+ Investiga los 5 w:
-  + Quién está utilizando los datos (Who)
-  + Qué singifica (what)
-  + Cuándo fue capturada (when)
-  + Cuándo es utilizada (when)
-  + Por qué se está guardando o usando (why)
+![](./docs/images/pointer.png) ¿Qué se te ocurre que debamos guardar como metadata de tu *data pipeline*
 
+Tan solo en tu ETL:
+
++ *Raw*
+  + Fecha de ejecución
+  + Parámetros con los que ejecutaste tu *task*
+  + Quién ejecutó el task (usuario)
+  + Desde donde se ejecutó (ip, instancia EC2)
+  + \# de registros ingestados
+  + Nombre del archivo generado
+  + Si el *load* ocurre en S3, la ruta de almacentamiento incluyendo el bucket
+  + Si el *load* ocurre en BD, nombre de la base de datos, esquema, tabla.
+
++ *Preprocessed*
+  + Fecha de ejecución
+  + Quién ejecutó (usuario)
+  + Qué se ejecutó: Debería ser lo más granular posible (y atómico). Por ejemplo, si hiciste un cambio de formato de JSON a Parquet.
+  + *Tag* de código de github que se ejecutó
+  + Dónde se ejecutó
+  + Idealmente \# de registros modificados
+  + Estatus de ejecución: Fallido, exitoso, etc.
+
++ *Clean*
+  + Fecha de ejecución
+  + Quién ejecutó (usuario)
+  + Dónde se ejecutó
+  + Qué se ejecutó: Debería ser lo más granular posible (y atómico)
+  + *Tag* de código de github que se ejecutó
+  + Idealmente \# de registros modificados
+  + Estatus de ejecución: Fallido, exitoso, etc.
+
+  ¿Quién genera esta *metadata*? ... ¡Tú!, a través de tus *tasks*.
+
+### Machine learning governance
+
+Para poder habilitar la parte de *Data Lineage* en nuestro proceso de modelado deberemos incluir la generación de *metadata*.
+
+Para ello ocuparemos como método de almacenamiento una base de datos relacional (Postgres)
+
+![](./docs/images/model_governance_db_1.png)
+<br>
+Fuente: [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
+
++ *Model group:* Una combinación única de las características de un modelo: tipo de modelo, hiperparámetros del modelo, *random seed*, *features* utilizados. Cada uno de esos *model group* son considerados 1 experimento.
+
++ *Models*: Cada *model group* o experimento está entrenado con un *set* de datos de entrenamiento, este *fit* se queda almacenado en esta tabla.
+
++ *Predictions:* Las predicciones generadas con la combinación de experimento (*model group*) y set de entrenamiento (*model*) se almacenan en esta tabla.
+
++ *Evaluations:* Las métricas de desempeño *off-line* se quedan almacenadas en esta tabla, así como el tiempo que tardó en entrenarse!  
+
++ *Feature importances:* Esta tabla almacena la importancia de las variables ocupadas en el experimento.
+
++ *Individual importances:* Esta tabla almacena la importancia de variable para cada predicción.
+
+No necesariamente tendremos que ocupar todas, o todos los campos asociados. En nuestro caso las primeras 4 será necesarias.
+
+### Herramientas/Frameworks para data lineage y ml governance
+
++ [ArangoML](https://www.arangodb.com/machine-learning/)
++ [Pachyderm](https://www.pachyderm.com/)
++ [DVC](https://dvc.org/)
 
 ### Referencias
 
 + [DSSG Model Governance](https://dssg.github.io/triage/dirtyduck/ml_governance/)
++ [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
