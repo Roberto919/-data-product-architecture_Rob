@@ -175,19 +175,45 @@ Para ello ocuparemos como método de almacenamiento una base de datos relacional
 <br>
 Fuente: [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
 
-+ *Model group:* Una combinación única de las características de un modelo: tipo de modelo, hiperparámetros del modelo, *random seed*, *features* utilizados. Cada uno de esos *model group* son considerados 1 experimento.
++ `model_group`: Una combinación única de las características de un modelo: tipo de modelo, hiperparámetros del modelo, *random seed*, *features* utilizados. Cada uno de esos *model group* son considerados 1 experimento.
 
-+ *Models*: Cada *model group* o experimento está entrenado con un *set* de datos de entrenamiento, este *fit* se queda almacenado en esta tabla.
++ `models`: Cada *model group* o experimento está entrenado con un *set* de datos de entrenamiento, este *fit* se queda almacenado en esta tabla.
 
-+ *Predictions:* Las predicciones generadas con la combinación de experimento (*model group*) y set de entrenamiento (*model*) se almacenan en esta tabla.
++ `predictions`: Las predicciones generadas con la combinación de experimento (*model group*) y set de entrenamiento (*model*) se almacenan en esta tabla.
 
-+ *Evaluations:* Las métricas de desempeño *off-line* se quedan almacenadas en esta tabla, así como el tiempo que tardó en entrenarse!  
++ `evaluations`: Las métricas de desempeño *off-line* se quedan almacenadas en esta tabla, así como el tiempo que tardó en entrenarse!  
 
-+ *Feature importances:* Esta tabla almacena la importancia de las variables ocupadas en el experimento.
++ `feature_importances`: Esta tabla almacena la importancia de las variables ocupadas en el experimento.
 
-+ *Individual importances:* Esta tabla almacena la importancia de variable para cada predicción.
++ `individual_importances`: Esta tabla almacena la importancia de variable para cada predicción.
 
 No necesariamente tendremos que ocupar todas, o todos los campos asociados. En nuestro caso las primeras 4 será necesarias.
+
+Ahora, para cuando estemos en producción, necesitaremos de otro conjunto de tablas que nos permita almacenar *metadata* de ese proceso, estas tablas vivirán en otro esquema (*production*).
+
++ `models`: Almacenamos los modelos que hemos puesto en predicción (incluida su versión)
+
++ `predictions`: Almacenams las predicciones realizadas por el modelo que se encuentra en producción.
+
++ `feature_importances`: Almacenamos la importancia de variables para este modelo productivo.
+
++ `individual_importances`: Almacenamos la importancia de variables por predicción realizada.
+
+![](./docs/images/pointer.png) ¿Por qué almacenamos todo esta *metadata* en una BD relacional?
+
+Hacerlo en una RDBMS nos permitirá almacenar miles de millones de registros, indexarlos y analizarlos en cuestión de segundos.
+
+Será muy sencillo generar *fronts* (casi siempre *dashboards*) que puedan visualizar la *metadata* -información- que se está generando en nuestros *pipelines*.
+
+Por ejemplo, una vez que se tiene alamacenada toda esta información se puede generar un *dashboard* de este estilo, con el cuál tanto nosotros como nuestros clientes/*partners*/usuarios podemos tomar decisiones basadas en los datos (¡predicar con el ejemplo!).
+
+![](./docs/images/dashboard_ml_governance.png)
+<br>
+Fuente: [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
+
+![](./docs/images/performance_ml_governance.png)
+<br>
+Medición de *accuracy* en el tiempo. Fuente: [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
 
 ### Herramientas/Frameworks para data lineage y ml governance
 
