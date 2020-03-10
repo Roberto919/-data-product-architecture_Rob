@@ -60,7 +60,7 @@ Si no hacemos *data governance* bien lo que haremos es que iniciaremos con un he
 <br>
 Fuente: [Kiran Donepudi](https://www.linkedin.com/pulse/data-lake-swamp-kiran-donepudi/)
 
-#### Organisación sugerida de un Data Lake
+#### Organización sugerida de un Data Lake
 
 + *Raw* o *landing zone*: Donde la ingesta de datos es almacenada y se queda lo más "cerca" posible a su estado original.  
 + *Gold* o *production zone*: Donde todos los datos están limpios y procesados.
