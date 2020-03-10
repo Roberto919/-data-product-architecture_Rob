@@ -32,7 +32,7 @@ Un proyecto de gobernanza de datos exitoso requerirá de alinear personas, proce
 
 #### Data Lakes
 
-Repositorio de alamacenamiento de datos de una empresa/entidad.
+Repositorio de almacenamiento de datos de una empresa/entidad.
 
 La mejor manera de iniciar con gobernanza de datos es a través de un caso de uso o proyecto, ya que en lugar de meter todos los datos posibles al *data lake*, utilizamos únicamente los que nos están brindando un valor inmediato y capitalizable en ese proyecto en particular.
 
@@ -84,7 +84,7 @@ En el contexto de *data governance*, *metadata* habilita el *data governance* y 
 + Uso de los datos
 + Seguridad de los datos
 + Organizar la información de los datos para que éstos puedan ser buscados por los usuarios de negocio.
-+ Enriquecer y manater registro detallado del flujo de datos.
++ Enriquecer y mantener registro detallado del flujo de datos.
 + Linaje de los datos
 
 La administración de esta *metadata* resulta crucial para mantener disciplina y control en la recolección de datos durante el *data governance*, algunas responsabilidades dentro de esta administración son:
@@ -109,7 +109,7 @@ Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-
 
 El linaje de tus datos.
 
-De acuerdo a la *International Association of Data Management Professionals* ([DAMA](https://dama.org/), existe un [capítulo para México](http://dama.gxpsites.com/)), *data lineage* está definido como el camino a través del cual los datos se mueven desde su punto de origen a su puto de uso (dentro de una empresa), así como la descripción de lo que pasa a los datos conforme fluyen a través de la organización.
+De acuerdo a la *International Association of Data Management Professionals* ([DAMA](https://dama.org/), existe un [capítulo para México](http://dama.gxpsites.com/)), *data lineage* está definido como el camino a través del cual los datos se mueven desde su punto de origen a su punto de uso (dentro de una empresa), así como la descripción de lo que pasa a los datos conforme fluyen a través de la organización.
 
 Tener la trazabilidad sobre todas las transformaciones que se han hecho a los datos en todo el *pipeline*, tanto técnicas como de negocio. Podemos identificar qué transfornación se hizo en qué momento y por quién.
 
@@ -131,7 +131,7 @@ Fuente: [The Blond Coummunicator Blog](https://theblondecommunicator.wordpress.c
 
 **Metadata para habilitar data lineage en tu data pipeline**
 
-![](./docs/images/pointer.png) ¿Qué se te ocurre que debamos guardar como metadata de tu *data pipeline*
+![](./docs/images/pointer.png) ¿Qué se te ocurre que debamos guardar como metadata de tu *data pipeline*?
 
 Tan solo en tu ETL:
 
