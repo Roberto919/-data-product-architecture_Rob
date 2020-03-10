@@ -143,7 +143,11 @@ Tan solo en tu ETL:
   + \# de registros ingestados
   + Nombre del archivo generado
   + Si el *load* ocurre en S3, la ruta de almacentamiento incluyendo el bucket
-  + Si el *load* ocurre en BD, nombre de la base de datos, esquema, tabla.
+  + Si el *load* ocurre en BD, nombre de la base de datos, esquema, tabla
+    + Usuario en BD
+  + Variables (en el orden en el que aparecen)
+  + Tipos de datos  
+  + Qué script se ejecutó (*tag* de github)
 
 + *Preprocessed*
   + Fecha de ejecución
