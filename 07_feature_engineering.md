@@ -178,7 +178,7 @@ Zeppelin tiene integrado matplotlib, pandas, md, shell
 
 Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más natural en nuestro cluster de EMR. Para que puedas abrir un *notebook* de Zeppelin necesitarás conectarte al puerto 8890 dentro de un *browser* de la instancia master de tu *cluster*.0
 
-![](./docs/imabes/pointer.png) Para poder hacer esto ve el *screencast* `screencast_zeppelin` que está en github en la carpeta *screencasts*.  
+![](./docs/images/pointer.png) Ve el video de `zeppelin.mp4` que está compartido en esta [liga](https://drive.google.com/open?id=1r8y7U4p0fUv6lyvSPmV9cEcyygtFMX1f). **Por favor no la reproduzcas con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
 
 
 #### Jupyter en el cluster
