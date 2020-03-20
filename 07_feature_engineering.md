@@ -85,7 +85,7 @@ Spark está integrado a muchas de las herramientas del ecosistema de Hadoop:
 
 -   Cada aplicación de Spark está coordinada por el *SparkContext* también se le conoce como *driver*.
 -   El *SparkContexT* se conecta al *cluster manager* que puede ser de diferentes tipos: YARN, Mesos -otro cluster manager- , Kubernetes (la última version, 2.3.0) -centrado en infraestructura en contenedores- o un cluser standalone. El *cluster manager* como YARN es el que adminstra todos los recursos en el cluster.
--   En los nodos del cluster se crean *Executors* que son procesos que correrán el procesamiento y que guardarán datos de la aplicación -job de MapReduce-.
+-   En los nodos del cluster se crean *Executors* que son procesos que correrán el procesamiento y que guardarán datos de la aplicación -*job* de *MapReduce*-.
 -   El *cluster manager* será el responsable de enviar el código de la aplicación -en un JAR si se ocupó Scala o en Python si se ocupó pyspark- a los *executors*.
 
 **Características:**
@@ -134,4 +134,56 @@ En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no**
 
 Debido a que *SparkSession* es un *wrapper* al *SparkContext*, la única forma de acceder al *SparkContext* es a través del *SparkSession*.
 
+### Anexos
+
+#### Foxy-Proxy
+
+#### Port forwarding
+
+Para que puedas abrir un *browser* en el EMR tendrás que hacer un *port forwarding* a través del cual configuraremos un puerto
+
+#### Zeppelin
+
+![](./docs/images/zeppelin_logo.png) <br>
+
+Proyecto de Apache :)!
+
+Zeppelin (0.82) es un *notebook* multipropósito (piénsalo como un jupyter) que permite ocupar varios *framewokrs* y lenguajes en el *notebook* para realizar análisis de datos en un mismo ambiente, su motor por detrás es Spark, por lo que tiene todas las integraciones a los diferentes elementos del ecosistema de Spark.
+
+A través de Zeppelin es posible ralizar ingesta de datos (de HDFS y S3), análisis de datos, visualización de datos y colaboración.
+
+![](./docs/images/zeppelin_languages.png) <br>
+
+Para ocupar los diferentes intérpretes dentro de Zeppelin basta con agregar antes de cualquier cosa el nombre del *engine* que tiene que ocupar Zeppelin para "interpretar". Por ejemplo, para ocupar el intérprete de python hay que poner `%python` también se puede poner un sabor específico de python como `%python.conda`.
+
+Zeppelin tiene integrado matplotlib, pandas, md, shell
+
+![](./docs/images/zeppelin_interpreters.png) <br>
+
+-   Pyspark
+
+![](./docs/images/zeppelin_pyspark.png) <br>
+
+-   Python
+
+![](./docs/images/zeppelin_python.png) <br>
+
+-   Shell
+
+![](./docs/images/zeppelin_sh.png)
+
+-   md
+
+![](./docs/images/zeppelin_sh.png)
+
+Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más natural en nuestro cluster de EMR. Para que puedas abrir un *notebook* de Zeppelin necesitarás conectarte al puerto 8890 dentro de un *browser* de la instancia master de tu *cluster*.0
+
+![](./docs/imabes/pointer.png) Para poder hacer esto ve el *screencast* `screencast_zeppelin` que está en github en la carpeta *screencasts*.  
+
+
+#### Jupyter en el cluster
+
+
 ### Referencias
+
+- Documentación [Zeppelin 0.82](https://zeppelin.apache.org/docs/0.8.2/)
