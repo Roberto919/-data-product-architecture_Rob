@@ -138,6 +138,10 @@ Debido a que *SparkSession* es un *wrapper* al *SparkContext*, la única forma d
 
 #### Foxy-Proxy
 
+En la siguiente liga puedes encontrar cómo configurar Foxy Proxy para que tu *browser* pueda mostrar contenido de los *web services* que ocuparemos en el EMR.
+
+Sigue las [instrucciones](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-proxy.html) para Chrome, la de Firefox a veces funciona, a veces no.
+
 #### Port forwarding
 
 Para que puedas abrir un *browser* en el EMR tendrás que hacer un *port forwarding* a través del cual configuraremos un puerto local que ocuparemos para "ligar" a un puerto en la computadora remota y que podamos ocupar "nuestro" *browser*.
@@ -145,6 +149,9 @@ Para que puedas abrir un *browser* en el EMR tendrás que hacer un *port forward
 Las instancias de EMR ya tienen una instrucción para que puedas realizar este *dynamic port forwarding* y los puertos asociados a los servicios que ofrecen como Zeppelin, Hive, Hue, etc.
 
 Nosotros ocuparemos este servicio para poder ocupar Jupyter *notebooks* en los EMR.
+
+#### Jupyter en el *cluster*
+
 
 #### Zeppelin
 
@@ -185,9 +192,7 @@ Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más 
 ![](./docs/images/pointer.png) Ve el video de `zeppelin.mp4` que está compartido en esta [liga](https://drive.google.com/open?id=1r8y7U4p0fUv6lyvSPmV9cEcyygtFMX1f). **Por favor no la reproduzcas con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
 
 
-#### Jupyter en el cluster
-
-
 ### Referencias
 
 - Documentación [Zeppelin 0.82](https://zeppelin.apache.org/docs/0.8.2/)
+- Puertos de EMR [WebServices](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-web-interfaces.html)
