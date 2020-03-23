@@ -120,13 +120,13 @@ El objeto más importante dentro de Spark es **Resilent Distributed Dataset** (R
 1.  Utilizar el *SparkContext* para crear un RDD de una fuente externa.
 2.  Ejecutar una transformación en uno o más RDDs.
 
-→ Todo en Spark son **acciones** o **transformaciones** y solo las acciones hacen que el procesamiento distribuido se lleve a cabo -antes no!, Spark es lazy!-. Las transformaciones son las operaciones que realizamos a los datos para "modificarlos": filtros, agregaciones, intersecciones, uniones, joins, etc. [Transformations](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#transformations).
+→ Todo en Spark son **acciones** o **transformaciones** y solo las acciones hacen que el procesamiento distribuido se lleve a cabo -antes no, ¡Spark es lazy!-. Las transformaciones son las operaciones que realizamos a los datos para "modificarlos": filtros, agregaciones, intersecciones, uniones, joins, etc. [Transformations](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#transformations).
 
-Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: count, collect, first, take, saveAs..., foreach, etc. [Actions](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#actions)
+Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, etc. [Actions](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#actions)
 
 ![](./docs/images/spark_actions_transformations_dag.png) <br>
 
-En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son semejantes a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un cluster, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
+En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son semejantes a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
 
 ![](./docs/images/sparkcontext_sparksession.png) <br>
 
@@ -151,6 +151,27 @@ Las instancias de EMR ya tienen una instrucción para que puedas realizar este *
 Nosotros ocuparemos este servicio para poder ocupar Jupyter *notebooks* en los EMR.
 
 #### Jupyter en el *cluster*
+
+Puedes tener jupyter en el EMR para que puedas realizar tus scripts ahí, en lugar de el shell de pyspark. Para ello deberás hacer los siguientes pasos:
+
+1. Levantar tu *cluster* EMR que tenga Hadooop y Zeppelin.
+
+2. Instalar jupyter con la siguiente instrucción `sudo pip install jupyter`
+
+3. Configurar las variables de ambiente de pyspark.
++ `export PYSPARK_DRIVER_PYTHON=jupyter`
++ `export PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port=8888'source .bashrc`
+
+4. Hacer *dynamic port forwarding* de tu local al EMR:
+`ssh -i ~/lmillan_itam.pem -N -f -L localhost:8889:localhost:8888 hadoop@dns_de_tu_emr`
+
+El primer puerto -8889- corresponde a un puerto libre en tu computadora local, el segundo puerto -el de EMR- puedes dejarlo como 8888 pues es el que por *default* se asocia a un jupyter notebook. En mi caso -y seguro en el tuyo también-, mi puerto local 8888 ya está ocupado con mi jupyter notebook local, por eso cambié de puerto a uno que está libre. (Para saber si un puerto está ocupado puedes ocupar `lsof -i | grep 8888` en ubuntu).
+
+5. En la instancia de EMR correr `pyspark`, esto levantará un jupyter notebook pero no abrirá un *browser* (no hay donde).
+
+6. En tu máquina local abre una página de chrome: `http://localhost:8889` (o el puerto que hayas forwardeado) y te pedirá un token. El token está en la instancia de EMR donde pusiste pyspark. Copia el resto de la dirección `?/token=xxxxxxx` a tu *browser* local.
+
+¡Listo! ya tienes un jupyter notebook para trabajar con el EMR.   
 
 
 #### Zeppelin
