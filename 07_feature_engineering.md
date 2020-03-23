@@ -140,7 +140,11 @@ Debido a que *SparkSession* es un *wrapper* al *SparkContext*, la única forma d
 
 #### Port forwarding
 
-Para que puedas abrir un *browser* en el EMR tendrás que hacer un *port forwarding* a través del cual configuraremos un puerto
+Para que puedas abrir un *browser* en el EMR tendrás que hacer un *port forwarding* a través del cual configuraremos un puerto local que ocuparemos para "ligar" a un puerto en la computadora remota y que podamos ocupar "nuestro" *browser*.
+
+Las instancias de EMR ya tienen una instrucción para que puedas realizar este *dynamic port forwarding* y los puertos asociados a los servicios que ofrecen como Zeppelin, Hive, Hue, etc.
+
+Nosotros ocuparemos este servicio para poder ocupar Jupyter *notebooks* en los EMR.
 
 #### Zeppelin
 
