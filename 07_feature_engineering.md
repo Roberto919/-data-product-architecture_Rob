@@ -122,7 +122,7 @@ El objeto más importante dentro de Spark es **Resilent Distributed Dataset** (R
 
 → Todo en Spark son **acciones** o **transformaciones** y solo las acciones hacen que el procesamiento distribuido se lleve a cabo -antes no, ¡Spark es lazy!-. Las transformaciones son las operaciones que realizamos a los datos para "modificarlos": filtros, agregaciones, intersecciones, uniones, joins, etc. [Transformations](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#transformations).
 
-Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, etc. [Actions](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#actions)
+Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, `show`, etc. [Actions](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#actions)
 
 ![](./docs/images/spark_actions_transformations_dag.png) <br>
 
@@ -172,8 +172,7 @@ Se requiere de cargar el jar que contiene el drive JDBC para poder comunicarnos 
   + Lectura: `df = spark.read.jdbc(url, dbtable, properties={"user":"user", "password"="password"})`
   + Escritura: `df.write.jdbc(url, dbtable, properties={"user":"user", "password"="password"}`
 
-**Feather:**
-
+![](./docs/images/pointer.png) En la carpeta `scripts` se encuentra el archivo `sql_tutorial.json` que pueden cargar en un Zeppelin para ver algunos ejercicios de Spark con Python (pyspark).
 
 ### Anexos
 
