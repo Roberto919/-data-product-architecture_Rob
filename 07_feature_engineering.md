@@ -134,6 +134,47 @@ En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no**
 
 Debido a que *SparkSession* es un *wrapper* al *SparkContext*, la única forma de acceder al *SparkContext* es a través del *SparkSession*.
 
+
+### SparkSQL
+
+El módulo de Spark que nos permite realizar manipulaciones y transformaciones a los datos. [Spark SQL Documentación API](https://spark.apache.org/docs/latest/sql-programming-guide.html)
+
+Cuando levantas el EMR la variables `spark` ya se encuentra creada. Esta varible contiene el *SparkSession* por lo que es posible
+
+#### I/O
+
++ **CSV:**
+  + Lectura: `df = spark.read.csv("path/to/file/in/dfs")`
+  + Escritura: `df.write.csv("path/for/writing/name.csv")`
+
++ **JSON:**
+  + Lectura: `df = spark.read.format("json").load("path/to/file/in/json")`
+  + Escritura: `df.write.format("json").save("path/for/writing/name.json")`
+
++ **Parquet:**
+  + Lectura: `df = spark.read.parquet("path/to/file/in/dfs")`
+  + Escritura: `df.write.format("parquet").save("path/for/writing/name.parquet")`
+
++ **Avro:**
+
+Para la versión 2.4 hay que cargar el paquete cuando estamos ejecutando pyspark: `$pyspark --packages org.apache.spark:spark-avro_2.12:2.4.4`
+
+Para versiones anteriores a la 2.4 hay que cambiar el paquete para ocupar el de
+[Databricks](https://github.com/databricks/spark-avro/blob/branch-4.0/README-for-old-spark-versions.md) que permite la lectura y escritura de avro desde Spark. `$pyspark --packages com.databricks:spark-avro_2.11:4.0.0`
+
+  + Lectura: `df = spark.read.format("com.databricks.spark.avro").load("path/to/file/in/avro")`
+  + Escritura: `df.write.format("com.databricks.spark.avro").save("path/for/writing/name.avro")`
+
++ **Base de Datos:** (Postgres)
+
+Se requiere de cargar el jar que contiene el drive JDBC para poder comunicarnos con la base de datos. `$pyspark --driver-class-path postgresql-9.4.1207.jar --jars postgresql-9.4.1207.jar`
+
+  + Lectura: `df = spark.read.jdbc(url, dbtable, properties={"user":"user", "password"="password"})`
+  + Escritura: `df.write.jdbc(url, dbtable, properties={"user":"user", "password"="password"}`
+
+**Feather:**
+
+
 ### Anexos
 
 #### Foxy-Proxy
@@ -173,6 +214,9 @@ El primer puerto -8889- corresponde a un puerto libre en tu computadora local, e
 
 ¡Listo! ya tienes un jupyter notebook para trabajar con el EMR.   
 
+Puedes encontrar el video asociado a estos pasos [aqui](https://drive.google.com/open?id=1XuNIs-5h1zJkUcpkySCbALT2SeEicP-z).
+
+**Por favor no reproduzcas este video con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
 
 #### Zeppelin
 
@@ -210,7 +254,7 @@ Zeppelin tiene integrado matplotlib, pandas, md, shell
 
 Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más natural en nuestro cluster de EMR. Para que puedas abrir un *notebook* de Zeppelin necesitarás conectarte al puerto 8890 dentro de un *browser* de la instancia master de tu *cluster*.0
 
-![](./docs/images/pointer.png) Ve el video de `zeppelin.mp4` que está compartido en esta [liga](https://drive.google.com/open?id=1r8y7U4p0fUv6lyvSPmV9cEcyygtFMX1f). **Por favor no la reproduzcas con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
+![](./docs/images/pointer.png) Ve el video de `zeppelin.mp4` que está compartido en esta [liga](https://drive.google.com/open?id=1r8y7U4p0fUv6lyvSPmV9cEcyygtFMX1f). **Por favor no reproduzcas este video con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
 
 
 ### Referencias
