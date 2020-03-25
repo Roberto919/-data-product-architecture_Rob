@@ -46,9 +46,9 @@ Spark también mantiene la escalabilidad lineal y la tolerancia a fallos, pero *
 
 2.  Spark complementa las mejoras que brinda la estructura de DAG con un conjunto de transformaciones que permiten al usuario expresar los procesamientos de manera más natural por lo que se pueden expresar *pipelines* complejos en pocas líneas de código.
 
-3.  Spark permite tener procesamiento en memoria a través de las abstraciones *Dataset* y *DataFrame* con las que es posible que podamos materializar cualquier punto de procesamiento de un *pipeline* en memoria por lo que si hay *steps* más adelante en el *pipeline* que ocupen estos datos no requieren de ser reprocesados o vueltos a cargar de disco!!!. Esta característica permite que Spark sea el *framework* seleccionado en algoritmos iterativos que requieren de pasar varias veces sobre un set de datos.
+3.  Spark permite tener procesamiento en memoria a través de las abstraciones *Dataset* y *DataFrame* con las que es posible que podamos materializar cualquier punto de procesamiento de un *pipeline* en memoria por lo que si hay *steps* más adelante en el *pipeline* que ocupen estos datos no requieren de ser reprocesados o vueltos a cargar de disco!!!. Esta característica permite que Spark sea el *framework* seleccionado en algoritmos iterativos que requieren de pasar varias veces sobre un set de datos. Esta es característica de modelado!.
 
-La razón más importante para seleccionar Spark por sobre otros *frameworks* es que resuelve varios de los retos de ciencia de datos mencionados anteriormente:
+La razón más importante para seleccionar Spark por sobre otros *frameworks* es que resuelve varios de los retos de ciencia de datos:
 
 -   El cuello de botella más grande para hacer productos de datos no es el CPU, ni la memoria, ni el disco, ni la red sino la productividad analítica. Spark permite hacer el *pipeline* desde preprocesamiento hasta evaluación del modelo en un solo ambiente!, lo que acelera los tiempos de desarrollo.
 -   Spark tiene una serie de librerías que le aportan las características de un REPL.
@@ -171,6 +171,14 @@ Se requiere de cargar el jar que contiene el drive JDBC para poder comunicarnos 
 
   + Lectura: `df = spark.read.jdbc(url, dbtable, properties={"user":"user", "password"="password"})`
   + Escritura: `df.write.jdbc(url, dbtable, properties={"user":"user", "password"="password"}`
+
+#### Manejo de datos
+
+En Spark puedes manipular los datos a través de 3 objetos:
+
+1. RDD: A través del *SparkContext*, no recomendable porque hay que configurar muchas cosas de paralelización.
+2. DataFrames: A través del *SparkSession* y aplicando las funciones de SQL de Spark.
+3. Tablas temporales: Estas tablas son como tablas de bases de datos a las cuáles puedes realizar queries directos con SQL o bien aplicar funciones de SQL de Spark. Requiren de un DataFrame como entrada.
 
 ![](./docs/images/pointer.png) En la carpeta `scripts` se encuentra el archivo `sql_tutorial.json` que pueden cargar en un Zeppelin para ver algunos ejercicios de Spark con Python (pyspark).
 
