@@ -74,17 +74,19 @@ Spark está integrado a muchas de las herramientas del ecosistema de Hadoop:
 
 ![](./docs/images/spark_ecosystem.png) Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
 
--   SparkSQL: La librería que le permite a Spark analizar, como **dplyr** (EDA).
+-   SparkSQL: La librería que le permite a Spark ingestar, limpiar, analizar y manipular datos como **dplyr** (EDA).
 -   Spark MLlib: La librería que le permite a Spark realizar *machine learning*, como **scikitlearn**.
 -   Spark GraphX: La librería que le permite a Spark hacer análisis y representación de grafos, como Neo4j y la librería de **networkx** de Python.
 -   Spark Streaming: La librería que le permite a Spark hacer análisis en *streaming*.
 
 #### Arquitectura de Spark
 
-![](./docs/images/spark_cluster_driver.png) Fuente: [Overview Spark](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
+![](./docs/images/spark_cluster_driver.png)
+<br>
+Fuente: [Overview Spark](https://spark.apache.org/docs/2.3.0/cluster-overview.html)
 
 -   Cada aplicación de Spark está coordinada por el *SparkContext* también se le conoce como *driver*.
--   El *SparkContexT* se conecta al *cluster manager* que puede ser de diferentes tipos: YARN, Mesos -otro cluster manager- , Kubernetes (la última version, 2.3.0) -centrado en infraestructura en contenedores- o un cluser standalone. El *cluster manager* como YARN es el que adminstra todos los recursos en el cluster.
+-   El *SparkContex* se conecta al *cluster manager* que puede ser de diferentes tipos: YARN, Mesos -otro cluster manager- , Kubernetes (la última version, 2.3.0) -centrado en infraestructura en contenedores- o un cluser standalone. El *cluster manager* como YARN es el que adminstra todos los recursos en el cluster.
 -   En los nodos del cluster se crean *Executors* que son procesos que correrán el procesamiento y que guardarán datos de la aplicación -*job* de *MapReduce*-.
 -   El *cluster manager* será el responsable de enviar el código de la aplicación -en un JAR si se ocupó Scala o en Python si se ocupó pyspark- a los *executors*.
 
@@ -104,6 +106,8 @@ Hacer un programa en Spark consiste a grandes rasgos de los siguientes 3 pasos:
 3.  Hacer procesamiento local de los resultados obtenidos de forma distribuida.
 
 #### Spark Shell
+
+![](./docs/images/pointer.png) Levantar un cluster de EMR, mostrar el shell.
 
 Es el REPL de Spark, por default es para Scala, aunque tambien existe un *shell* para Python :) -**pyspark**-. Esta consola nos permite definir funciones y manipular datos, es como R sin IDE.
 
@@ -268,3 +272,6 @@ Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más 
 
 - Documentación [Zeppelin 0.82](https://zeppelin.apache.org/docs/0.8.2/)
 - Puertos de EMR [WebServices](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-web-interfaces.html)
++ [API de SparkSQL](https://spark.apache.org/docs/2.4.4/api/python/index.html)
++ [Documentación para SQL, DataFrames y DataSets de Spark](https://spark.apache.org/docs/2.4.4/sql-programming-guide.html)
++ [Documentación general de Spark](https://spark.apache.org/docs/2.4.4/quick-start.html)
