@@ -271,7 +271,7 @@ Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más 
 
 ![](./docs/images/modin_logo.png)
 
-Modin es un paquete que modifica los DataFrames de Pandas para convertirlos en DataFrames del estilo de Spark, es decir, a nosotros parece un DataFrame normal (como los de Spark) sin embargo, por abajo está divididos en chunks que nos permiten escalar la cantidad de datos y operaciones que podemos hacer sobre ellos **sin tener** que ocupar un cluster como Spark.
+Modin es un paquete que modifica los DataFrames de Pandas para convertirlos en DataFrames del estilo de Spark, es decir, a nosotros parece un DataFrame normal (como los de Spark) sin embargo, por abajo está dividido en *chunks* que nos permiten escalar la cantidad de datos y operaciones que podemos hacer sobre ellos **sin tener** que ocupar un cluster como Spark. Modin aprovecha tus *cores* para hacer procesamiento en paralelo y distribuir los datos. Es como si tuvieras un pequeño cluster en tu computadora aprovechando el procesamiento en paralelo.
 
 Seguramente alguna vez te haz topado con el problema de que debido a la cantidad de datos que tienes, Pandas explota y te dice que no tiene más espacio en memoria para poder cargar los datos. Modin resuelve este problema.
 
@@ -285,6 +285,34 @@ Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
 <br>
 Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
 
+Para ocupar Modin necesitas instalarlo con `pip install "modin[all]"` (si estás en Windows -por qué!- deberá ser con `pip install "modin[dask]"`) en el ambiente de pyenv/virtualenv/anaconda/conda de la clase. Una vez instalado, necesitas definir qué *engine* ocuparás para que Modin se haga cargo del procesamiento en paralelo, hay 2 *engines*:
++ Ray
++ Dask
+
+Si estas en Windows solo puedes ocupar Dask porque Ray no está soportado en Windows, si estas en Linux o Mac puedes seleccionar cualquier de las dos -selecciona Ray, Dask aún es experimental-.
+
+Para definir el *engine* tendrás que poner el siguiente código **antes** de que importes la librería de modin.
+
+```
+import os
+
+os.environ["MODIN_ENGINE"] = "ray"
+# o bien
+# os.environ["MODIN_ENGINE"] = "Dask"
+```
+
+
+ **sólo** necesitas importar la librería como `import modin.pandas as pd`, al ponerlo como pd, en todos los lugares donde ocupabas pandas ahora ocuparás Modin.
+
+No todas las funciones de Pandas está implementadas en Modin aún, el estatus actual es el siguiente:
+
+![](./docs/images/pandas_coverage.png)
+<br>
+Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
+
+Por ejemplo, el verano pasado aún no se podían leer parquets desde Modin, ahora ya se puede :).
+
+![](./docs/images/pointer.png) Notebook `07_modin.ipynb`
 
 ### Referencias
 
@@ -294,3 +322,4 @@ Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
 + [Documentación para SQL, DataFrames y DataSets de Spark](https://spark.apache.org/docs/2.4.4/sql-programming-guide.html)
 + [Documentación general de Spark](https://spark.apache.org/docs/2.4.4/quick-start.html)
 + [Modin](https://github.com/modin-project/modin)
++ [API Reference Modin](https://modin.readthedocs.io/en/latest/index.html)
