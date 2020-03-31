@@ -283,7 +283,8 @@ Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
 
 ![](./docs/images/modin_architecture.png)
 <br>
-Fuente:
+Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
+
 
 ### Referencias
 
