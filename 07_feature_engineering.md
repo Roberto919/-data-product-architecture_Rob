@@ -273,7 +273,17 @@ Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más 
 
 Modin es un paquete que modifica los DataFrames de Pandas para convertirlos en DataFrames del estilo de Spark, es decir, a nosotros parece un DataFrame normal (como los de Spark) sin embargo, por abajo está divididos en chunks que nos permiten escalar la cantidad de datos y operaciones que podemos hacer sobre ellos **sin tener** que ocupar un cluster como Spark.
 
+Seguramente alguna vez te haz topado con el problema de que debido a la cantidad de datos que tienes, Pandas explota y te dice que no tiene más espacio en memoria para poder cargar los datos. Modin resuelve este problema.
 
+De acuerdo a la documentación Modin está hecho para que puedas ocupar más de 1 TB en un DataFrame.
+
+![](./docs/images/read_csv_modin.png)
+<br>
+Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
+
+![](./docs/images/modin_architecture.png)
+<br>
+Fuente:
 
 ### Referencias
 
