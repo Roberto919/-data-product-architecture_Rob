@@ -267,6 +267,13 @@ Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más 
 
 ![](./docs/images/pointer.png) Ve el video de `zeppelin.mp4` que está compartido en esta [liga](https://drive.google.com/open?id=1r8y7U4p0fUv6lyvSPmV9cEcyygtFMX1f). **Por favor no reproduzcas este video con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
 
+### Modin
+
+![](./docs/images/modin_logo.png)
+
+Modin es un paquete que modifica los DataFrames de Pandas para convertirlos en DataFrames del estilo de Spark, es decir, a nosotros parece un DataFrame normal (como los de Spark) sin embargo, por abajo está divididos en chunks que nos permiten escalar la cantidad de datos y operaciones que podemos hacer sobre ellos **sin tener** que ocupar un cluster como Spark.
+
+
 
 ### Referencias
 
@@ -275,3 +282,4 @@ Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más 
 + [API de SparkSQL](https://spark.apache.org/docs/2.4.4/api/python/index.html)
 + [Documentación para SQL, DataFrames y DataSets de Spark](https://spark.apache.org/docs/2.4.4/sql-programming-guide.html)
 + [Documentación general de Spark](https://spark.apache.org/docs/2.4.4/quick-start.html)
++ [Modin](https://github.com/modin-project/modin)
