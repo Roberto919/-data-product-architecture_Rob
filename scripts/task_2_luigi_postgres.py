@@ -14,9 +14,12 @@ class Task2(CopyToTable):
     host = credentials.host[0]
     table = 'metadata'
 
-    columns = [("x", "VARCHAR")]
+    columns = [("x", "VARCHAR"),
+               ("y", "VARCHAR")]
 
     def rows(self):
         z = str(self.x + self.x)
         print("########### ", z)
-        return (z)
+        r = [("test 1", z), ("test 2","45")]
+        for element in r:
+            yield element
