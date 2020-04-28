@@ -53,7 +53,11 @@ Y que:
 
 Ahora si...
 
-+ *Equal Parity* o *Demographic or Statistical Parity*: Cuando nos interesa que cada grupo este representado equitativamente en el *dataset*. Por ejemplo: En un modelo que predice si darte o no un crédito, nos gustaría que sin importar el género de la persona -*demographic parity*- tuvieran la misma oportunidad.
+1. *Equal Parity* o *Demographic or Statistical Parity*: Cuando nos interesa que cada grupo de la variable "protegida" -género- tenga la misma proporción de etiquetas positivas predichas (TP). Por ejemplo: En un modelo que predice si darte o no un crédito, nos gustaría que sin importar el género de la persona -*demographic parity*- tuvieran la misma oportunidad.
+
+![](./docs/images/fairness_demographic_parity.png)
+<br>
+Fuente: [How to define fairness to detect and prevent discriminatory outcomes in Machine Learning](https://towardsdatascience.com/how-to-define-fairness-to-detect-and-prevent-discriminatory-outcomes-in-machine-learning-ef23fd408ef2)
 
 Se utiliza esta métrica cuando:
 
@@ -61,20 +65,35 @@ a) Queremos cambiar el estado actual para "mejorarlo". Por ejemplo: Ver más per
 
 b) Conocemos que hay habido una ventaja histórica que afecta los datos con los que construiremos el modelo.
 
+##### Caveats
 
-+ *Proportional Parity* o *Impact Parity* o *Minimizing Disparate Impact*: Cuando nos interesa que cada grupo tenga una representación proporcional a su representación en toda la población.
+Al querer eliminar las desventajas podríamos poner en más desventaja al grupo que históricamente ha tenido desventaja, ya que no está preparado -literalmente- para recibir esa ventaja. Por ejemplo, si damos créditos a grupos a los que antes de hacer *fairness* no lo hacíamos, sin ninguna educación financiera o apoyo de educación financiera de nuestra parte, muy probablemente esas personas caerán en *default* profundizando el *bias* que ya teníamos inicialmente.
 
-+ *False Positive Parity*: Cuando queremos que todos los grupos tengan el mismo FPR.
+2. *Proportional Parity* o *Impact Parity* o *Minimizing Disparate Impact*: Cuando nos interesa que cada grupo tenga una representación proporcional a su representación en toda la población.
+
+3. *False Positive Parity*: Cuando queremos que todos los grupos de la variable protegida tengan el mismo FPR. Es decir, nos equivocamos en las mismas proporciones para etiquetas positivas que eran negativas.
 
 + *False Negative Parity* o *Equal Oppportunity*:  Cuando queremos que todos los grupos tengan el mismo FNR -el mismo TPR-.
+
+![](./docs/images/fairness_eq_opportunity.png
+)
+<br>
+Fuente: [How to define fairness to detect and prevent discriminatory outcomes in Machine Learning](https://towardsdatascience.com/how-to-define-fairness-to-detect-and-prevent-discriminatory-outcomes-in-machine-learning-ef23fd408ef2)
 
 Se utiliza esta métrica cuando:
 
 a) El modelo necesita ser muy bueno en detectar la etiqueta positiva.
+
 b) No hay -mucho- costo en introducir falsos negativos al sistema -tanto al usuario como a la empresa-. Por ejemplo: Generar FPs en tarjeta de crédito.
+
 c) La definición de la variable *target* no es subjetiva. Por ejemplo: Fraude o No Fraude no es alog subjetivo, buen empleado o no puede ser muy subjetivo.
 
-#### Conceptos básicos
+##### *Caveats*
+
+Para poder cumplir con tener el mismo porcentaje de TPR en todos los grupos de la variable protegida, incurriremos en agregar más falsos positivos, lo que puede afectar más a ese grupo a largo plazo.
+
+
+#### Conceptos en *Bias* y *Fairness*
 
 + *Atrribute*: Un *feature* en nuestro *dataset*. Por ejemplo: `genero`.
 + *Group*: Un **grupo** consiste en tener todos los elementos que comparten el mismo valor de un atributo. Por ejemplo: El grupo `genero-femenino`.
@@ -89,6 +108,7 @@ c) La definición de la variable *target* no es subjetiva. Por ejemplo: Fraude o
 ![](./docs/images/aequitas_concepts.png)
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
+
 
 #### Métricas de distribución de grupos
 
