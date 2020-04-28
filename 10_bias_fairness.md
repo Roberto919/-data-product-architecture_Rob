@@ -147,19 +147,20 @@ En estas métricas requerimos de la verdadera etiqueta para encontrar los TP, FP
 
 #### Cálculo de *bias* y *fairness*
 
-En este *framework* se define *bias* como una métrica de disparidad entre los valores obtenidos para las métricas de un grupo con base en el grupo de referencia.
+En este *framework* se define *bias* como una métrica de disparidad entre los valores obtenidos para las métricas de un grupo y el grupo de referencia.
 
 **Proceso General:**
 
-1. Calcular las métricas por grupo: PPR, PPREV, FDR, FPR, FOR, FNR.
-2. Calcular *disparity* y *bias* entre los diferentes grupos y el grupo referencia.
-3. Obtener el *fairness criteria assessment* de cada grupo.
+1. Seleccionar los grupos que serán referencia para cada variable "protegida".
+2. Calcular las métricas de *fairness* de interés: PPR, PPrev, FDR, FPR, FOR, FNR.
+3. Calcular *disparity* y *bias* entre los diferentes grupos y el grupo referencia.
+4. Obtener el *fairness criteria assessment* de cada grupo (nosotros definimos el *threshold*).
 
 **Detalles de implementación:**
 
 Antes que nada, seleccionamos el grupo de referencia -con la metodología deseada-.
 
-Las diferentes métricas de *bias* se aplican comparando pares de grupos definidos por un atributo dado. Por ejemplo: El *Predicted Prevalence Disparity* se obtiene al dividir el *Predicted Prevalence* del grupo `genero femenino`, el *Predicted Prevalence* del grupo `genero` referencia.
+Las diferentes métricas de *fairness* se aplican comparando pares de grupos definidos por un atributo dado. Por ejemplo: El *Predicted Prevalence Disparity* se obtiene al dividir el *Predicted Prevalence* del grupo `genero femenino` y el *Predicted Prevalence* del grupo `genero` de referencia.
 
 1. Calcular las métricas por grupo
   + *Predicted Positive Rate*
@@ -174,7 +175,7 @@ Las diferentes métricas de *bias* se aplican comparando pares de grupos definid
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
 2. Calcular *disparity* y *bias*
-+ Para cada grupo, dividir entre la misma métrica a obtener *parity* del grupo referencia.
++ Para cada grupo, dividir entre el grupo de referencia de la misma métrica para obtener *parity*.
 
 **Métricas de bias**
 
@@ -182,8 +183,9 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 + *Proportional Parity*
 + *False Positive Parity*
 + *False Negative Parity*
++ ...
 
-En el reporte de Aequitas, un modelo es *fair* si y solo si estas 4 métricas son *fair*, si alguna es *unfair* el modelo completo se considera *unfair*.
+En el reporte de Aequitas, un modelo es *fair* **si y solo si** todas las métricas de interés calculadas son *fair*, si alguna es *unfair* el modelo completo se considera *unfair*.
 
 ![](./docs/images/bias_report.png)
 <br>
@@ -208,7 +210,7 @@ Finalmente, para calcular todas estas métricas y ocupar Aequitas, debemos tener
 
 + `score`: Predicción generada por el modelo que queremos auditar.
 + `label_value`: La etiqueta real asociada a la observación.
-+ columnas de cada atributo que queremos auditar por bias: edad, sexo, raza, ciudadanía, estatus civil, tipo de ciudadanía.
++ columnas de cada atributo que queremos auditar por *bias* -la variable protegida-: edad, sexo, raza, ciudadanía, estatus civil, tipo de ciudadanía, etc.
 
 ![](./docs/images/aequitas_input.png)
 <br>
@@ -233,13 +235,15 @@ Fuente: [Aequitas: A Bias and Fairness Audit Toolkit](https://arxiv.org/pdf/1811
 
 *Open source toolkit* de IBM que reune diferentes algoritmos para mitigar el *bias* y *fairness* en diferentes etapas del modelado, así como métricas para identificarlos. Todo está hecho en Python.
 
+A diferencia de Aequitas que **cuantifica** y **transparenta** el *bias* y *fairness*, esta herramienta **mitiga** el *bias*.
+
 #### Algoritmos de mitigación de sesgo
 
 Estos algoritmos buscan mitigar el sesgo modificando los datos de entrenamiento -*pre-processing*-, el modelo -*in-processing*-, o bien las predicciones emitidas por un modelo -*post-processing*.
 
-La selección del algoritmo depende en gran medida de si podemos o no hacer modificaciones en esa etapa del *machine learning pipeline*. Si podemos tener acceso desde modificar los datos de entrenamiento, entonces es mejor hacerlo aquí.
+La selección del algoritmo depende en gran medida de si podemos o no hacer modificaciones en esa etapa del *machine learning pipeline*. Si podemos tener acceso desde modificar los datos de entrenamiento, entonces es mejor hacerlo aquí-*pre-processing*-.
 
-![](./docs/images/pointer.png) ¿En qué situación te imaginas que estamos solo para poder aplicar un algoritmo de mitigación en la parte de *post-processing*?
+![](./docs/images/pointer.png) ¿En qué situación te imaginas que como científicos de datos solo para poder aplicar un algoritmo de mitigación en la parte de *post-processing*?
 
 ##### Pre-processing
 
