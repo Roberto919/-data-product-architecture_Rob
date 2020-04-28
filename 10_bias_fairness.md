@@ -24,9 +24,14 @@ Latín de equidad. Es un *toolkit open source* para medir *bias* y *fairness* de
 
 El siguiente árbol de decisión está desarrollado pensando desde el punto de vista del tomador de decisiones -operativas- al que ayudamos desarrollando un modelo de *machine learning* para identificar en qué métricas deberíamos de concentrarnos para cuantificar el *bias* y *fairness*.
 
+
 ![](./docs/images/fairness_tree.png)
 <br>
-Fuente: [Aequitas](http://www.datasciencepublicpolicy.org/projects/aequitas/)
+Fuente: [Versión anterior Aequitas](http://www.datasciencepublicpolicy.org/projects/aequitas/)
+
+![](./docs/images/fairness_tree_amplified.png)
+<br>
+Fuente: [Versión actualizada Aequitas](http://www.datasciencepublicpolicy.org/projects/aequitas/)
 
 
 Donde:
@@ -51,6 +56,11 @@ Y que:
 + TNR = 1 - FPR
 + FNR = 1 - TPR
 
+Además:
+
++ Precision: $\frac{TP}{TP+FP}$
++ Recall: $\frac{TP}{TP+FN}$
+
 Ahora si...
 
 1. *Equal Parity* o *Demographic or Statistical Parity*: Cuando nos interesa que cada grupo de la variable "protegida" -género- tenga la misma proporción de etiquetas positivas predichas (TP). Por ejemplo: En un modelo que predice si darte o no un crédito, nos gustaría que sin importar el género de la persona -*demographic parity*- tuvieran la misma oportunidad.
@@ -65,18 +75,15 @@ a) Queremos cambiar el estado actual para "mejorarlo". Por ejemplo: Ver más per
 
 b) Conocemos que hay habido una ventaja histórica que afecta los datos con los que construiremos el modelo.
 
-##### Caveats
+##### *Caveats*
 
-Al querer eliminar las desventajas podríamos poner en más desventaja al grupo que históricamente ha tenido desventaja, ya que no está preparado -literalmente- para recibir esa ventaja. Por ejemplo, si damos créditos a grupos a los que antes de hacer *fairness* no lo hacíamos, sin ninguna educación financiera o apoyo de educación financiera de nuestra parte, muy probablemente esas personas caerán en *default* profundizando el *bias* que ya teníamos inicialmente.
+Al querer eliminar las desventajas podríamos poner en más desventaja al grupo que históricamente ha tenido desventaja, ya que no está preparado -literalmente- para recibir esa ventaja. Por ejemplo, si damos créditos a grupos a los que antes de hacer *fairness* no lo hacíamos, sin ninguna educación financiera o apoyo de educación financiera de nuestra parte, muy probablemente esas personas caerán en *default* aumentando el *bias* que ya teníamos inicialmente.
 
-2. *Proportional Parity* o *Impact Parity* o *Minimizing Disparate Impact*: Cuando nos interesa que cada grupo tenga una representación proporcional a su representación en toda la población.
+2. *False Positive Parity*: Cuando queremos que todos los grupos de la variable protegida tengan el mismo FPR. Es decir, nos equivocamos en las mismas proporciones para etiquetas positivas que eran negativas.
 
-3. *False Positive Parity*: Cuando queremos que todos los grupos de la variable protegida tengan el mismo FPR. Es decir, nos equivocamos en las mismas proporciones para etiquetas positivas que eran negativas.
+3. *False Negative Parity* o *Equal Oppportunity*:  Cuando queremos que todos los grupos tengan el mismo FNR -el mismo TPR-.
 
-+ *False Negative Parity* o *Equal Oppportunity*:  Cuando queremos que todos los grupos tengan el mismo FNR -el mismo TPR-.
-
-![](./docs/images/fairness_eq_opportunity.png
-)
+![](./docs/images/fairness_eq_opportunity.png)
 <br>
 Fuente: [How to define fairness to detect and prevent discriminatory outcomes in Machine Learning](https://towardsdatascience.com/how-to-define-fairness-to-detect-and-prevent-discriminatory-outcomes-in-machine-learning-ef23fd408ef2)
 
@@ -92,18 +99,25 @@ c) La definición de la variable *target* no es subjetiva. Por ejemplo: Fraude o
 
 Para poder cumplir con tener el mismo porcentaje de TPR en todos los grupos de la variable protegida, incurriremos en agregar más falsos positivos, lo que puede afectar más a ese grupo a largo plazo.
 
+4. *Proportional Parity* o *Impact Parity* o *Minimizing Disparate Impact*: Cuando nos interesa que cada grupo de la variable "protegida" tenga el mismo impacto. Por ejemplo, en la imagen anterior de *False negative parity*, no se tiene el mismo *impact parity* pues en el grupo B el impacto resultante de tener la misma proporción de TPR introdujo muchos más FPs.
 
-#### Conceptos en *Bias* y *Fairness*
+5. *False Omission Rate (FOR)*: Esta métrica está asociada a las etiquetas negativas. Se calcula como $\frac{FN}{FN+TN}$, y nos permite identificar la proporción de Falsos Negativos que existen entre todas las etiquetas predichas como negativas. Ocupamos esta métrica cuando nos interesa conocer si hay un sesgo hacia algún grupo de no ser selección como etiqueta positiva, por lo que se busca tener paridad entre los FNR de todos los grupos de la variable "protegida". Asociada a modelos *assistive*.
+
+6. *False Discovery Rate (FDR)*: Esta métrica está asociada a las etiquetas positivas pero enfocadas a los False Positive. Se calcula como $\frac{FP}{FP+TP}$, y nos permite identificar la proporción de Falsos Positivos que existen entre todas las etiquetas predichas como positivas. Ocupamos esta métrica cuando nos interesa conocer si hay sesgo hacia un grupo para que salga FP. Asociada a modelos *punitive*.  
+
+#### Conceptos preliminares para Aequitas
 
 + *Atrribute*: Un *feature* en nuestro *dataset*. Por ejemplo: `genero`.
-+ *Group*: Un **grupo** consiste en tener todos los elementos que comparten el mismo valor de un atributo. Por ejemplo: El grupo `genero-femenino`.
++ *Group*: Un **grupo** está formado por las observaciones que tienen un valor espécifico del atributo. Por ejemplo: El grupo `genero-femenino`.
 + *Referenced group*:  Seleccionamos uno de los grupos que nos servirá como referencia. Existen 3 formas de seleccionar este grupo base:
   + El grupo de mayor tamaño entre todos los grupos existentes -de mayor elementos en él-. Por ejemplo: `genero-masculino`.
   + El grupo de menor tamaño. Por ejemplo: `genero-otro`.
   + Aquél que históricamente ha sido un grupo favorecido. Por ejemplo: Para la variable raza, el grupo `raza-blanca`.
 + *Labeled Positive*: El número de elementos etiquetados como positivo dentro de un grupo.
 + *Labeled Negative*: El número de elementos etiquetados como negativo dentro de un grupo.
-+ *Prevalence*: La fracción de entidades en un grupo cuya predicción real fue positiva.
++ *Predicted Positive (PP)*: Número de observaciones en un grupo con predicción de etiqueta positiva.
++ *Total predicted positive*: Número total de observaciones con predicción de etiqueta positiva en todos los grupos.
++ *Predicted Negative (PN)*: Número de observaciones en un grupo con predicción de etiqueta negativa.
 
 ![](./docs/images/aequitas_concepts.png)
 <br>
@@ -112,14 +126,11 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
 #### Métricas de distribución de grupos
 
-En estas métricas nos interesa conocer las distribuciones de las entidades en los grupos.
+En estas métricas nos interesa conocer las distribuciones de las observaciones en cada grupo de la variable "protegida".
 
-+ *Predicted Positive (PP)*: Número de entidades en un grupo con predicción de etiqueta positiva.
-+ *Total predicted positive*: Número total de entidades con predicción de etiqueta positiva en todos los grupos.
-+ *Predicted Negative (PN)*: Número de entidades en un grupo con predicción de etiqueta negativa.
-
-1. *Predicted Prevalence (PPrev)*: La fracción de entidades en un grupo con predicción de etiqueta positiva.
-2. *Predicted Positive Rate (PPR)*: La fracción de entidades con predicción de etiqueta positiva que pertenecen a cierto grupo.
+1. *Prevalence*: La fracción de observaciones en un grupo cuya predicción fue TP.
+2. *Predicted Prevalence (PPrev)*: La fracción de observaciones en un grupo con predicción de etiqueta positiva.
+3. *Predicted Positive Rate (PPR)*: La fracción de observaciones con predicción de etiqueta positiva que pertenecen a cierto grupo.
 
 ![](./docs/images/bias_metrics.png)
 <br>
@@ -127,7 +138,7 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
 #### Métricas de error de grupos
 
-En estas métricas requerimos de la verdadera etiqueta para encontrar los TP, FP, TN, FN. A través de estas medidas podemos obtener las siguientes 4 métricas asociadas al error:
+En estas métricas requerimos de la verdadera etiqueta para encontrar los TP, FP, TN y FN. A través de estas medidas podemos obtener las siguientes 4 métricas asociadas al error:
 
 1. *False Discovery Rate (FDR)*: $FDR=\frac{FP}{FP+TP}$ La fracción de falsos positivos en un grupo de aquellos predichos como positivos del mismo grupo.
 2. *False Omission Rate (FOR)*: $FOR=\frac{FN}{FN+TN}$ La fracción de falsos negativos de un grupo de aquellos predichos como negativos en el grupo.
@@ -136,7 +147,7 @@ En estas métricas requerimos de la verdadera etiqueta para encontrar los TP, FP
 
 #### Cálculo de *bias* y *fairness*
 
-En este *framework* se define *bias* como una métrica de disparidad entre los valores obtenidos para las métricas de un grupo versus el grupo de referencia.
+En este *framework* se define *bias* como una métrica de disparidad entre los valores obtenidos para las métricas de un grupo con base en el grupo de referencia.
 
 **Proceso General:**
 
