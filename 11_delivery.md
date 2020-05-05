@@ -130,7 +130,11 @@ Esto solo es la base de APIs, a esta base falta agregarle autenticación, seguri
 
 #### API Management
 
-Todas las plataformas de nube tienen una solución para crear y administrar APIs, la de AWS se llama Amazon API Gateway. 
+Todas las plataformas de nube tienen una solución para crear y administrar APIs, la de AWS se llama *Amazon API Gateway*.
+
+![](./docs/images/aws_api_gateway.png)
+<br>
+Fuente: [AWS API Management](https://aws.amazon.com/api-gateway/api-management/)
 
 ### Dashboards
 
