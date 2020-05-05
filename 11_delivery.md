@@ -27,6 +27,8 @@ Acrónimo de *Application Programming Interface*. Un(a) API nos permite poder ac
 
 Por ejemplo: La mayoría de sus proyectos utilizan una API a través de la cuál obtienen los datos que necesitan para sus productos de datos.
 
+![](,/images/pointer.png) Te recomiendo leer un pequeño artículo de Forbes de enero de 2020 donde se habla de la economía que está generando el desarrollo de APIs.
+
 ![](./images/pointer.png) La forma más eficiente de integrar nuestro trabajo como científicos de datos a una empresa/proceso es utilizar una API para "exponer" las predicciones de nuestro modelo. De esta manera, el área de sistemas "solo" tiene que hacer una petición a la API para obtener los resultados del modelo.
 
 También preferimos ocupar APIs porque de esta manera nos aseguramos que el desarrollo o implementación de los modelos están bien hechos -los hicimos nosotros con nuestras herramientas de trabajo: R, Sklearn, PySpark, etc.- y que no hubo ningún cambio en el código que pueda ser problema. --> ¡No queremos que ingenieros de software implementen nuestra solución!.
@@ -56,6 +58,8 @@ El top 5 para 2019: Facebook, Google maps, Twitter, YouTube, Accuweather.
 
 Seguro para el análisis de 2020 las API más llamadas serán de datos relacionados a COVID-19.
 
+Por lo pronto estamos a punto de llegar al **Trillon** de *endpoints*! (Dell Technologies Capital).
+
 
 #### HTTP Methods
 
@@ -80,9 +84,65 @@ Existen varios *frameworks* para desarrollar una API, en particular para python 
 
 Ocuparemos Flask porque es muy sencillo de implementar y trae lo mínimo necesario para hacer una API por lo que si necesitamos más cosas necesitaremos agregar extensiones a Flask (de Flask) o bien si ya te sientes con más confianza a conceptos de ingeniería de software pasarnos a Djando.
 
-Si en tu equipo de trabajo hay un ingenieró de datos entonces la opción uno debería ser Django que trae todo lo que pudieras necesitar: seguridad en las llamdas, soporte para aguantar n llamadas por segundo, tiempo de respuesta, etc. 
+Si en tu equipo de trabajo hay un ingenieró de datos entonces la opción uno debería ser Django que trae todo lo que pudieras necesitar: seguridad en las llamdas, soporte para aguantar n llamadas por segundo, tiempo de respuesta, etc.
+
+
+##### Flask
+
+ES un micro-framework para APIs escrito en Python. Para instalarlo solo necesitas bajarlo con pip `pip install Flask` en tu ambiente virtual de la clase.
+
+Para utilizar Flask ocuparemos decoradores que nos permitarán "exponer" funciones a través de una API.
+
+El decorador más utilizado es `route` y nos permite definir la ruta a través de la cuál ese servicio quedará expuesto, esta ruta también se puede armar dinámicamente pasando parámetros en la URL utilizando `<variable>`, y también es posible definir el tipo de dato que esta variable debe ser, por ejemplo: `<string: variable>`.
+
+Los tipos soportados por Flask son:
++ `string` el de *default* si no se define un tipo  
++ `int` acepta enteros positivos  
++ `float` acepta reales positivos
++ `path` como un `string` pero acepta los `\`
++ `uuid` acepta `strings` UUID.
+
+También es posible 
+
+A este decorador le podemos definir qué métodos HTTP tiene asociados.
+
+![](./images/pointer.png) Ir al *script* `flask_script_1.py`.
+
+Para levantar el servidor de Flask necesitamos definir como variable de ambiente dónde está la clase que implementa Flask. `$export FLASK_APP=script_python.py` o el directorio que tiene los *scripts* que definen el *routing* y los servicios a exponer.
+
+Después solo se necesita correr flask `flask run`, esto levantará un pequeño servidor que expone a través de tu localhost en el puerto 5000 (por default).  
+
+
+##### Swagger UI
+
+Es un *framework* que nos permite documentar APIs, de esta manera exponemos a posibles usuarios de nuestra API cómo interactuar con ella. Listar los servicios disponibles, a los que llamamos *endpoints*, y las firmas de los métodos que se pueden ocupar.
+
+Por ejemplo: [Petstore demo](https://petstore.swagger.io/)
+
+Para ocupar Swagger con Flask necesitamos instalar la extensión de Flask `Flask-RESTPlus` con `pip install flask-restplus`.
+
+![](./images/pointer.png) Verificar el script `flask_w_swagger.py`.
+
+Al utilizar Flask-RESTPlus ahora tenemos que hacer clases que implementan a la clase `Resource`, en nuestras clases debemos implementar los métodos HTTP que queremos que el *endpoint* administre.
+
+#### API Management AWS
+
+Todas las plataformas de nube tienen una solución para crear y administrar APIs, la de AWS se llama API Management
+
+### Dashboards
+
+#### Bokeh
+
+#### Dash
+
+#### Shiny
 
 ### Referencias
 
-+ [Flask Documentacion](https://flask.palletsprojects.com/en/1.1.x/)
-+
++ [Forbes: API Economy](https://www.forbes.com/sites/tomtaulli/2020/01/18/api-economy--is-it-the-next-big-thing/#22c51ef642ff)
++ [Flask Documentación](https://flask.palletsprojects.com/en/1.1.x/)
++ [Flask API Reference](https://flask.palletsprojects.com/en/1.1.x/#api-reference)
++ [Swagger UI](https://swagger.io/tools/swagger-ui/)
++ [Flask-RESTPlus Documentación](https://flask-restplus.readthedocs.io/en/stable/)
++ [Bokeh](https://docs.bokeh.org/en/latest/index.html)
++ [Dash plotly](https://plotly.com/dash/)
