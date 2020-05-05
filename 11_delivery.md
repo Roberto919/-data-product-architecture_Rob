@@ -60,6 +60,9 @@ Seguro para el análisis de 2020 las API más llamadas serán de datos relaciona
 
 Por lo pronto estamos a punto de llegar al **Trillon** de *endpoints*! (Dell Technologies Capital).
 
+![](./docs/images/all_about_images.jpg)
+<br>
+Fuente: SmartFiles Developers, Junio 2013.
 
 #### HTTP Methods
 
@@ -89,7 +92,7 @@ Si en tu equipo de trabajo hay un ingenieró de datos entonces la opción uno de
 
 ##### Flask
 
-ES un micro-framework para APIs escrito en Python. Para instalarlo solo necesitas bajarlo con pip `pip install Flask` en tu ambiente virtual de la clase.
+Es un *micro-framework* para APIs escrito en Python. Para instalarlo solo necesitas bajarlo con pip `pip install Flask` en tu ambiente virtual de la clase.
 
 Para utilizar Flask ocuparemos decoradores que nos permitarán "exponer" funciones a través de una API.
 
@@ -102,11 +105,11 @@ Los tipos soportados por Flask son:
 + `path` como un `string` pero acepta los `\`
 + `uuid` acepta `strings` UUID.
 
-También es posible 
+También es posible armar la URL con parámetros que forman parte de un query. 
 
-A este decorador le podemos definir qué métodos HTTP tiene asociados.
+Es posible agregar los métodos que cada *endpoint* resuelve, agregándolos al decorador `route`.
 
-![](./images/pointer.png) Ir al *script* `flask_script_1.py`.
+![](./docs/images/pointer.png) Ir al *script* `flask_script_1.py`.
 
 Para levantar el servidor de Flask necesitamos definir como variable de ambiente dónde está la clase que implementa Flask. `$export FLASK_APP=script_python.py` o el directorio que tiene los *scripts* que definen el *routing* y los servicios a exponer.
 
@@ -121,7 +124,7 @@ Por ejemplo: [Petstore demo](https://petstore.swagger.io/)
 
 Para ocupar Swagger con Flask necesitamos instalar la extensión de Flask `Flask-RESTPlus` con `pip install flask-restplus`.
 
-![](./images/pointer.png) Verificar el script `flask_w_swagger.py`.
+![](./docs/images/pointer.png) Verificar el script `flask_w_swagger.py`.
 
 Al utilizar Flask-RESTPlus ahora tenemos que hacer clases que implementan a la clase `Resource`, en nuestras clases debemos implementar los métodos HTTP que queremos que el *endpoint* administre.
 
