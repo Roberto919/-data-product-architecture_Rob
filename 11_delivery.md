@@ -60,7 +60,7 @@ Seguro para el análisis de 2020 las API más llamadas serán de datos relaciona
 
 Por lo pronto estamos a punto de llegar al **Trillon** de *endpoints*! (Dell Technologies Capital).
 
-![](./docs/images/all_about_images.jpg)
+![](./docs/images/all_about_apis.jpg)
 <br>
 Fuente: SmartFiles Developers, Junio 2013.
 
@@ -105,8 +105,6 @@ Los tipos soportados por Flask son:
 + `path` como un `string` pero acepta los `\`
 + `uuid` acepta `strings` UUID.
 
-También es posible armar la URL con parámetros que forman parte de un query. 
-
 Es posible agregar los métodos que cada *endpoint* resuelve, agregándolos al decorador `route`.
 
 ![](./docs/images/pointer.png) Ir al *script* `flask_script_1.py`.
@@ -124,9 +122,9 @@ Por ejemplo: [Petstore demo](https://petstore.swagger.io/)
 
 Para ocupar Swagger con Flask necesitamos instalar la extensión de Flask `Flask-RESTPlus` con `pip install flask-restplus`.
 
-![](./docs/images/pointer.png) Verificar el script `flask_w_swagger.py`.
-
 Al utilizar Flask-RESTPlus ahora tenemos que hacer clases que implementan a la clase `Resource`, en nuestras clases debemos implementar los métodos HTTP que queremos que el *endpoint* administre.
+
+![](./docs/images/pointer.png) Verificar el script `flask_w_swagger.py`.
 
 #### API Management AWS
 
