@@ -126,9 +126,11 @@ Al utilizar Flask-RESTPlus ahora tenemos que hacer clases que implementan a la c
 
 ![](./docs/images/pointer.png) Verificar el script `flask_w_swagger.py`.
 
-#### API Management AWS
+Esto solo es la base de APIs, a esta base falta agregarle autenticación, seguridad (tokens) y administración de la API. Se pueden ir agregando extensiones a Flask para ir agregando cada uno de estos puntos.
 
-Todas las plataformas de nube tienen una solución para crear y administrar APIs, la de AWS se llama API Management
+#### API Management
+
+Todas las plataformas de nube tienen una solución para crear y administrar APIs, la de AWS se llama Amazon API Gateway. 
 
 ### Dashboards
 
