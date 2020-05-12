@@ -138,11 +138,62 @@ Fuente: [AWS API Management](https://aws.amazon.com/api-gateway/api-management/)
 
 ### Dashboards
 
+**Python**
+
 #### Bokeh
+
+Librería de visualización interactiva de Python. Supuestamente permite tener un alto performance interactivo sobre grandes cantidades de datos e inclusive sobre *stremaing*.
+
+Bokeh se puede utilizar para graficas interactivas, *dashboards*, y aplicaciones de datos.
+
+Para instalar Bokeh solo necesitas poner `pip install bokeh` en el pyenv/virtualenv/conda de la clase. A través de pip no se instalan los ejemplos, pero puedes verlos en el [repositorio](https://github.com/bokeh/bokeh).
+
+**Características**
+
++ Utiliza el framework de D3 para *front* y Tornado para *back* (WebServer en Python)
++ Se puede ocupar en Jupyter notebooks y Zeppelin
++ Para algunas gráficas se require de conocer Javascript (╯°□°)╯︵ ┻━┻
++ Es posible tener casos de inconsitencia de interacción en *dashboards*: Se seleccionan opciones del dashboard que no actualizan las gráficas o muestran datos que no debería
++ Para enero del 2018 parece que Dash es más eficiente cuando se tienen grandes cantidades de datos
++ En general parece que el sentimiento es que Bokeh es más difícil que Dash y que es menos intuitivo
++ Mantenimiento por Anaconda
++ De licencia abierta
 
 #### Dash
 
-#### Shiny
+Para instalarlo solo necesitas poner `pip install dash` en el pyenv/virtualenv/conda de la clase.
+
+Levanta un pequeño servidor que corre tu aplicación (como Shiny).
+
++ Utiliza framewokrs de React y Plotly para el *front* y *Flask* para el *back*
++ No se puede ocupar en Jupyter notebooks o Zeppelin
++ Solo se requiere saber Python
++ No se conocen de casos con inconsistencia de interacción, o por lo menos no se ha reportado
++ Con gran cantidad de datos o *streaiming* no se ve afectado el *performance*
++ Mantenimiento por Plotly
++ De licencia abierta
+
+[Ejemplos de Dash dashboards](https://dash-gallery.plotly.host/Portal/)
+
+**R**
+
+#### R-Shiny
+
+Ya tiene un tiempo que R-Shiny agregó *dashboards* a su conjunto de herramientas de visualización.
+
+Ahora tienen una opción muy sencilla que te permite hacer *dashobards*, el paquete `flexdashboard`.
+
+Este paquete te permite utilizar un Rmd como fuente, basta con ponerle al *header* del Rmd que la salida sea un `flexdashboard::flex_dashboard`. Cada elemento que tenga un *markdown header* de tres niveles `###` será interpretado como una sección que será agregada al *dashboard*, claro, tiene que tener un chunck de código de r con la visualización a mostrar!.
+
+También exite la solución clásica de *dashboard*, en ésta si es necesario poner componentes UI de Shiny.    
+
++ Hecho en R
++ Mantenimiento por RStudio
++ Se requiere de pagar para poder tener usuarios concurrentes
+
+[Ejemplos de *flexdashboard*](https://rmarkdown.rstudio.com/flexdashboard/examples.html)
+
+#### Dash
 
 ### Referencias
 
@@ -152,4 +203,10 @@ Fuente: [AWS API Management](https://aws.amazon.com/api-gateway/api-management/)
 + [Swagger UI](https://swagger.io/tools/swagger-ui/)
 + [Flask-RESTPlus Documentación](https://flask-restplus.readthedocs.io/en/stable/)
 + [Bokeh](https://docs.bokeh.org/en/latest/index.html)
++ [Bokeh Quickstart](https://docs.bokeh.org/en/latest/docs/user_guide/quickstart.html)
++ [Tutorial Bokeh 5 minutos](https://nbviewer.jupyter.org/github/bokeh/bokeh-notebooks/blob/master/quickstart/quickstart.ipynb)
 + [Dash plotly](https://plotly.com/dash/)
++ [Dash tutorial](http://dash.plotly.com/)
++ [Dash gallery](https://dash-gallery.plotly.host/Portal/)
++ [Dash vs Bokeh](https://medium.com/sicara/bokeh-dash-best-dashboard-framework-python-shiny-alternative-c5b576375f7f)
++ [Shiny tutorial](https://shiny.rstudio.com/tutorial/)
