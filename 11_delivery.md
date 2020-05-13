@@ -142,7 +142,7 @@ Fuente: [AWS API Management](https://aws.amazon.com/api-gateway/api-management/)
 
 #### Bokeh
 
-Librería de visualización interactiva de Python. Supuestamente permite tener un alto performance interactivo sobre grandes cantidades de datos e inclusive sobre *stremaing*.
+Librería de visualización interactiva de Python. Supuestamente permite tener un alto performance interactivo sobre grandes cantidades de datos e inclusive sobre *streamang*.
 
 Bokeh se puede utilizar para graficas interactivas, *dashboards*, y aplicaciones de datos.
 
@@ -169,7 +169,7 @@ Levanta un pequeño servidor que corre tu aplicación (como Shiny).
 + No se puede ocupar en Jupyter notebooks o Zeppelin
 + Solo se requiere saber Python
 + No se conocen de casos con inconsistencia de interacción, o por lo menos no se ha reportado
-+ Con gran cantidad de datos o *streaiming* no se ve afectado el *performance*
++ Con gran cantidad de datos o *streaming* no se ve afectado el *performance*
 + Mantenimiento por Plotly
 + De licencia abierta
 
