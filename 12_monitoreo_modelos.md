@@ -59,17 +59,17 @@ Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.you
 <br>
 Fuente: [CausalImpact Python](https://github.com/dafiti/causalimpact)
 
-+ *Canary models*. Modelos que se considerán *champions* del problema a resolver, el que está en producción es el *champion* -por un tiempo-. 
++ *Canary models*. Modelos que se considerán *champions* del problema a resolver, el que está en producción es el *champion* -por un tiempo-.
 
-![](./docs/images/canary_model.png)
+![](./docs/images/canary_models.png)
 <br>
 Fuente: [Monitoring Machine Learning Results and Canary Models](https://www.youtube.com/watch?v=LK9D249SgCw)
 
-![](./docs/images/model_monitoring.png)
+![](./docs/images/model_monitoring_metrics.png)
 <br>
 Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.youtube.com/watch?v=IqKunD0Bl5c)
 
-\* Para comparar distribuciones puedes ocupar la métrica de Kullback-Leibler Divergence, que mide la disimilitud entre dos distribuciones. SciPy tiene una función para esta métrica [entropy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.entropy.html). Recuerda que en entropía 0 significa homogeneidad!.
+\* Para comparar distribuciones puedes ocupar la métrica de **Kullback-Leibler Divergence**, que cuantifica la disimilitud entre dos distribuciones, cuánto difieren dos distribuciones de probabilidad. SciPy tiene una función para esta métrica [entropy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.entropy.html). Recuerda que en entropía 0 significa homogeneidad!.
 
 ### Soluciones existentes
 
@@ -97,9 +97,13 @@ En la parte de monitoreo se generar alertas que permiten identificar cuando un m
 
 Al igual que en el resto de las soluciones utiliza el set de entrenamiento como *baseline* y datos nuevos que llegan de producción para hacer comparaciones e identificar *drift*. También utiliza el concepto de *canary model* para ir comparando las predicciones del modelo en predicción contral el mejor predecesor, o el mejor en *desarrollo*. El modelo que pones en producción es el *canary model* en ese momento, pero conforme pasa el tiempo habrá otros modelos que tienen mejor *performance* que el que está en producción. Cuando cambias de modelo el que se queda en producción siempre es el *canary model*.
 
-
+![](./docs/images/parallelM.png)
+<br>
+Fuente: [ParallelM](https://www.parallelm.com/product/)
 
 ### Liguero
 
 + [Monitoring models in production, PyData Amsterdam 2018](https://www.youtube.com/watch?v=IqKunD0Bl5c)
-+ [AWS SageMaker ModelMonitoring]
++ [AWS SageMaker ModelMonitoring](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html)
++ [AzureMachineLearning model monitoring](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-monitor-data-drift)
++ [DataRobot ParallelM](https://www.parallelm.com/product/)
