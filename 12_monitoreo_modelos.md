@@ -38,7 +38,7 @@ Lo monitoreamos porque los modelos forman parte de un sistema dinámico, si hici
 + Identificar *data drift*. Esto es, cambios drásticos en los datos de entrada a tus modelos que provocan que el desempeño de tu modelo se degrade considerablemente. <- Nos protegimos también con validaciones a través de marbles en nuestro pipeline! ┌(° ͜ʖ͡°)┘
   + Comparar las distribuciones de los datos de entrada con las distribuciones del *dataset* de entrenamiento ocupado en el modelo. <- Para esto se tiene que tener en algún lugar guardado esta base de comparación. Por eso necesitamos la metadata del modelo que quedó seleccionado.
   + Generar alertas cuando las distribuciones tengan n desviaciones estándar
-+ Distribución de las etiquetas
++ Distribución de las etiquetas \*
 
 ![](./docs/images/alerting_example.png)
 <br>
@@ -51,6 +51,7 @@ Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.you
 + Si tienes un modelo supervisado, siempre generar un modelo de interpretabilidad de cada predicción. Eso nos puede dar *insights*.
 + Comparar contra la etiqueta real -> aunque esto puede tardar días, semanas, meses inclusive años dependiendo del problema. Si no existe tal cosa, nosotros podemos etiquetar un pequeño subset, eso nos ayudará a tener mayor contexto sobre el problema. Puede ser que algunas suposiciones que teníamos del problema y de los datos no se cumplan y haciendo este ejercicio ayuda a identificar esto rápidamente.
 + En casos donde no se trata de aprendizaje supervisado también puedes hacer verificaciones. Por ejemplo: Número de elementos en los clusters.
++ De ser posible habilita una forma en la que el *feedback* del usuario final te llegue.
 + Generar modelos de identificación de anomalías
 + Generar modelos de "impacto causal" [CausalImpact Python](https://github.com/dafiti/causalimpact)
 
@@ -58,11 +59,17 @@ Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.you
 <br>
 Fuente: [CausalImpact Python](https://github.com/dafiti/causalimpact)
 
-+ *Canary models*
++ *Canary models*. Modelos que se considerán *champions* del problema a resolver, el que está en producción es el *champion* -por un tiempo-. 
+
+![](./docs/images/canary_model.png)
+<br>
+Fuente: [Monitoring Machine Learning Results and Canary Models](https://www.youtube.com/watch?v=LK9D249SgCw)
 
 ![](./docs/images/model_monitoring.png)
 <br>
 Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.youtube.com/watch?v=IqKunD0Bl5c)
+
+\* Para comparar distribuciones puedes ocupar la métrica de Kullback-Leibler Divergence, que mide la disimilitud entre dos distribuciones. SciPy tiene una función para esta métrica [entropy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.entropy.html). Recuerda que en entropía 0 significa homogeneidad!.
 
 ### Soluciones existentes
 
@@ -88,7 +95,7 @@ Esta solución (MCenter) te permite deployar, monitorear y gobernar modelos en p
 
 En la parte de monitoreo se generar alertas que permiten identificar cuando un modelo no tiene el desempeño esperado debido a cambios en los datos -*data drift*.
 
-Al igual que en el resto de las soluciones utiliza el set de entrenamiento como *baseline* y datos nuevos que llegan de producción para hacer comparaciones e identificar *drift*. También utiliza el concepto de *canary model*.
+Al igual que en el resto de las soluciones utiliza el set de entrenamiento como *baseline* y datos nuevos que llegan de producción para hacer comparaciones e identificar *drift*. También utiliza el concepto de *canary model* para ir comparando las predicciones del modelo en predicción contral el mejor predecesor, o el mejor en *desarrollo*. El modelo que pones en producción es el *canary model* en ese momento, pero conforme pasa el tiempo habrá otros modelos que tienen mejor *performance* que el que está en producción. Cuando cambias de modelo el que se queda en producción siempre es el *canary model*.
 
 
 
