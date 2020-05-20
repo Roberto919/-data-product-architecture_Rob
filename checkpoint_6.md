@@ -1,7 +1,7 @@
 ### Checkpoint 6: Final mile(s)
 
 + Pipeline de predicción: Su requieres tendría que buscar el pkl en S3 (training) y haber pasado la validación de FE
-  + Las predicciones se guardan en S3
+  + Las predicciones se guardan en S3 (cold) y RDS (hot)
   + Metadata de predicción en RDS -> gobernanza de modelos (guardar el uuid del archivo con las predicciones)
   + Al menos 2 validaciones sobre las predicciones
 + Cálculo de bias y fairness con el mejor modelo seleccionado durante el training (a través de python no Web!)
