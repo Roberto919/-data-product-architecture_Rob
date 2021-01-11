@@ -36,7 +36,7 @@ Este curso esta diseñado para que puedas desarrollar un producto de datos de in
 
 ## Material del curso
 
-El diseño de los temas, el contenido y las lecturas están basados en la clase [*Software Engineering for AI-Enabled Systems*](https://ckaestne.github.io/seai/) de **Kristian Kaestner** y **Eunsuk Kang** impartida en *Carnegie Mellon Universty* a finales de 2019, así como por adecuaciones realizadas junto con el Dr Adolfo de Unánue.
+El diseño de los temas, el contenido y las lecturas fueron hecho con base en la clase [*Software Engineering for AI-Enabled Systems*](https://ckaestne.github.io/seai/) de **Kristian Kaestner** y **Eunsuk Kang** impartida en *Carnegie Mellon Universty* a finales de 2019, así como por adecuaciones realizadas junto con el Dr Adolfo de Unánue.
 
 + Libro [Building Intelligent Systems: A Guide to Machine Learning Engineering](https://www.amazon.com.mx/Building-Intelligent-Systems-Learning-Engineering-ebook/dp/B07B91WQHR/ref=sr_1_1?__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=building+intelligent+systems&qid=1579111267&sr=8-1) de **Geoff Hulten**.
 
@@ -55,6 +55,7 @@ El diseño de los temas, el contenido y las lecturas están basados en la clase 
 + Nuestro principal medio de comunicación es [Slack](https://slack.com/intl/es-mx/), lo puedes instalar en tu computadora y en tu celular.
   + Nuestro *workspace* se llama `dpa_primavera_21`, puedes integrarte al grupo a través de esta [liga](https://join.slack.com/t/dpaprimavera21/shared_invite/zt-krewnpn8-POOJrJRRhlAofWzhyiZ3uA).
   + Por favor agrega a tu perfil el nombre con el que quieres que te llamemos en la clase y una foto para saber quién eres
++ Las notas se encuentran en Github en `https://github.com/ITAM-DS/data-product-architecture` **en la rama** `dpa_2021`.
 + No tomo asistencia.
 + Si por cualquier cosa necesitas enviar un correo por favor que tu *subject* sea `dpa_itam_2021`, de otra manera se pierde en mi spam :(
 
