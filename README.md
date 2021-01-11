@@ -40,6 +40,12 @@ El diseño de los temas, el contenido y las lecturas fueron hecho con base en la
 
 + Libro [Building Intelligent Systems: A Guide to Machine Learning Engineering](https://www.amazon.com.mx/Building-Intelligent-Systems-Learning-Engineering-ebook/dp/B07B91WQHR/ref=sr_1_1?__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=building+intelligent+systems&qid=1579111267&sr=8-1) de **Geoff Hulten**.
 
+![](images/building_intelligent_systems.jpeg)
+
++ Libro [Introducing MLOps](https://www.amazon.com.mx/Introducing-MLOps-Machine-Learning-Enterprise-ebook/dp/B08PDW3JLY/ref=sr_1_1?__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=mlops&qid=1610337923&sr=8-1)
+
+![](images/introducing_mlops.jpeg)
+
 ## Evaluación
 
 + *Checkpoints* 80%:
@@ -56,8 +62,10 @@ El diseño de los temas, el contenido y las lecturas fueron hecho con base en la
   + Nuestro *workspace* se llama `dpa_primavera_21`, puedes integrarte al grupo a través de esta [liga](https://join.slack.com/t/dpaprimavera21/shared_invite/zt-krewnpn8-POOJrJRRhlAofWzhyiZ3uA).
   + Por favor agrega a tu perfil el nombre con el que quieres que te llamemos en la clase y una foto para saber quién eres
 + Las notas se encuentran en Github en `https://github.com/ITAM-DS/data-product-architecture` **en la rama** `dpa_2021`.
-+ No tomo asistencia.
++ Nos moveremos a Zoom en lugar de Teams utilizando siempre la siguiente [liga](https://itam.zoom.us/j/91296837188?pwd=RFhYSlVBOS9ZcXprc1U4VWNkaGdKdz09).
 + Si por cualquier cosa necesitas enviar un correo por favor que tu *subject* sea `dpa_itam_2021`, de otra manera se pierde en mi spam :(
+
+![](images/pointer.png)  Para tener acceso a las notas del curso necesitas tener una cuenta en Github, si aún no tienes una puedes crear una [aquí](https://github.com/) y enviarme **tu usuario** o **correo** que registraste en github a través de Slack por mensaje directo.
 
 ## Cursos recomendados
 
