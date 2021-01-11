@@ -63,6 +63,7 @@ El diseño de los temas, el contenido y las lecturas fueron hecho con base en la
   + Por favor agrega a tu perfil el nombre con el que quieres que te llamemos en la clase y una foto para saber quién eres
 + Las notas se encuentran en Github en `https://github.com/ITAM-DS/data-product-architecture` **en la rama** `dpa_2021`.
 + Nos moveremos a Zoom en lugar de Teams utilizando siempre la siguiente [liga](https://itam.zoom.us/j/91296837188?pwd=RFhYSlVBOS9ZcXprc1U4VWNkaGdKdz09).
++ Ocuparemos un documento conjunto en donde haremos la recopilación de preguntas que vayan surgiendo [aquí](https://docs.google.com/document/d/1O6rYP4ln_nz4cMSJ5YdJAT5AyohmdvaQhn-jfxp6_VE/edit?usp=sharing)
 + Si por cualquier cosa necesitas enviar un correo por favor que tu *subject* sea `dpa_itam_2021`, de otra manera se pierde en mi spam :(
 
 ![](images/pointer.png)  Para tener acceso a las notas del curso necesitas tener una cuenta en Github, si aún no tienes una puedes crear una [aquí](https://github.com/) y enviarme **tu usuario** o **correo** que registraste en github a través de Slack por mensaje directo.
