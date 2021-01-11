@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -34,7 +34,7 @@ Claramente sería mejor que el lenguaje ocupado en el análisis de laboratorio s
 
 #### Introducción
 
-![](./docs/images/spark_logo.png)
+![](./images/spark_logo.png)
 
 Spark fue creado en el laboratorio [AMPLab](https://amplab.cs.berkeley.edu/) de la Universidad de Berkeley (2014), también forma parte del Apache Software Foundation y es considerado como la primer solución *open source* de procesamiento distribuido hecha para *Data Scientists*.
 
@@ -66,13 +66,13 @@ Spark está integrado a muchas de las herramientas del ecosistema de Hadoop:
 -   Tiene una librería para SQL -SparkSQL- con la que se puede interactuar con el metastore de Hive o los datos que cargarmos a través de Parquets o Avro.
 -   Puede correr con YARN lo que permite compartir recursos del cluster dinámicamente.
 
-![](./docs/images/pointer.png) ... Por cierto, Spark está desarrollado en Scala, por lo que la gente que desarrolló Spark sugiere **fuertemente** utilizar Scala...pero, puedes ocupar **PySpark** -un *wraper* de Python para Spark- (también puedes conectar R con Spark con la libería **sparklyr**, por cierto, un mexicano está en el desarrollo de esta librería （っ＾▿＾）-Javier Luraschi-)
+![](./images/pointer.png) ... Por cierto, Spark está desarrollado en Scala, por lo que la gente que desarrolló Spark sugiere **fuertemente** utilizar Scala...pero, puedes ocupar **PySpark** -un *wraper* de Python para Spark- (también puedes conectar R con Spark con la libería **sparklyr**, por cierto, un mexicano está en el desarrollo de esta librería （っ＾▿＾）-Javier Luraschi-)
 
 #### Teoría de Spark
 
 ##### Ecosistema de Spark
 
-![](./docs/images/spark_ecosystem.png) Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
+![](./images/spark_ecosystem.png) Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
 
 -   SparkSQL: La librería que le permite a Spark ingestar, limpiar, analizar y manipular datos como **dplyr** (EDA).
 -   Spark MLlib: La librería que le permite a Spark realizar *machine learning*, como **scikitlearn**.
@@ -81,7 +81,7 @@ Spark está integrado a muchas de las herramientas del ecosistema de Hadoop:
 
 #### Arquitectura de Spark
 
-![](./docs/images/spark_cluster_driver.png)
+![](./images/spark_cluster_driver.png)
 <br>
 Fuente: [Overview Spark](https://spark.apache.org/docs/2.3.0/cluster-overview.html)
 
@@ -107,11 +107,11 @@ Hacer un programa en Spark consiste a grandes rasgos de los siguientes 3 pasos:
 
 #### Spark Shell
 
-![](./docs/images/pointer.png) Levantar un cluster de EMR, mostrar el shell.
+![](./images/pointer.png) Levantar un cluster de EMR, mostrar el shell.
 
 Es el REPL de Spark, por default es para Scala, aunque tambien existe un *shell* para Python :) -**pyspark**-. Esta consola nos permite definir funciones y manipular datos, es como R sin IDE.
 
-![](./docs/images/spark_shell.png) <br>
+![](./images/spark_shell.png) <br>
 
 -   `:help` para ver todos los comandos disponibles en el *shell*.
 -   `:history` permite buscar nombres de variables o funciones que han sido generadas anteriormente en la sesión.
@@ -128,11 +128,11 @@ El objeto más importante dentro de Spark es **Resilent Distributed Dataset** (R
 
 Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, `show`, etc. [Actions](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#actions)
 
-![](./docs/images/spark_actions_transformations_dag.png) <br>
+![](./images/spark_actions_transformations_dag.png) <br>
 
 En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son semejantes a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
 
-![](./docs/images/sparkcontext_sparksession.png) <br>
+![](./images/sparkcontext_sparksession.png) <br>
 
 *SparkSession* permite tener acceso a las funciones de SQL de Spark y a trabajar directamente con el DataFrame, *SparkContext* permite trabajar directamente con el RDD y hacer paralelización explícita. Desde Spark 2.x trabajamos directamente con el SparkSession, aunque sigue siendo posible trabajar con el *SparkContext* y el RDD. Un *SparkSession* siempre contiene al menos un *SparkContext*.
 
@@ -184,7 +184,7 @@ En Spark puedes manipular los datos a través de 3 objetos:
 2. DataFrames: A través del *SparkSession* y aplicando las funciones de SQL de Spark.
 3. Tablas temporales: Estas tablas son como tablas de bases de datos a las cuáles puedes realizar queries directos con SQL o bien aplicar funciones de SQL de Spark. Requiren de un DataFrame como entrada.
 
-![](./docs/images/pointer.png) En la carpeta `scripts` se encuentra el archivo `sql_tutorial.json` que pueden cargar en un Zeppelin para ver algunos ejercicios de Spark con Python (pyspark).
+![](./images/pointer.png) En la carpeta `scripts` se encuentra el archivo `sql_tutorial.json` que pueden cargar en un Zeppelin para ver algunos ejercicios de Spark con Python (pyspark).
 
 ### Anexos
 
@@ -231,7 +231,7 @@ Puedes encontrar el video asociado a estos pasos [aqui](https://drive.google.com
 
 #### Zeppelin
 
-![](./docs/images/zeppelin_logo.png) <br>
+![](./images/zeppelin_logo.png) <br>
 
 Proyecto de Apache :)!
 
@@ -239,37 +239,37 @@ Zeppelin (0.82) es un *notebook* multipropósito (piénsalo como un jupyter) que
 
 A través de Zeppelin es posible ralizar ingesta de datos (de HDFS y S3), análisis de datos, visualización de datos y colaboración.
 
-![](./docs/images/zeppelin_languages.png) <br>
+![](./images/zeppelin_languages.png) <br>
 
 Para ocupar los diferentes intérpretes dentro de Zeppelin basta con agregar antes de cualquier cosa el nombre del *engine* que tiene que ocupar Zeppelin para "interpretar". Por ejemplo, para ocupar el intérprete de python hay que poner `%python` también se puede poner un sabor específico de python como `%python.conda`.
 
 Zeppelin tiene integrado matplotlib, pandas, md, shell
 
-![](./docs/images/zeppelin_interpreters.png) <br>
+![](./images/zeppelin_interpreters.png) <br>
 
 -   Pyspark
 
-![](./docs/images/zeppelin_pyspark.png) <br>
+![](./images/zeppelin_pyspark.png) <br>
 
 -   Python
 
-![](./docs/images/zeppelin_python.png) <br>
+![](./images/zeppelin_python.png) <br>
 
 -   Shell
 
-![](./docs/images/zeppelin_sh.png)
+![](./images/zeppelin_sh.png)
 
 -   md
 
-![](./docs/images/zeppelin_sh.png)
+![](./images/zeppelin_sh.png)
 
 Nosotros necesitaremos Zeppelin para poder interactuar con Spark de manera más natural en nuestro cluster de EMR. Para que puedas abrir un *notebook* de Zeppelin necesitarás conectarte al puerto 8890 dentro de un *browser* de la instancia master de tu *cluster*.0
 
-![](./docs/images/pointer.png) Ve el video de `zeppelin.mp4` que está compartido en esta [liga](https://drive.google.com/open?id=1r8y7U4p0fUv6lyvSPmV9cEcyygtFMX1f). **Por favor no reproduzcas este video con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
+![](./images/pointer.png) Ve el video de `zeppelin.mp4` que está compartido en esta [liga](https://drive.google.com/open?id=1r8y7U4p0fUv6lyvSPmV9cEcyygtFMX1f). **Por favor no reproduzcas este video con otros ni compartas en redes o youtube, este material solo es para las personas que están tomando la materia!!!** (*Issues* legales de derechos de autor y privacidad).
 
 ### Modin
 
-![](./docs/images/modin_logo.png)
+![](./images/modin_logo.png)
 
 Modin es un paquete que modifica los DataFrames de Pandas para convertirlos en DataFrames del estilo de Spark, es decir, a nosotros parece un DataFrame normal (como los de Spark) sin embargo, por abajo está dividido en *chunks* que nos permiten escalar la cantidad de datos y operaciones que podemos hacer sobre ellos **sin tener** que ocupar un cluster como Spark. Modin aprovecha tus *cores* para hacer procesamiento en paralelo y distribuir los datos. Es como si tuvieras un pequeño cluster en tu computadora aprovechando el procesamiento en paralelo.
 
@@ -277,11 +277,11 @@ Seguramente alguna vez te haz topado con el problema de que debido a la cantidad
 
 De acuerdo a la documentación Modin está hecho para que puedas ocupar más de 1 TB en un DataFrame.
 
-![](./docs/images/read_csv_modin.png)
+![](./images/read_csv_modin.png)
 <br>
 Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
 
-![](./docs/images/modin_architecture.png)
+![](./images/modin_architecture.png)
 <br>
 Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
 
@@ -306,13 +306,13 @@ os.environ["MODIN_ENGINE"] = "ray"
 
 No todas las funciones de Pandas está implementadas en Modin aún, el estatus actual es el siguiente:
 
-![](./docs/images/pandas_coverage.png)
+![](./images/pandas_coverage.png)
 <br>
 Fuente: [Repositorio proyecto Modin](https://github.com/modin-project/modin)
 
 Por ejemplo, el verano pasado aún no se podían leer parquets desde Modin, ahora ya se puede :).
 
-![](./docs/images/pointer.png) Notebook `07_modin.ipynb`
+![](./images/pointer.png) Notebook `07_modin.ipynb`
 
 ### Referencias
 

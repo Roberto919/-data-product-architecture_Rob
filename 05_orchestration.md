@@ -1,6 +1,6 @@
 ### Orchestration
 
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -28,7 +28,7 @@ Acrónimo de *Directed Acyclic Graph*, un grafo acíclico dirigido. Esta estruct
 
 Dado que en un DAG *no* hay ciclos, es posible determinar sin ambigüedad qué forma la entrada a un *task*, qué la salida, **qué ya fue procesado y qué no**.
 
-![](./docs/images/dag.png)
+![](./images/dag.png)
 <br>
 Fuente: [What is an acyclic graph](https://medium.com/kriptapp/guide-what-is-directed-acyclic-graph-364c04662609)
 
@@ -51,12 +51,12 @@ Así se ve el DAG de un *data pipeline* orquestado en Luigi:
 
 
 
-![](./docs/images/pointer.png) ¿Un árbol es un DAG?
+![](./images/pointer.png) ¿Un árbol es un DAG?
 
 
 ### Luigi
 
-![](./docs/images/luigi.png)
+![](./images/luigi.png)
 
 + Orquestador de *pipelines* desarrollado por Spotify en 2012.
 + Convertido a *open source* en 2014.
@@ -102,13 +102,13 @@ Para instalar Luigi necesitarás correr `pip install luigi` (en tu pyenv!)
 
 Luigi incluye una página web para interactuar con los diferentes *pipelines* que tengas implementados en Luigi, así como los tasks que los componen:
 
-![](./docs/images/luigi_server.png)
+![](./images/luigi_server.png)
 <br>
 Fuente: [Documentación de Luigi](https://github.com/spotify/luigi)
 
 Asi como el visualizador del grafo de dependencias en tiempo de ejecución para identificar en dónde se encuentra el *pipeline*, identificar errores en algún *task*, o bien para verificar que nuestra definicion del grafo de dependencias está correcto.
 
-![](./docs/images/luigi_graph.png) <br> Fuente: [Documentación de Luigi](https://github.com/spotify/luigi)
+![](./images/luigi_graph.png) <br> Fuente: [Documentación de Luigi](https://github.com/spotify/luigi)
 
 Si bien Luigi ya tiene *templates* para tasks que generalmente se ocupan en *pipelines* de Ciencia de Datos, también es posible definir nuestros propios *templates*.
 
@@ -137,17 +137,17 @@ Luigi tiene 2 objetos principales para construir su DAG:
 
 + `run()`: El código que queremos qeu se corra.
 
-![](./docs/images/luigi_flow.png) <br> Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/workflows.html)
+![](./images/luigi_flow.png) <br> Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/workflows.html)
 
 Es muy común que se requiera enviar uno o más parámetros a un *task* pertenciente a un *pipeline* y para ello se ocupa un objeto `Parameter` ver la [documentación](https://luigi.readthedocs.io/en/stable/parameters.html). Por ejemplo: enviar una fecha al flujo para que la salida de un archivo contenga la fecha de ejecución.
 
-![](./docs/images/luigi_tasks.png) <br>
+![](./images/luigi_tasks.png) <br>
 
 Es posible tener dependencias dinámicas, esto significa que cuando estamos construyendo el grafo de dependencias no estamos completamente seguros de las dependencias que una tarea tendrá, sino hasta que estamos en *runtime*. Para administrar estas dependencias dinámicas Luigi ocupa una estrategia de *yield* para esperar a que termine una dependencia, es alternativo al `requires()` y se ocupa dentro de `run()`.
 
 La desventaja de ocupar `yield()` es que si se vuelve a correr el *pipeline* y las dependencias ya se cumplieron, al ser declaradas como `yield` se vuelve a ejecutar desde 0 :(, es por eso que siempre preferimos declarar explícitamente el grafo de dependencias desde la creación del workflow con `requires`.
 
-![](./docs/images/luigi_yield.png) <br> Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/tasks.html#dynamic-dependencies)
+![](./images/luigi_yield.png) <br> Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/tasks.html#dynamic-dependencies)
 
 Podemos correr procesos de Luigi de 2 maneras:
 
@@ -155,7 +155,7 @@ Podemos correr procesos de Luigi de 2 maneras:
 
 `luigi --module nombre_script nombre_Task --local-scheduler` o `luigi -m nombre_script nombre_Task --local-scheduler`. Si la tarea requiere de algún parámetro, se envía desde aquí. Por ejemplo:
 
-![](./docs/images/luigi_run_parameters.png)
+![](./images/luigi_run_parameters.png)
 <br>
 Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/running_luigi.html)
 
@@ -165,7 +165,7 @@ Otra manera de ejecutar un *pipeline* de Luigi desde línea de comando es:
 
 `python -m luigi --module ex1 MyTask --x 123 --y 345 --local-scheduler`.
 
-![](./docs/images/pointer.png) Si el nombre del parámetro tiene un guión bajo `_` se tiene que reemplazar por un guión alto `-` en la llamada desde línea de comando -no hace falta cambiarlo internamente-.
+![](./images/pointer.png) Si el nombre del parámetro tiene un guión bajo `_` se tiene que reemplazar por un guión alto `-` en la llamada desde línea de comando -no hace falta cambiarlo internamente-.
 
 
 2. Desde Python

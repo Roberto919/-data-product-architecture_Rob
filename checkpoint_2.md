@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -20,4 +20,4 @@ Cada equipo tendrá **5 minutos** para presentar su proyecto, la presentación d
 Después de esos 5 minutos tendremos 2 minutos para preguntas y después haremos la corrida de su EL desde Luigi.
 
 
-![](./docs/images/pointer.png) Son 7 equipos, sean concisos y respetemos el tiempo de todos los equipos.
+![](./images/pointer.png) Son 7 equipos, sean concisos y respetemos el tiempo de todos los equipos.

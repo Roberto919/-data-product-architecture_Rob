@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -40,7 +40,7 @@ Niveles de madurez en *Data Lake*.
 
 + *Data puddle:* Repositorio de datos *Single-purpose* o datos de un solo proyecto (*single-project*). Este repositorio utiliza tecnologías de "big data". Los datos que viven en este *Data puddle* son utilizados normalmente por un solo equipo o en 1 solo proyecto, por lo que el contenido es conocido y entendido por los miembros del equipo.
 
-![](./docs/images/pointer.png) ¿Por qué no ocupar entonces un RDS normal?
+![](./images/pointer.png) ¿Por qué no ocupar entonces un RDS normal?
 
 + *Data pond:* Una colección de al menos 2 *data puddle* **aunque** en tecnologías clásicas de alamacenamiento de datos como un *datawarehouse* o un *data mart*.
 
@@ -50,13 +50,13 @@ Niveles de madurez en *Data Lake*.
 
 + *Data ocean:* Expande los servicios que permite el *data lake* a todos los datos de la empresa habilitando la cultura *data driven* de la compañía.
 
-![](./docs/images/data_lake_maturity.png)
+![](./images/data_lake_maturity.png)
 <br>
 Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-enterprise-big/9781491931547/ch01.html)
 
 Si no hacemos *data governance* bien lo que haremos es que iniciaremos con un hermosos *data lake* y pronto lo convertiremos en un *data swamp* -un *data lake*- cuya administración de *metadata* está rota o es inexistente.
 
-![](./docs/images/data_swamp.jpeg)
+![](./images/data_swamp.jpeg)
 <br>
 Fuente: [Kiran Donepudi](https://www.linkedin.com/pulse/data-lake-swamp-kiran-donepudi/)
 
@@ -67,7 +67,7 @@ Fuente: [Kiran Donepudi](https://www.linkedin.com/pulse/data-lake-swamp-kiran-do
 + *Dev* o *work zone*: Donde la mayor parte de usuarios técnicos están: *data scientists* y *data engineers*. Esta zona debe estar muy bien organizada, por ejemplo, por usuario, proyecto, tema, etc.
 + *Sensitive*: Donde viven los datos sensibles.  
 
-![](./docs/images/data_lake_organization.png)
+![](./images/data_lake_organization.png)
 <br>
 Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-enterprise-big/9781491931547/ch01.html)
 
@@ -99,7 +99,7 @@ Un nuevo rol dentro de *data governance* que se enfoca más a la zonas *sensitiv
 
 **Gobernanza de datos por zona**
 
-![](./docs/images/data_governance_per_zone.png)
+![](./images/data_governance_per_zone.png)
 <br>
 Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-enterprise-big/9781491931547/ch01.html)
 
@@ -113,14 +113,14 @@ De acuerdo a la *International Association of Data Management Professionals* ([D
 
 Tener la trazabilidad sobre todas las transformaciones que se han hecho a los datos en todo el *pipeline*, tanto técnicas como de negocio. Podemos identificar qué transfornación se hizo en qué momento y por quién.
 
-![](./docs/images/pointer.png) Para poder hacer *data lineage* se requiere tener *metadata*.
+![](./images/pointer.png) Para poder hacer *data lineage* se requiere tener *metadata*.
 
 A través de conocer este **ciclo de vida** de los datos podemos conocer los puntos donde los datos son accesados, usados, reportados, cambiados o usados para generar nuevos datos.
 
 
 **¿Por qué necesitamos Data Lineage?**
 
-![](./docs/images/broken_telephone.jpg)
+![](./images/broken_telephone.jpg)
 <br>
 Fuente: [The Blond Coummunicator Blog](https://theblondecommunicator.wordpress.com/2016/06/29/broken-telephone/)
 
@@ -131,7 +131,7 @@ Fuente: [The Blond Coummunicator Blog](https://theblondecommunicator.wordpress.c
 
 **Metadata para habilitar data lineage en tu data pipeline**
 
-![](./docs/images/pointer.png) ¿Qué se te ocurre que debamos guardar como metadata de tu *data pipeline*?
+![](./images/pointer.png) ¿Qué se te ocurre que debamos guardar como metadata de tu *data pipeline*?
 
 Tan solo en tu ETL:
 
@@ -175,7 +175,7 @@ Para poder habilitar la parte de *Data Lineage* en nuestro proceso de modelado d
 
 Para ello ocuparemos como método de almacenamiento una base de datos relacional (Postgres)
 
-![](./docs/images/model_governance_db_1.png)
+![](./images/model_governance_db_1.png)
 <br>
 Fuente: [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
 
@@ -205,7 +205,7 @@ Ahora, para cuando estemos en producción, necesitaremos de otro conjunto de tab
 
 Seguramente para tu problema en particular necesitarás generar algunas tablas adicionales que almacenen *metadata* importante. Por ejemplo, deltas de cambios de estado: de intervenir a no intervenir, delta de rankeo, etc.
 
-![](./docs/images/pointer.png) ¿Por qué almacenamos todo esta *metadata* en una BD relacional?
+![](./images/pointer.png) ¿Por qué almacenamos todo esta *metadata* en una BD relacional?
 
 Hacerlo en una RDBMS nos permitirá almacenar miles de millones de registros, indexarlos y analizarlos en cuestión de segundos.
 
@@ -213,11 +213,11 @@ Será muy sencillo generar *fronts* (casi siempre *dashboards*) que puedan visua
 
 Por ejemplo, una vez que se tiene alamacenada toda esta información se puede generar un *dashboard* de este estilo, con el cuál tanto nosotros como nuestros clientes/*partners*/usuarios podemos tomar decisiones basadas en los datos (¡predicar con el ejemplo!).
 
-![](./docs/images/dashboard_ml_governance.png)
+![](./images/dashboard_ml_governance.png)
 <br>
 Fuente: [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
 
-![](./docs/images/performance_ml_governance.png)
+![](./images/performance_ml_governance.png)
 <br>
 Medición de *accuracy* en el tiempo. Fuente: [DSSG Blog](http://www.dssgfellowship.org/2018/02/08/tech-lessons-learned-implementing-early-intervention-systems-in-charlotte-and-nashville/)
 

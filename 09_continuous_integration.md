@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -20,9 +20,9 @@ M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
 Es una prática *core* de ingeniería de *software*.
 
-![](./docs/images/pointer.png) Piensa en una app móvil bancaria ¿por qué crees que necesitamos hacer pruebas de código?
+![](./images/pointer.png) Piensa en una app móvil bancaria ¿por qué crees que necesitamos hacer pruebas de código?
 
-![](./docs/images/pointer.png) Ahora piensa en tu contexto de ciencia de datos ¿por qué crees que necesitamos hacer pruebas de código?
+![](./images/pointer.png) Ahora piensa en tu contexto de ciencia de datos ¿por qué crees que necesitamos hacer pruebas de código?
 
 #### Objetivos
 

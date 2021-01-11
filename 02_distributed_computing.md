@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 <br>
 
 ### Cómputo distribuido
@@ -43,7 +43,7 @@ En un sistema de computo distribuido no se pueden cumplir más de 2 de las sigui
 
 Estas hablidades se aplican a sistemas de base de datos distribuidos, por ejemplo: Cassandra, MongoDB, etc.
 
-![](./docs/images/cap_theorem.png)
+![](./images/cap_theorem.png)
 <br>
 
 Es importante aclarar que este teorema aplica **temporalmente** en bases de datos distribuidas -a veces mal llamadas NoSQL- el teorema se cumple temporalmente, solo mientras se realiza la replicación en todos los nodos.
@@ -138,7 +138,7 @@ HDFS tiene una arquitectura maestro/esclavo con los siguientes elementos:
 -   Responsables de atender las peticiones de escritura y lectura de los clientes del sistema de archivos.
 -   Llevan a cabo la creación de bloques, borrado y replicación bajo instrucción del *Name Node*.
 
-![](./docs/images/hdfs_architecture.png)
+![](./images/hdfs_architecture.png)
 <br>
 
 Fuente: <http://blog.raremile.com/hadoop-demystified/>
@@ -160,14 +160,14 @@ El *Name Node* es el responsable de mantener este *file system namespace*, cualq
 
 -   HDFS almacena cada archivo como una sequencia de bloques, estos bloques son replicados en el *cluster* para tener tolerancia a fallas -físicas-. El tamaño de los bloques y el número de réplicas son configurables por archivo -aunque se puede establecer una configuración de ambos por *default*-.
 
-![](./docs/images/hdfs_blocks_1.png) <br>
+![](./images/hdfs_blocks_1.png) <br>
 
 -   **Todos** los bloques de un archivo excepto el último son del mismo tamaño ... ¿por qué?. El tamaño por *default* es de **64MB** por bloque, pero el tamaño 'óptimo' depende de la naturaleza del *dataset* y de cómo se utilizarán los datos en la aplicación
 -   Se puede especificar el número de réplicas de un archivo -normalmente se pone mínimo 3- ... ¿por qué?
 -   El factor de replicación se puede especificar en el momento de la creación del archivo y se puede cambiar después. Los archivos en HDFS se escriben **una vez** (excepto por *appends* y *truncates*) y tienen estrictamente un solo *writer* por vez
 -   El *Name Node* es el que toma las decisiones relacionadas a la replicación de los bloques y periódicamente recibe un *heartbeat* y un reporte de los bloques -*Blockreport*- de cada *Data Node* en el *cluster*. Al recibir el *heartbeat* el *Name Node* se asegura que ese nodo está "vivo" y que está funcionando correctamente, y el *Blockreport* contiene la lista de todos los bloques contenidos por *Data Node*
 
-![](./docs/images/block_replication.png) Fuente: <https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Data_Replication>
+![](./images/block_replication.png) Fuente: <https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Data_Replication>
 
 **Anatomía de la replicación**
 
@@ -179,7 +179,7 @@ Si el *cluster* de Hadoop es tan grande que se requiere de ocupar *racks*, el pr
 
 Cuándo se deja la réplica de 3 -con *racks*- se deja 1 réplica en la máquina local -si el *writer* está en el *Data Node*- o en cualquier nodo en otro caso, otra réplica en un nodo en otro *rack*, y la última en un nodo diferente en el mismo *rack* del anterior.
 
-![](./docs/images/replication_racks.png)
+![](./images/replication_racks.png)
 
 Si el factor de replicación es mayor a 3, el *placement* de cada réplica a partir de la 4 se determina de forma aleatoria cuidando que el número de réplicas por *rack* se encuentre por debajo de su límite máximo: $(replicas -1)/(racks + 2)$.
 
@@ -238,7 +238,7 @@ Los *reducers* -también procesos de Java- reciben los datos **ordenados** y par
 -   Para particionar el set se ocupa una función de *hash*.
 - Un *reducer* requiere de 1 a 1.5 cores para correr por lo que el número de *reducers* que puede haber en un nodo *slave* dependerá del número de cores disponibles en ese nodo *slave*.
 
-![](./docs/images/map_reduce.png)
+![](./images/map_reduce.png)
 <br>
 Fuente: Libro *Hadoop Application Architectures*
 
@@ -283,11 +283,11 @@ Para correr un job de *streaming* en Hadoop solo debemos indicarle a hadoop de d
 
 **Objetivo:** Contar la frecuencia de operación de cada palabra en un texto
 
-- ![](./docs/images/pointer.png) ¿Cómo diseñamos el conteo de palabras para hacer en modelo de programación MapReduce?
+- ![](./images/pointer.png) ¿Cómo diseñamos el conteo de palabras para hacer en modelo de programación MapReduce?
 
-- ![](./docs/images/pointer.png) ¿Qué harían los *mappers*? ¿Qué harían los *reducers*? (¿más de uno?)
+- ![](./images/pointer.png) ¿Qué harían los *mappers*? ¿Qué harían los *reducers*? (¿más de uno?)
 
-![](./docs/images/word_count_map_reduce.png)
+![](./images/word_count_map_reduce.png)
 <br>
 Fuente: <https://www.researchgate.net/figure/Word-count-program-flow-executed-with-MapReduce-5_270448794>
 
@@ -499,4 +499,4 @@ En una BD tradicional los datos se guardan en tercera forma normal -3NF- asegura
 
 El simil más parecido a lo que estamos haciendo con estas estrategias en BD tradicional operativa son las famosas vistas materializadas...
 
-![](./docs/images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de alamacenamiento... nos importa la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.
+![](./images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de alamacenamiento... nos importa la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.

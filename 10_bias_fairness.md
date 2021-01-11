@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -25,11 +25,11 @@ Latín de equidad. Es un *toolkit open source* para medir *bias* y *fairness* de
 El siguiente árbol de decisión está desarrollado pensando desde el punto de vista del tomador de decisiones -operativas- al que ayudamos desarrollando un modelo de *machine learning* para identificar en qué métricas deberíamos de concentrarnos para cuantificar el *bias* y *fairness*.
 
 
-![](./docs/images/fairness_tree.png)
+![](./images/fairness_tree.png)
 <br>
 Fuente: [Versión anterior Aequitas](http://www.datasciencepublicpolicy.org/projects/aequitas/)
 
-![](./docs/images/fairness_tree_amplified.png)
+![](./images/fairness_tree_amplified.png)
 <br>
 Fuente: [Versión actualizada Aequitas](http://www.datasciencepublicpolicy.org/projects/aequitas/)
 
@@ -40,7 +40,7 @@ Donde:
 
 + *Assistive*: Corresponde a modelos en donde la acción asociada al modelo son del estilo de triage. Por ejemplo: Priorización de inspecciones a realizar: médicas, a hogares, a *foster homes*, a estaciones de generación de energía, etc.  
 
-![](./docs/images/pointer.png) Rercordemos:
+![](./images/pointer.png) Rercordemos:
 
 ||Predicted|Real|
 |:------|:-------|:-------|
@@ -65,7 +65,7 @@ Ahora si...
 
 1. *Equal Parity* o *Demographic or Statistical Parity*: Cuando nos interesa que cada grupo de la variable "protegida" -género- tenga la misma proporción de etiquetas positivas predichas (TP). Por ejemplo: En un modelo que predice si darte o no un crédito, nos gustaría que sin importar el género de la persona -*demographic parity*- tuvieran la misma oportunidad.
 
-![](./docs/images/fairness_demographic_parity.png)
+![](./images/fairness_demographic_parity.png)
 <br>
 Fuente: [How to define fairness to detect and prevent discriminatory outcomes in Machine Learning](https://towardsdatascience.com/how-to-define-fairness-to-detect-and-prevent-discriminatory-outcomes-in-machine-learning-ef23fd408ef2)
 
@@ -83,7 +83,7 @@ Al querer eliminar las desventajas podríamos poner en más desventaja al grupo 
 
 3. *False Negative Parity* o *Equal Oppportunity*:  Cuando queremos que todos los grupos tengan el mismo FNR -el mismo TPR-.
 
-![](./docs/images/fairness_eq_opportunity.png)
+![](./images/fairness_eq_opportunity.png)
 <br>
 Fuente: [How to define fairness to detect and prevent discriminatory outcomes in Machine Learning](https://towardsdatascience.com/how-to-define-fairness-to-detect-and-prevent-discriminatory-outcomes-in-machine-learning-ef23fd408ef2)
 
@@ -119,7 +119,7 @@ Para poder cumplir con tener el mismo porcentaje de TPR en todos los grupos de l
 + *Total predicted positive*: Número total de observaciones con predicción de etiqueta positiva en todos los grupos.
 + *Predicted Negative (PN)*: Número de observaciones en un grupo con predicción de etiqueta negativa.
 
-![](./docs/images/aequitas_concepts.png)
+![](./images/aequitas_concepts.png)
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
@@ -132,7 +132,7 @@ En estas métricas nos interesa conocer las distribuciones de las observaciones 
 2. *Predicted Prevalence (PPrev)*: La fracción de observaciones en un grupo con predicción de etiqueta positiva.
 3. *Predicted Positive Rate (PPR)*: La fracción de observaciones con predicción de etiqueta positiva que pertenecen a cierto grupo.
 
-![](./docs/images/bias_metrics.png)
+![](./images/bias_metrics.png)
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
@@ -170,7 +170,7 @@ Las diferentes métricas de *fairness* se aplican comparando pares de grupos def
   + *False Omission Rate*
   + *False Negative Rate*
 
-![](./docs/images/group_metrics.png)
+![](./images/group_metrics.png)
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
@@ -187,11 +187,11 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
 En el reporte de Aequitas, un modelo es *fair* **si y solo si** todas las métricas de interés calculadas son *fair*, si alguna es *unfair* el modelo completo se considera *unfair*.
 
-![](./docs/images/bias_report.png)
+![](./images/bias_report.png)
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
-![](./docs/images/disparity_and_bias_metrics.png)
+![](./images/disparity_and_bias_metrics.png)
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
@@ -202,7 +202,7 @@ $$(1-\tau) \le \text{DisparityMeasure}_{group_i} \le \frac{1}{(1-\tau)}$$
 
 Donde $\tau$ es el *fairness threshold* definido por nosotros. En el siguiente ejemplo, $\tau=20%$ por lo que cualquier métrica de paridad que se encuentre entre 0.8 y 1.25 va a ser tratado como *fair*.
 
-![](./docs/images/fairness_criteria_assessments.png)
+![](./images/fairness_criteria_assessments.png)
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
@@ -212,7 +212,7 @@ Finalmente, para calcular todas estas métricas y ocupar Aequitas, debemos tener
 + `label_value`: La etiqueta real asociada a la observación.
 + columnas de cada atributo que queremos auditar por *bias* -la variable protegida-: edad, sexo, raza, ciudadanía, estatus civil, tipo de ciudadanía, etc.
 
-![](./docs/images/aequitas_input.png)
+![](./images/aequitas_input.png)
 <br>
 Fuente: [Aequitas](http://aequitas.dssg.io/upload.html)
 
@@ -226,7 +226,7 @@ Para ocupar Aequitas con Python necesitamos interactuar con 3 grandes clases:
 
 [Compas Analysis using Aequitas Python](https://dssg.github.io/aequitas/examples/compas_demo.html)
 
-![](./docs/images/aequitas_example.png)
+![](./images/aequitas_example.png)
 <br>
 Fuente: [Aequitas: A Bias and Fairness Audit Toolkit](https://arxiv.org/pdf/1811.05577.pdf)
 
@@ -243,7 +243,7 @@ Estos algoritmos buscan mitigar el sesgo modificando los datos de entrenamiento 
 
 La selección del algoritmo depende en gran medida de si podemos o no hacer modificaciones en esa etapa del *machine learning pipeline*. Si podemos tener acceso desde modificar los datos de entrenamiento, entonces es mejor hacerlo aquí-*pre-processing*-.
 
-![](./docs/images/pointer.png) ¿En qué situación te imaginas que como científicos de datos solo para poder aplicar un algoritmo de mitigación en la parte de *post-processing*?
+![](./images/pointer.png) ¿En qué situación te imaginas que como científicos de datos solo para poder aplicar un algoritmo de mitigación en la parte de *post-processing*?
 
 ##### Pre-processing
 

@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -60,7 +60,7 @@ Seguro para el análisis de 2020 las API más llamadas serán de datos relaciona
 
 Por lo pronto estamos a punto de llegar al **Trillon** de *endpoints*! (Dell Technologies Capital).
 
-![](./docs/images/all_about_apis.jpg)
+![](./images/all_about_apis.jpg)
 <br>
 Fuente: SmartFiles Developers, Junio 2013.
 
@@ -107,7 +107,7 @@ Los tipos soportados por Flask son:
 
 Es posible agregar los métodos que cada *endpoint* resuelve, agregándolos al decorador `route`.
 
-![](./docs/images/pointer.png) Ir al *script* `flask_script_1.py`.
+![](./images/pointer.png) Ir al *script* `flask_script_1.py`.
 
 Para levantar el servidor de Flask necesitamos definir como variable de ambiente dónde está la clase que implementa Flask. `$export FLASK_APP=script_python.py` o el directorio que tiene los *scripts* que definen el *routing* y los servicios a exponer.
 
@@ -124,7 +124,7 @@ Para ocupar Swagger con Flask necesitamos instalar la extensión de Flask `Flask
 
 Al utilizar Flask-RESTPlus ahora tenemos que hacer clases que implementan a la clase `Resource`, en nuestras clases debemos implementar los métodos HTTP que queremos que el *endpoint* administre.
 
-![](./docs/images/pointer.png) Verificar el script `flask_w_swagger.py`.
+![](./images/pointer.png) Verificar el script `flask_w_swagger.py`.
 
 Esto solo es la base de APIs, a esta base falta agregarle autenticación, seguridad (tokens) y administración de la API. Se pueden ir agregando extensiones a Flask para ir agregando cada uno de estos puntos.
 
@@ -132,7 +132,7 @@ Esto solo es la base de APIs, a esta base falta agregarle autenticación, seguri
 
 Todas las plataformas de nube tienen una solución para crear y administrar APIs, la de AWS se llama *Amazon API Gateway*.
 
-![](./docs/images/aws_api_gateway.png)
+![](./images/aws_api_gateway.png)
 <br>
 Fuente: [AWS API Management](https://aws.amazon.com/api-gateway/api-management/)
 

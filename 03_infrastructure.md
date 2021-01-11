@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 <br>
 
 ### Infraestructura
@@ -30,7 +30,7 @@ Concepto de redes, una forma de comunicación entre dos dispositivos de una form
 
 Un tipo particular -protocolo- de *tunneling* a través del cual podemos realizar *logins* y transferir archivos sobre redes no confiables ya que los datos que viajan a través de este tipo de *tunneling*, viajan encriptados. Este es el protocolo que se ocupa para usar los servicios de AWS.
 
-![](./docs/images/ssh_tunneling.png)
+![](./images/ssh_tunneling.png)
 <br>
 Fuente: [SSH.COM](https://www.ssh.com/ssh/tunneling)
 
@@ -63,7 +63,7 @@ Para crear este par de llaves necesitarás un programa que te las generes.
 3. Te pedirá una `passphrase` para generar la llave, que servirá como semilla aleatoria para poder generar las llaves. **No** se te vaya a olvidar este `passphrase` porque te lo pedirá cuando quieras conectarte a tu infraestructura de AWS.
 4. Si todo se generó correctamente te mostrará un *output* "raro" con caracteres y te indicará que ocupó el algoritmo de RSA de 2048 bits utilizando SHA256 -genera un *hash* de 256 bits sin colisiones-.
 
-![](./docs/images/pointer.png) Entonces necesitarán tener las llaves públicas de los miembros de sus equipos para que puedan compartir la misma infraestructura, y también la mía para que pueda meterme a verificar su infraestructura.
+![](./images/pointer.png) Entonces necesitarán tener las llaves públicas de los miembros de sus equipos para que puedan compartir la misma infraestructura, y también la mía para que pueda meterme a verificar su infraestructura.
 
 ### AWS
 
@@ -95,10 +95,10 @@ Este servicio de AWS nos permite crear instancias de computadoras con sistemas o
 
 La arquitectura que construiremos en DPA es la siguiente:
 
-![](./docs/images/ec2_subnets.png)
+![](./images/ec2_subnets.png)
 <br>
 
-![](./docs/images/ec2_architecture.png)
+![](./images/ec2_architecture.png)
 <br>
 
 #### Creación de usuarios en buntu
@@ -124,7 +124,7 @@ Para hacer esto, necesitarás:
 
 ¿Por qué necesitamos esta arquitectura?
 
-![](./docs/images/pointer.png) En el pizarrón.
+![](./images/pointer.png) En el pizarrón.
 
 + ElasticIP
 + VPC con *subnet* pública y privada
@@ -143,7 +143,7 @@ Para hacer esto, necesitarás:
 + Prueba de acceso a EC2 desde Bastión
 + Prueba de acceso denegado a EC2 desde local
 
-![](./docs/images/pointer.png) En AWS.
+![](./images/pointer.png) En AWS.
 
 ### CI/CD
 
@@ -160,11 +160,11 @@ Este proceso implica que además de pruebas automatizadas, tengamos que tener el
 
 + *Continuous Deployment (DevOps)*: El siguiente paso de CD, resulta que no queremos apretar un botón, queremos que todo se libere a producción (hacer *deploy*) sin intervención de un humano. Para esta fase, todas las pruebas que se desarrollan son los únicos filtros para no liberar algo a producción con efecto inmediato a los clientes. (*^▽^*)
 
-![](./docs/images/CI_CD.png)
+![](./images/CI_CD.png)
 <br>
 Fuente: [CodeMaze](https://code-maze.com/what-is-continuous-integration/)
 
-![](./docs/images/dev_ops.png)
+![](./images/dev_ops.png)
 <br>
 Fuente: [AWS blogs](https://aws.amazon.com/devops/what-is-devops/)
 
@@ -189,7 +189,7 @@ Amabas plataformas nos permiten crear, cambiar y administrar infraestructura de 
 
 Estas 2 herramientas están hechas específicamente para trabajar infraestructura de a nube (AWS).
 
-![](./docs/images/filosoraptor.jpg) ¿Qué crees que sea entonces MLOps?
+![](./images/filosoraptor.jpg) ¿Qué crees que sea entonces MLOps?
 
 #### Herramientas de MLOps
 

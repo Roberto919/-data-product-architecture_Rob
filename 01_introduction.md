@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -27,7 +27,7 @@ Existen muchos *frameworks* de arquitectura empresarial: TOGAF, MODAF, EAF. Cada
 4. Arquitectura de Datos: **Soportada** por la tecnología que la empresa decida comprar o desarrollar.
 5. Arquitectura Tecnológica
 
-![](./docs/images/enterprise_architecture_model.jpg)
+![](./images/enterprise_architecture_model.jpg)
 <br>
 Fuente: [Mckinsey Enterprise Architecture View](https://enterprisearchitectview.wordpress.com/tag/mckinsey-7s/)
 
@@ -36,7 +36,7 @@ Fuente: [Mckinsey Enterprise Architecture View](https://enterprisearchitectview.
 
 #### Productos de datos
 
-![](./docs/images/pointer.png) ¿Cuál es el típico *pipeline* para hacer un modelo de *machine learning*?
+![](./images/pointer.png) ¿Cuál es el típico *pipeline* para hacer un modelo de *machine learning*?
 <br>
 <br>
 
@@ -66,7 +66,7 @@ El capítulo 2, 5 y 20 del libro de texto tiene mucho más información al respe
 
 En un sistema inteligente o producto de datos el *pipeline* se debe ver así:
 
-![](./docs/images/ml_pipeline_2.png)
+![](./images/ml_pipeline_2.png)
 <br>
 Fuente: [Components of an AI-Enabled System](https://ckaestne.github.io/seai/slides/02_components/components.html#/4/4)
 
@@ -86,7 +86,7 @@ Fuente: [Components of an AI-Enabled System](https://ckaestne.github.io/seai/sli
 
 + Prevención de fraude Banorte
 
-![](./docs/images/banorte.jpg)
+![](./images/banorte.jpg)
 <br>
 
   + ¿Cuál es el objetivo?

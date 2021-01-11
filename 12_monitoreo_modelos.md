@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 
@@ -15,7 +15,7 @@ Mayo 2020
 
 ¿A qué nos referimos cuando hablamos de monitoreo de modelos?
 
-![](./docs/images/ml_process.png)
+![](./images/ml_process.png)
 <br>
 Fuente: [Deployment isn't the final step-Monitoring machine learning models in production blog](https://www.imperva.com/blog/deployment-isnt-the-final-step-monitoring-machine-learning-models-in-production/)
 
@@ -40,7 +40,7 @@ Lo monitoreamos porque los modelos forman parte de un sistema dinámico, si hici
   + Generar alertas cuando las distribuciones tengan n desviaciones estándar
 + Distribución de las etiquetas \*
 
-![](./docs/images/alerting_example.png)
+![](./images/alerting_example.png)
 <br>
 Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.youtube.com/watch?v=IqKunD0Bl5c)
 
@@ -55,17 +55,17 @@ Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.you
 + Generar modelos de identificación de anomalías
 + Generar modelos de "impacto causal" [CausalImpact Python](https://github.com/dafiti/causalimpact)
 
-![](./docs/images/causal_impact.png)
+![](./images/causal_impact.png)
 <br>
 Fuente: [CausalImpact Python](https://github.com/dafiti/causalimpact)
 
 + *Canary models*. Modelos que se considerán *champions* del problema a resolver, el que está en producción es el *champion* -por un tiempo-.
 
-![](./docs/images/canary_models.png)
+![](./images/canary_models.png)
 <br>
 Fuente: [Monitoring Machine Learning Results and Canary Models](https://www.youtube.com/watch?v=LK9D249SgCw)
 
-![](./docs/images/model_monitoring_metrics.png)
+![](./images/model_monitoring_metrics.png)
 <br>
 Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.youtube.com/watch?v=IqKunD0Bl5c)
 
@@ -97,7 +97,7 @@ En la parte de monitoreo se generar alertas que permiten identificar cuando un m
 
 Al igual que en el resto de las soluciones utiliza el set de entrenamiento como *baseline* y datos nuevos que llegan de producción para hacer comparaciones e identificar *drift*. También utiliza el concepto de *canary model* para ir comparando las predicciones del modelo en predicción contral el mejor predecesor, o el mejor en *desarrollo*. El modelo que pones en producción es el *canary model* en ese momento, pero conforme pasa el tiempo habrá otros modelos que tienen mejor *performance* que el que está en producción. Cuando cambias de modelo el que se queda en producción siempre es el *canary model*.
 
-![](./docs/images/parallelM.png)
+![](./images/parallelM.png)
 <br>
 Fuente: [ParallelM](https://www.parallelm.com/product/)
 

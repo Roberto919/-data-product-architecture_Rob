@@ -1,4 +1,4 @@
-![](./docs/images/itam_logo.png)
+![](./images/itam_logo.png)
 <br>
 
 M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
@@ -36,13 +36,13 @@ Febrero 2020
 
 **Ejemplo:**
 
-![](./docs/images/columnar_format.png)
+![](./images/columnar_format.png)
 <br>
 Fuente: [NoSQL Database Concepts, Bhaskar Gunda](https://www.slideshare.net/BhaskarGunda/nosqldatabaseconcepts-64494185)
 
 **Ejercicio 1:** ¿Cómo quedaría la siguiente tabla con un formato columnar?
 
-![](./docs/images/db_ex.png)
+![](./images/db_ex.png)
 <br>
 
 #### [AVRO](https://avro.apache.org/)
@@ -68,59 +68,59 @@ Las siguientes comparaciones se realizaron con 2 datasets reales en un spark 1.6
 
 + *Dataset* 1
 
-![](./docs/images/narrow_avro_parquet.png)
+![](./images/narrow_avro_parquet.png)
 <br>
 
 + *Dataset* 2
 
-![](./docs/images/wide_avro_parquet.png) <br>
+![](./images/wide_avro_parquet.png) <br>
 
 2. Conteo de observaciones de una columna:
 
 + *Dataset* 1
 
-![](./docs/images/narrow_row_count.png)
+![](./images/narrow_row_count.png)
 <br>
 
 + *Dataset* 2
 
-![](./docs/images/wide_row_count_avro_parquet.png)
+![](./images/wide_row_count_avro_parquet.png)
 <br>
 
 3. GroupBy
 
 + *Dataset* 1
 
-![](./docs/images/narrow_group_by_avro_parquet.png)
+![](./images/narrow_group_by_avro_parquet.png)
 <br>
 
 + *Dataset* 2
 
-![](./docs/images/wide_group_by_avro_parquet.png)
+![](./images/wide_group_by_avro_parquet.png)
 <br>
 
 4. Map simple
 
 + *Dataset* 1
 
-![](./docs/images/narrow_map_avro_parquet.png)
+![](./images/narrow_map_avro_parquet.png)
 <br>
 
 + *Dataset* 2
 
-![](./docs/images/wide_map_avro_parquet.png)
+![](./images/wide_map_avro_parquet.png)
 <br>
 
 5. Espacio en disco
 
 + Dataset 1
 
-![](./docs/images/narrow_disk_space_avro_parquet.png)
+![](./images/narrow_disk_space_avro_parquet.png)
 <br>
 
 + *Dataset* 2
 
-![](./docs/images/wide_disk_space_avro_parquet.png)
+![](./images/wide_disk_space_avro_parquet.png)
 <br>
 
 ##### **Compresión**
@@ -158,7 +158,7 @@ Cuando estos 3 procesos ocurren en secuencia de forma automatizada se genera un 
 
 Existen varias arquitecturas disponibles para las partes de ETL, las más comunes son las siguientes:
 
-![](./docs/images/etl.png)
+![](./images/etl.png)
 <br>
 Fuente: [Databricks blog](https://databricks.com/glossary/extract-transform-load)
 
@@ -170,7 +170,7 @@ Fuente: [Databricks blog](https://databricks.com/glossary/extract-transform-load
 
 Puedes revisar la documentación del servicio [AWS Pipeline](https://aws.amazon.com/datapipeline/?hp=tile&so-exp=below).
 
-![](./docs/images/pointer.png) Generemos el pipeline del ETL de un proyecto ejemplo.
+![](./images/pointer.png) Generemos el pipeline del ETL de un proyecto ejemplo.
 
 Tenemos los datos de registro de queja sanitaria en propiedad privada [311 de Chicago](https://311.chicago.gov/s/article/Sanitation-code-violations?language=en_US).
 
@@ -202,4 +202,4 @@ En boto hay 2 tipos de objetos base: `client` y `resource`. El objeto `client` n
 
 En nuestro caso ocuparemos el objeto `resource` para las interacciones más generales con el *bucket* y luego ocuparemos `cliente` para gestionar el contenido del *bucket*. Para tener un `client` a partir de un `resource` se necesita acceder a los metadatos: `resource_object.meta.client.metodo_de_elección`.
 
-![](./docs/images/pointer.png) Ir a `scripts/aws.ipynb`.
+![](./images/pointer.png) Ir a `scripts/aws.ipynb`.
