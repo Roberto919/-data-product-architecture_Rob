@@ -13,25 +13,39 @@
 
 ||Fecha|Tema|
 |:---|:----|:---------------|
-|1|21 enero 2020|Introducción, productos de datos|
-|2|28 enero 2020|Cómputo distribuido|
-|3|4 febrero 2020|Infraestructura|
-|4|11 febrero 2020|ETL|
-|5|18 febrero 2020|Orquestadores|
-|6|25 febrero 2020|Gobernanza de datos|
-|7|3 marzo 2020|CI/CD|
-|8|10 marzo 2020|Feature engineering|
-|9|17 marzo 2020|Gobernanza de modelos|
-|10|24 marzo 2020|Modelling|
-|11|31 marzo 2020|Modelling|
-|12|7 abril 2020|ASUETO|
-|13|14 abril 2020|Predicciones|
-|14|21 abril 2020|Delivery|
-|15|28 abril 2020|Delivery|
-|16|5 mayo 2020|Post-modelling|
-|17|12 mayo 2020|Proyecto|
-|18|19 mayo 2020|Proyecto|
-
+|1|12 enero 2021|Introducción, productos de datos|
+|2|14 enero 2020|Cómputo distribuido|
+|3|19 enero 2020|Infraestructura|
+|4|21 febrero 2020|ETL|
+|5|26 febrero 2020|Orquestadores|
+|6|28 febrero 2020|Gobernanza de datos|
+|7|2 febrero 2021|CI/CD|
+|8|4 marzo 2020|Feature engineering|
+|9|9 marzo 2020|Gobernanza de modelos|
+|10|11 marzo 2020|Modelling|
+|11|16 marzo 2020|Modelling|
+|12|18 abril 2020|ASUETO|
+|13|23 abril 2020|Predicciones|
+|14|25 abril 2020|Delivery|
+|15|2 marzo 2021|Delivery|
+|16|4 mayo 2020|Post-modelling|
+|17|9 mayo 2020|Proyecto|
+|18|11 mayo 2020|Proyecto|
+|19|16 marzo 2021||
+|20|18 marzo 2021||
+|21|23 marzo 2021||
+|22|25 marzo 2021||
+|23|30 marzo 2021|ASUETO|
+|25|6 abril 2021||
+|26|8 abril 2021||
+|27|13 abril 2021||
+|28|15 abril 2021||
+|29|20 abril 2021||
+|30|25 abril 2021||
+|31|27 abril 2021||
+|32|4 mayo 2021||
+|33|6 mayo 2021||
+|34|11 mayo 2021||
 
 #### Detalle
 
