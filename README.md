@@ -108,3 +108,13 @@ El diseño de los temas, el contenido y las lecturas fueron hecho con base en la
 + Checkpoint 8: Interpretabilidad
 + Checkpoint 9: API
 + Checkpoint 10: *Dashboard*
+
+### Base de datos
+
++ [Chicago Food Inspections](https://www.chicago.gov/city/en/depts/cdph/provdrs/healthy_restaurants/svcs/restaurant_food_inspection.html)
++ Pregunta analítica: ¿El establecimiento pasará o no la inspección?
+
+
+### Empieza con
+
++ [AWS Cloud Practitioner Essentials](https://aws.amazon.com/training/course-descriptions/cloud-practitioner-essentials/) -> Video de 6 horas para familiarizarte con conceptos de AWS.
