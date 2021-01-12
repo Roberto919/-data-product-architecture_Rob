@@ -26,7 +26,7 @@ Este curso esta diseñado para que puedas desarrollar un producto de datos de in
 
 + Github
 + Python
-+ Docker
++ Docker\*
 + SQL
 + Cuenta en AWS Education (o no)
 + Trabajo en equipo
@@ -95,3 +95,16 @@ El diseño de los temas, el contenido y las lecturas fueron hecho con base en la
 + [Dash Plotly](https://plotly.com/dash/): *Dashboards*
 
 ![](images/dpa_2021.png)
+
+### Checkpoints
+
++ Checkpoint 1: *Starting point*
++ Checkpoint 2: Ingestión y almacenamiento
++ Checkpoint 3: Pre-procesamiento y limpieza
++ Checkpoint 4: *Feature engineering*
++ Checkpoint 5: Entrenamiento
++ Checkpoint 6: *Bias & Fairness*
++ Checkpoint 7: Predicción
++ Checkpoint 8: Interpretabilidad
++ Checkpoint 9: API
++ Checkpoint 10: *Dashboard*
