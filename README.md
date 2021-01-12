@@ -111,9 +111,10 @@ El diseño de los temas, el contenido y las lecturas fueron hecho con base en la
 
 ### Base de datos
 
-+ [Chicago Food Inspections](https://www.chicago.gov/city/en/depts/cdph/provdrs/healthy_restaurants/svcs/restaurant_food_inspection.html)
++ [Chicago Food Inspections](https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5)
 + Pregunta analítica: ¿El establecimiento pasará o no la inspección?
 
+![](images/dataset.png)
 
 ### Empieza con
 
