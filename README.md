@@ -1,10 +1,13 @@
 ![](images/itam_logo.png)
 
+M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
+
+Enero 2021
+
 # Arquitectura de Productos de Datos
 
-Sitio de la clase Arquitectura de Producto de Datos
+Repositorio de la clase Arquitectura de Producto de Datos
 
-Web: http://itam-ds.github.io/data-product-architecture
 
 ## Descripción del curso
 
@@ -16,17 +19,16 @@ Este curso esta diseñado para que puedas desarrollar un producto de datos de in
 + Que conozcas las implicaciones de cada uno de esos elementos.
 + Que entiendas conceptos básicos de ingeniería de software/ingeniería de datos.
 + Que puedas construir productos de datos de inicio a fin.
-+ Que seas capaz de levantar infraestructura en la nube.
++ Que seas capaz de levantar infraestructura en la nube (AWS).
 
 
 ## Prerequisitos
 
 + Github
 + Python
-+ Docker
-+ SQL\*
-+ Cuenta en AWS
-+ Webscraping
++ Docker\*
++ SQL
++ Cuenta en AWS Education (o no)
 + Trabajo en equipo
 
 \* Deseable.
@@ -34,14 +36,19 @@ Este curso esta diseñado para que puedas desarrollar un producto de datos de in
 
 ## Material del curso
 
-El diseño de los temas, el contenido y las lecturas están basados en la clase [*Software Engineering for AI-Enabled Systems*](https://ckaestne.github.io/seai/) de **Kristian Kaestner** y **Eunsuk Kang** impartida en *Carnegie Mellon Universty* a finales del año pasado, así como por adecuaciones realizadas junto con el Dr Adolfo de Unánue.
+El diseño de los temas, el contenido y las lecturas fueron hecho con base en la clase [*Software Engineering for AI-Enabled Systems*](https://ckaestne.github.io/seai/) de **Kristian Kaestner** y **Eunsuk Kang** impartida en *Carnegie Mellon Universty* a finales de 2019, así como por adecuaciones realizadas junto con el Dr Adolfo de Unánue.
 
 + Libro [Building Intelligent Systems: A Guide to Machine Learning Engineering](https://www.amazon.com.mx/Building-Intelligent-Systems-Learning-Engineering-ebook/dp/B07B91WQHR/ref=sr_1_1?__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=building+intelligent+systems&qid=1579111267&sr=8-1) de **Geoff Hulten**.
 
+![](images/building_intelligent_systems.jpeg)
+
++ Libro [Introducing MLOps](https://www.amazon.com.mx/Introducing-MLOps-Machine-Learning-Enterprise-ebook/dp/B08PDW3JLY/ref=sr_1_1?__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=mlops&qid=1610337923&sr=8-1)
+
+![](images/introducing_mlops.jpeg)
+
 ## Evaluación
 
-+ Deliverables de tu proyecto: 40%
-+ Checkpoints 40%: Se revisan en clase
++ *Checkpoints* 80%:
   + Funcional: 10
   + Con errores o incompleto: 5
   + No se hizo: 0
@@ -51,9 +58,15 @@ El diseño de los temas, el contenido y las lecturas están basados en la clase 
 
 ## Políticas del curso
 
-+ Nuestro principal medio de comunicación es Slack en nuestro workspace `dpa_itam_2020`, puedes tener acceso [aquí](https://join.slack.com/t/dpaitam2020workspace/shared_invite/enQtODk0Njk4NjkwMjU5LTI1ZWQ2ZGE4NTAyNDAyY2U2MzkzN2I0NWM1YWNiMDRhMzE3MTU4YTk5YjY4NWVjZjkxYThhY2M1ZTViODhkMGI). ¡Por favor agrega una foto de tu cara a tu nombre!
-+ No tomo asistencia.
-+ Si por cualquier cosa necesitas enviar un correo por favor que tu *subject* sea `dpa_itam2020`, de otra manera se pierde en mi spam :(
++ Nuestro principal medio de comunicación es [Slack](https://slack.com/intl/es-mx/), lo puedes instalar en tu computadora y en tu celular.
+  + Nuestro *workspace* se llama `dpa_primavera_21`, puedes integrarte al grupo a través de esta [liga](https://join.slack.com/t/dpaprimavera21/shared_invite/zt-krewnpn8-POOJrJRRhlAofWzhyiZ3uA).
+  + Por favor agrega a tu perfil el nombre con el que quieres que te llamemos en la clase y una foto para saber quién eres
++ Las notas se encuentran en Github en `https://github.com/ITAM-DS/data-product-architecture` **en la rama** `dpa_2021`.
++ Nos moveremos a Zoom en lugar de Teams utilizando siempre la siguiente [liga](https://itam.zoom.us/j/91296837188?pwd=RFhYSlVBOS9ZcXprc1U4VWNkaGdKdz09).
++ Ocuparemos un documento conjunto en donde haremos la recopilación de preguntas que vayan surgiendo [aquí](https://docs.google.com/document/d/1O6rYP4ln_nz4cMSJ5YdJAT5AyohmdvaQhn-jfxp6_VE/edit?usp=sharing)
++ Si por cualquier cosa necesitas enviar un correo por favor que tu *subject* sea `dpa_itam_2021`, de otra manera se pierde en mi spam :(
+
+![](images/pointer.png)  Para tener acceso a las notas del curso necesitas tener una cuenta en Github, si aún no tienes una puedes crear una [aquí](https://github.com/) y enviarme **tu usuario** o **correo** que registraste en github a través de Slack por mensaje directo.
 
 ## Cursos recomendados
 
@@ -66,45 +79,43 @@ El diseño de los temas, el contenido y las lecturas están basados en la clase 
 + Introducción a Ciencia de Datos
 
 
-### Bases de datos disponibles
+## Master plan
 
-+ [Ecobici](https://www.ecobici.cdmx.gob.mx/es/informacion-del-servicio/open-data)
-  + Datos del uso de la ecobici en las delegaciones donde se tiene este servicio. No se incluye el id de los usuarios, tiene viajes de los id de bicis.
-  + Frecuencia de actualización: Mensual.
-  + Histórico: Datos desde febrero de 2010.
+### Tecnologías/Frameworks/Servicios a ocupar
 
++ [Luigi](https://luigi.readthedocs.io/en/stable/): Orquestador de *jobs*
++ Python: Lenguaje de programacion general
++ Pandas/[Koalas](https://docs.databricks.com/languages/koalas.html)/[PySpark](https://spark.apache.org/docs/latest/api/python/index.html): Procesamiento de datos
++ [Marbles](https://github.com/twosigma/marbles): Pruebas unitarias a datos
++ [S3](https://aws.amazon.com/es/s3/): Servicio de alamacenamiento de AWS
++ [PostgreSQL](https://www.postgresql.org/): Base de datos
++ [Sklearn](https://scikit-learn.org/stable/modules/classes.html)/[MLlib](https://spark.apache.org/docs/latest/ml-guide.html) (Spark): *Machine learning*
++ [Zeppelin](https://zeppelin.apache.org/): Notebooks en la nube
++ [Flask](https://flask.palletsprojects.com/en/1.1.x/): Desarrollo de API REST
++ [Dash Plotly](https://plotly.com/dash/): *Dashboards*
 
-+ [RITA](http://stat-computing.org/dataexpo/2009/the-data.html) y [aquí](https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp)
-  + Datos de vuelos que incluyen salidas a tiempo, llegadas a tiempo, demoras, vuelos cancelados de todo Estados Unidos del Departamento de Transporte.
-  + Frecuencia de actualización: Mensual.
-  + Histórico: Datos desde junio del 2003.
+![](images/dpa_2021.png)
 
-+ [Chicago food inspections](https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5)
-  + Datos de inspecciones realizadas a establecimientos de comida para cumplimiento del reglamento sanitario.
-  + Frecuencia de actualización: Diaria.
-  + Histórico: Datos desde agosto del 2011.
+### Checkpoints
 
-+ [NYC 311 calls](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9)
-  + Datos de llamadas de solicitudes de servicio en NYC.
-  + Frecuencia de actualización: Diaria.
-  + Histórico: Desde octubre de 2011.
++ Checkpoint 1: *Starting point*
++ Checkpoint 2: Ingestión y almacenamiento
++ Checkpoint 3: Pre-procesamiento y limpieza
++ Checkpoint 4: *Feature engineering*
++ Checkpoint 5: Entrenamiento
++ Checkpoint 6: *Bias & Fairness*
++ Checkpoint 7: Predicción
++ Checkpoint 8: Interpretabilidad
++ Checkpoint 9: API
++ Checkpoint 10: *Dashboard*
 
-+ [NYC childcare centers inspections](https://data.cityofnewyork.us/Health/DOHMH-Childcare-Center-Inspections/dsg6-ifza)
-  + Datos sobre inspecciones realizadas a los centros de cuidados de niños en NYC para verificar el cumplimiento del reglamento del cuidado de niños.
-  + Frecuencia de actualización: Diaria.
-  + Histórico: Desde mayo de 2016.
+### Base de datos
 
-+ [Incidentes viales reportados en CDMX](https://datos.cdmx.gob.mx/explore/dataset/incidentes-viales-c5/table/?disjunctive.incidente_c4)
-  + Datos de incidentes reportados por el C5 en CDMX.
-  + Frecuencia de actualización: Mensual.
-  + Histórico: Desde 2014.
++ [Chicago Food Inspections](https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5)
++ Pregunta analítica: ¿El establecimiento pasará o no la inspección?
 
-+ [Afluencia diaria del Metro CDMX](https://datos.cdmx.gob.mx/explore/dataset/afluencia-diaria-del-metro-cdmx/table/?sort=-fecha)
-  + Datos sobre la afluencia diara -agregada por estación- del metro de la CDMX.
-  + Frecuencia de actualización: Mensual.
-  + Histórico: Desde enero 2010
+![](images/dataset.png)
 
-+ [NYC Roden inspection](https://data.cityofnewyork.us/Health/Rodent-Inspection/p937-wjvj)
-  + Datos de inspecciones de ratas.
-  + Frecuencia de actualización: Diaria
-  + Histórico: Desde noviembre de 2015
+### Empieza con
+
++ [AWS Cloud Practitioner Essentials](https://aws.amazon.com/training/course-descriptions/cloud-practitioner-essentials/) -> Video de 6 horas para familiarizarte con conceptos de AWS.
