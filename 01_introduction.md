@@ -9,7 +9,7 @@ Enero 2021
 
 ### Agenda
 
-+ Arquitectura de productos de datos
++ Productos de datos
 + Ejemplos
  ***
 
