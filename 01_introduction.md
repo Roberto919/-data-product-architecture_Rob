@@ -27,6 +27,8 @@ Un producto de datos a.k.a. *intelligent system* tiene al menos un componente de
 ![](images/filosoraptor.jpg)
 <br>
 
+> A system is an entity with interrelated and interdependent parts; it is defined by its boundaries and it is more than the sum of its parts (subsystem). Changing one part of the system affects other parts and the whole system. Henry Modisett.
+
 ¿Por qué es un sistema?
 
 
