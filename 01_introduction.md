@@ -72,14 +72,14 @@ Fuente: [Components of an AI-Enabled System](https://ckaestne.github.io/seai/sli
   + ¿Cuál es la orquestación?
 
 + Prevención de fraude Banorte
+  + ¿Cuál es el objetivo?
+  + ¿Cuál es la experiencia inteligente?
+  + ¿Cuál es la implementación de la inteligencia?
+  + ¿Cuál es la orquestación?
 
 ![](./images/banorte.jpg)
 <br>
 
-+ ¿Cuál es el objetivo?
-+ ¿Cuál es la experiencia inteligente?
-+ ¿Cuál es la implementación de la inteligencia?
-+ ¿Cuál es la orquestación?
 
 + UberEats: Predicción de tiempo de entrega
   + ¿Cuál es el objetivo?
