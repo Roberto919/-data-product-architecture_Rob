@@ -68,10 +68,10 @@ Fuente: [Components of an AI-Enabled System](https://ckaestne.github.io/seai/sli
 ![](./images/banorte.jpg)
 <br>
 
-  + ¿Cuál es el objetivo?
-  + ¿Cuál es la experiencia inteligente?
-  + ¿Cuál es la implementación de la inteligencia?
-  + ¿Cuál es la orquestación?
++ ¿Cuál es el objetivo?
++ ¿Cuál es la experiencia inteligente?
++ ¿Cuál es la implementación de la inteligencia?
++ ¿Cuál es la orquestación?
 
 + UberEats: Predicción de tiempo de entrega
   + ¿Cuál es el objetivo?
