@@ -6,10 +6,10 @@ Enero 2021
 
 ### Checkpoint 1
 
-**Jueves 21 enero 2021 23:59:59**
+**Jueves 21 enero 2021 23:59:59 CST**
 
 + Repositorio del proyecto
-+ Agregarme a su repo mi usuario es `silil`
++ Agregarme a su repo, mi usuario es `silil`
 + README.md
   + Integrantes del equipo
   + Summary de los datos con los que trabajarás:
@@ -18,9 +18,11 @@ Enero 2021
     + Qué variables son, qué información tiene
   + Pregunta analítica a contestar con el modelo predictivo
   + Frecuencia de actualización de los datos
-+ Estructura básica del proyecto (recuerda ocupar .gitkeep para subir carpetas vacías a github). Ver Figura 1.  
++ Estructura básica del proyecto (recuerda ocupar .gitkeep para subir carpetas vacías a github). Ver Figura 1
 + EDA (en la carpeta `notebooks/eda`)
-  + 5 visualizaciones de sus datos, una de ellas debe ser un mapa indicando las inspecciones que pasaron y las que no (histórico).
+  + 5 visualizaciones de sus datos, una de ellas debe ser un mapa indicando las inspecciones que pasaron y las que no (histórico)
++ `requirements.txt` con las librerías que ocupes hasta el momento de la entrega (`pip freeze > requirements.txt`)
+
 
 
 ```
