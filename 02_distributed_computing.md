@@ -35,7 +35,7 @@ No sería posible tener escalamiento horizontal, sin poder tener formas de distr
 
 **Teorema CAP**
 
-En un sistema de computo distribuido no se pueden cumplir más de 2 de las siguientes características simultáneamente:
+En un sistema de computo distribuido no se pueden cumplir más de 2 de las siguientes características simultáneamente\*:
 
 -   **Consistencia:** (Consistency) Todos los nodos ven la misma información al mismo tiempo
 -   **Disponibilidad:** (Availability) Garantía de confirmar que la petición hecha a cada nodo fue resuelta, aunque ésta no haya sido satisfactoria
@@ -103,7 +103,7 @@ En los sistemas distribuidos la A se logra replicando los datos entre todas las 
 
 → Para leer en detalle sobre las configuraciones de los RAIDS y sus detalles puedes ir [aquí](https://searchstorage.techtarget.com/definition/RAID)
 
-Acá una [infografía](http://blog.soydata.net/wp-content/uploads/hadoop-10th-birthday-infographic.gif) de la historia de Hadoop MUY resumida
+Acá una [infografía](https://unpocodejava.com/2016/01/23/infografia-historia-de-hadoop/) de la historia de Hadoop MUY resumida
 
 
 ### HDFS
