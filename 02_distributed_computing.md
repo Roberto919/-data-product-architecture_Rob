@@ -75,6 +75,15 @@ En los sistemas distribuidos la A se logra replicando los datos entre todas las 
         -   1: Mirroring, 2 discos.
         -   2: Ya no se usa.
         -   ...
+
+![](./images/raid_0.png)
+<br>
+Fuente: [Wikipedia RAID](https://es.wikipedia.org/wiki/RAID)
+
+![](./images/raid_1.png)
+<br>
+Fuente: [Wikipedia RAID](https://es.wikipedia.org/wiki/RAID)
+
 -   Código hecho para vivir en 1 sola máquina, limitado a **100 millones de páginas indexadas** → no era suficiente.
 -   Pongámos 3 máquinas más -¡¡un *cluster*!!- PERO ... la administración de pasar datos entre las máquinas y administrar el espacio lo tenían que hacer manual → esto no va a escalar chavos!, el aumentar el \# de máquinas aumentaba exponencialmente la complejidad de su administración (-’๏\_๏’-).
 -   Enter **HDFS** → parece que estos muchachos estaban muy aburridos en la vida ...
