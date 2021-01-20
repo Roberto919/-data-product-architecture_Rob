@@ -12,10 +12,15 @@ Enero 2021
 + Conceptos de cómputo distribuido
   + Escalamiento vertical
   + Escalamiento horizontal  
+    + Necesario si es streaming.
+    + Si necesitas Spark.
   + Teorema CAP
   + HDFS
   + MapReduce
   + Diseño de esquemas en HDFS
++ Otras observaciones
+  + Si puedes usar sklearn y Posgres entonces no debes levantar ningún cluster.
+  + Casi siempre deberás tener un cluster.
 
 
 ### Contexto
@@ -38,10 +43,16 @@ No sería posible tener escalamiento horizontal, sin poder tener formas de distr
 En un sistema de computo distribuido no se pueden cumplir más de 2 de las siguientes características simultáneamente\*:
 
 -   **Consistencia:** (Consistency) Todos los nodos ven la misma información al mismo tiempo
+    -   Ejemplo de consulta de saldo en dos cajeros distintos.
+    -   Si entramos a Facebook puede ser que el nodo en el que entramos no tenga la info actualizada de un amigo.
 -   **Disponibilidad:** (Availability) Garantía de confirmar que la petición hecha a cada nodo fue resuelta, aunque ésta no haya sido satisfactoria
 -   **Tolerancia a la partición:** (Partition tolerance) Si algun(os) nodo(s) en el *cluster fallan*, el sistema seguirá funcionando
+    -   Este debe ser por default. Lo debemos tener sí o sí.
 
 Estas hablidades se aplican a sistemas de base de datos distribuidos, por ejemplo: Cassandra, MongoDB, etc.
+
+- En realidad lo único que puedes elegir es la A y la C.
+- No se puede tener consistencia y disponibilidad todo el tiempo.
 
 ![](./images/cap_theorem.png)
 <br>
