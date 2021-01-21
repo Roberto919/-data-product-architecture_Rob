@@ -14,8 +14,8 @@ Enero 2021
   + Escalamiento horizontal  
   + Teorema CAP
   + HDFS
-  + MapReduce
   + Diseño de esquemas en HDFS
+  + MapReduce
 
 
 ### Contexto
@@ -206,6 +206,133 @@ El *Blockreport* contiene la lista de los *data blocks* que contiene, cada bloqu
 
 [Socrative Room: LILIANA2205](http://www.socrative.com/login/student)
 
+#### Schema design
+
+Una de las primeras cosas que hay que definir para ocupar HDFS es el diseño del esquema -la jerarquía y grupos que ocuparemos en el sistema de archivos-. Un diseño simple de directorios puede ser:
+
+    |- user
+    |- etl
+    |- tmp
+    |- data
+    |- app
+    |- metadata
+
+-   `/user/<username>`
+
+En este directorio se encuentran los archivos, datos de configuración específicos a un usuario. Los archivos que están aquí **no** son ocupados como parte del proceso de negocio y son solo ocupados por el dueño de los mismos -por eso el username-. Por ejemplo: Archivos con los que se está jugando en un pequeño proceso y con los que queremos primero experimentar, o salidas específicas a este usuario.
+
+-   `/etl`
+
+En este directorio se encuentran los datos que están en alguno de los procesos de algún *etl*. Se recomienda tener una organización dentro de esta carpeta por grupo de la empresa que tenga algún proceso de *etl*, la aplicación asociada y el proceso que se realiza `etl/<group>/<application>/<process>`.
+
+    |- etl
+    |--- group
+    |----- application
+    |------- process
+
+También se recomienda agregar al final un subdirectorio `bad` para dejar en este directorio aquellas observaciones que no pudieron ser procesadas correctamente -recuerda que no queremos perderlas...-
+
+Por ejemplo:
+
+    |- etl
+    |--- bi
+    |----- clickstream
+    |------- deduplication
+
+-   `/tmp`
+
+En este directorio se guardan **temporalmente** archivos que pueden ser salidas/entradas de otros procesos. Se recomienda que esta carpeta se borre automáticamente por algún *script* después de terminar el(los) proceso(s) adecuados para no tener basura acumulada que quita espacio.
+
+-   `/data`
+
+En este directorio se guardan los datasets que ya han sido procesados y que se comparten en toda la organización. Debido a que estos datasets ya están limpios y varios tienen acceso se recomienda solo dar permisos de lectura -no faltará el que la cajetee y borre/actualice los datos sin querer-. La única forma de escribir a este directorio debe ser a través de algún proceso automatizado -después del etl(s) normalmente- **auditado**.
+
+Se debe agregar un directorio por cada *dataset* para identificar de qué va ese *dataset*. Por ejemplo: Si tenemos el *dataset* de ecobici y de calidad del aire de cdmx -supongamos que somos una empresa de análisis de datos- tendríamos la siguiente estructura:
+
+    |- data
+    |--- cdmx
+    |----- ecobici
+    |----- calidad_aire
+
+-   `/app`
+
+En este directorio se guarda todo lo que requiere una aplicación de hadoop para correr: jars, *workflow definitions*, *UDF*s -User Defined Functions, Hive-, archivos HQL -Hive-, etc.
+
+Sigue la misma estructura propuesta que en la carpeta `etl` admás de agregarle versión/tag y/o artefacto:
+
+    |- app
+    |--- group
+    |----- application
+    |------- version
+
+-   `/metadata`
+
+Este directorio guarda la *metadata* generada por algún proceso -datos de los datos- ¿qué dato de los datos se te ocurre guardar?
+
+Normalmente este directorio tendrá permisos de lectura para procesos del ETL y de escritura para los procesos que ingestan datos a Hadoop -Sqoop-.
+
+Dentro de este directorio se debe guardar el nombre del dataset al que pertenece la metada, también se puede agregar el proceso que "genera" la metadata. Por ejemplo:
+
+    |- metada
+    |--- ecobici
+
+#### Estrategias de almacenamiento
+
+El diseño del esquema resuelve el punto de la organización de archivos, pero no resuelve el cómo guardar eficientemente los archivos en HDFS -el formato con el que serán almacenados!-.
+
+Hay 3 estrategias para almacenar los datos:
+
+1.  **Partitioning**
+
+En las bases de datos tradicionales SQL para hacer una búsqueda más rápida se generan índices sobre los datos, estos índices se crean -normalmente- al momento de ir "llenando" la tabla de los datos, esto hace que la inserción de los datos sea lenta pero el beneficio viene al momento de hacer queries pues el DBMS no necesita hacer un *full table scan* para encontrar los registros requeridos. Esto no sucede en HDFS pues no hay indexado de datos -parte del por qué la ingestión es mucho más rápida que en una BD tradicional para grandes sets de datos- ... ¿cómo resolvemos el problema de tener que hacer un *full table scan* para encontrar ciertos registros?
+
+La estrategia de partición requiere de hacer unas modificaciones a la forma en la que organizamos los datos en HDFS. Para hacer una partición ocupamos el `=` dentro del nombre del directorio al que queremos particionar -piénsalo como hacer índices de forma manual-. Por ejemplo: con los datos de ecobici tenemos la intuición de que será mejor separarlos por día ya que es muy seguro que queramos hacer preguntas con respecto a comportamientos por día... para hacer esta partición agregaríamos al directorio donde guardemos los datos de Ecobici:
+
+```
+    |- data
+    |-- ecobici
+    |---- date=20170101
+    |------ datos_1.csv
+    |------ datos_2.csv
+```
+
+O mejor aún
+
+```
+    |- data
+    |-- ecobici
+    |---- year=2017
+    |------ month=01
+    |-------- day=01
+    |----------- datos_1.csv
+    |----------- datos_2.csv
+```
+
+Puedes pensar que la segunda opción es demasiado específica, pero en mi experiencia funciona mucho mejor ser más específico -de nuevo es como tener un índice por año, uno para mes, uno para día- y es más eficiente para recuperar datos → recuerda que estamos trabajando con datos de gran escala, cada optimización por más pequeña que sea es un beneficio enorme en todo el proceso :).
+
+Esta estrategia es "entendida" por las tecnologías que se ocupan en Hadoop para poder hacer *queries* sobre los datos: Pig, Hive, Impala, HCatalog.
+
+1.  **Bucketing**
+
+La estrategia de particionamiento funciona cuando es posible particionar el set de datos de manera que muchos archivos "caen" en la partición, esto sucede cuando los datos se organizan por fechas, o bien cuando conocemos muy bien nuestros datos; pero si los datos no son organizados por fechas... o no los conocemos con detalle, la estrategia de *partitioning* no es una buena opción. Por ejemplo: Supongamos que queremos organizar los datos de Ecobici -porque eventualmente preguntaremos de esa manera- por usuario de ecobici... habrá usuarios que casi no ocupan Ecobici, mientras que hay otros muy comprometidos con el medio ambiente que lo ocupan todos los días... u otros que no les queda de otra :P ... en estos casos en los que es posible que haya **pocos archivos** por partición se ocupa la estrategía *bucketing*.
+
+El *bucketing* funciona hasheando los valores de una columna -`user_id`- en un número de *buckets* predeterminado por "alguien" -el número de *buckets* debe ser mucho menor que el número diferente de registros que exista en la columna hasheada -un buen tamaño de cubeta puede ser de algunos múltiplos del tamaño del bloque en HDFS, esto hará que las cubetas estén bien distribuidas-. En cada *bucket* habrá diferentes `user_id` particionando la tabla completa.
+
+Esta estrategia también beneficia el uso de *joins* entre diferentes datos ... ya veremos más adelante que hacer un *join* en *MapReduce* no está tan sencillo, aunque esta operación la podemos hacer desde Pig, Hive, Spark sin necesidad de quebrarnos la cabeza con el MapReduce ;). Cuando los datos se encuentran en *buckets* el *join* se realiza entre subsets de datos más pequeños que una tabla completa, por lo que se reduce significativamente el tiempo de procesamiento → recordemos que al estar trabajando con datos a gran escala cualquier optimiación brinda un beneficio al tiempo de procesamiento.
+
+Se recomienda que las tablas que sean muy largas -en SQL tradicional- se guarden en *bucketing* utilizando como llave para hacer el *bucketing* la variable con la que normalmente se le hace *join* a otras tablas (o *wheres*).
+
+1.  **Denormalizing**
+
+Con la estrategia de *bucketing* identificamos que los *join* pueden ser un problema en una arquitectura de Hadoop, pues son muy caros computacionalmente -requieren muchos recursos del cluster- y corresponden al conjunto de operaciones más lentas en Hadoop. Una solución para esto es **no tener que hacer joins** y para evitar tener que hacer *joins* tenemos que denormalizar los datos.
+
+En una BD tradicional los datos se guardan en tercera forma normal -3NF- asegurando que no haya redundancia en los datos y resguardando su integridad en las operaciones que se realizan sobre los mismos -actualizaciónes principalmente-. Esta forma de guardar los datos provoca tener que hacer *joins* entre diferentes tablas para encontrar más variables/atributos que necesitamos que formen parte de la respuesta de nuestro *query*. Para evitar hacer estos *joins*, esta estrategia plantea denormalizar los datos -unirlos a una sola tabla que contenga todos los atributos pertenecientes a diferentes tablas. Esto implica hacer el *join* antes de guardar los datos → en el ETL!!! :).
+
+El simil más parecido a lo que estamos haciendo con estas estrategias en BD tradicional operativa son las famosas vistas materializadas...
+
+![](./images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de alamacenamiento... nos importa la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.
+
+
 ### MapReduce
 
 Es un concepto introducido por primera vez en 2004 en un paper publicado por Google [MapReduce: Simplified Data Procesing on Large Clusters](http://static.googleusercontent.com/media/research.google.com/en/us/archive/mapreduce-osdi04.pdf).
@@ -383,129 +510,3 @@ Ahora probemos con MapReduce! ๏◡๏
     -file /home/lmillan/Documents/itam/metodos_gran_escala/datasets/reducer.py \
     -reducer reducer.py
 ```
-
-#### Schema design
-
-Una de las primeras cosas que hay que definir para ocupar HDFS es el diseño del esquema -la jerarquía y grupos que ocuparemos en el sistema de archivos-. Un diseño simple de directorios puede ser:
-
-    |- user
-    |- etl
-    |- tmp
-    |- data
-    |- app
-    |- metadata
-
--   `/user/<username>`
-
-En este directorio se encuentran los archivos, datos de configuración específicos a un usuario. Los archivos que están aquí **no** son ocupados como parte del proceso de negocio y son solo ocupados por el dueño de los mismos -por eso el username-. Por ejemplo: Archivos con los que se está jugando en un pequeño proceso y con los que queremos primero experimentar, o salidas específicas a este usuario.
-
--   `/etl`
-
-En este directorio se encuentran los datos que están en alguno de los procesos de algún *etl*. Se recomienda tener una organización dentro de esta carpeta por grupo de la empresa que tenga algún proceso de *etl*, la aplicación asociada y el proceso que se realiza `etl/<group>/<application>/<process>`.
-
-    |- etl
-    |--- group
-    |----- application
-    |------- process
-
-También se recomienda agregar al final un subdirectorio `bad` para dejar en este directorio aquellas observaciones que no pudieron ser procesadas correctamente -recuerda que no queremos perderlas...-
-
-Por ejemplo:
-
-    |- etl
-    |--- bi
-    |----- clickstream
-    |------- deduplication
-
--   `/tmp`
-
-En este directorio se guardan **temporalmente** archivos que pueden ser salidas/entradas de otros procesos. Se recomienda que esta carpeta se borre automáticamente por algún *script* después de terminar el(los) proceso(s) adecuados para no tener basura acumulada que quita espacio.
-
--   `/data`
-
-En este directorio se guardan los datasets que ya han sido procesados y que se comparten en toda la organización. Debido a que estos datasets ya están limpios y varios tienen acceso se recomienda solo dar permisos de lectura -no faltará el que la cajetee y borre/actualice los datos sin querer-. La única forma de escribir a este directorio debe ser a través de algún proceso automatizado -después del etl(s) normalmente- **auditado**.
-
-Se debe agregar un directorio por cada *dataset* para identificar de qué va ese *dataset*. Por ejemplo: Si tenemos el *dataset* de ecobici y de calidad del aire de cdmx -supongamos que somos una empresa de análisis de datos- tendríamos la siguiente estructura:
-
-    |- data
-    |--- cdmx
-    |----- ecobici
-    |----- calidad_aire
-
--   `/app`
-
-En este directorio se guarda todo lo que requiere una aplicación de hadoop para correr: jars, *workflow definitions*, *UDF*s -User Defined Functions, Hive-, archivos HQL -Hive-, etc.
-
-Sigue la misma estructura propuesta que en la carpeta `etl` admás de agregarle versión/tag y/o artefacto:
-
-    |- app
-    |--- group
-    |----- application
-    |------- version
-
--   `/metadata`
-
-Este directorio guarda la *metadata* generada por algún proceso -datos de los datos- ¿qué dato de los datos se te ocurre guardar?
-
-Normalmente este directorio tendrá permisos de lectura para procesos del ETL y de escritura para los procesos que ingestan datos a Hadoop -Sqoop-.
-
-Dentro de este directorio se debe guardar el nombre del dataset al que pertenece la metada, también se puede agregar el proceso que "genera" la metadata. Por ejemplo:
-
-    |- metada
-    |--- ecobici
-
-#### Estrategias de almacenamiento
-
-El diseño del esquema resuelve el punto de la organización de archivos, pero no resuelve el cómo guardar eficientemente los archivos en HDFS -el formato con el que serán almacenados!-.
-
-Hay 3 estrategias para almacenar los datos:
-
-1.  **Partitioning**
-
-En las bases de datos tradicionales SQL para hacer una búsqueda más rápida se generan índices sobre los datos, estos índices se crean -normalmente- al momento de ir "llenando" la tabla de los datos, esto hace que la inserción de los datos sea lenta pero el beneficio viene al momento de hacer queries pues el DBMS no necesita hacer un *full table scan* para encontrar los registros requeridos. Esto no sucede en HDFS pues no hay indexado de datos -parte del por qué la ingestión es mucho más rápida que en una BD tradicional para grandes sets de datos- ... ¿cómo resolvemos el problema de tener que hacer un *full table scan* para encontrar ciertos registros?
-
-La estrategia de partición requiere de hacer unas modificaciones a la forma en la que organizamos los datos en HDFS. Para hacer una partición ocupamos el `=` dentro del nombre del directorio al que queremos particionar -piénsalo como hacer índices de forma manual-. Por ejemplo: con los datos de ecobici tenemos la intuición de que será mejor separarlos por día ya que es muy seguro que queramos hacer preguntas con respecto a comportamientos por día... para hacer esta partición agregaríamos al directorio donde guardemos los datos de Ecobici:
-
-```
-    |- data
-    |-- ecobici
-    |---- date=20170101
-    |------ datos_1.csv
-    |------ datos_2.csv
-```
-
-O mejor aún
-
-```
-    |- data
-    |-- ecobici
-    |---- year=2017
-    |------ month=01
-    |-------- day=01
-    |----------- datos_1.csv
-    |----------- datos_2.csv
-```
-
-Puedes pensar que la segunda opción es demasiado específica, pero en mi experiencia funciona mucho mejor ser más específico -de nuevo es como tener un índice por año, uno para mes, uno para día- y es más eficiente para recuperar datos → recuerda que estamos trabajando con datos de gran escala, cada optimización por más pequeña que sea es un beneficio enorme en todo el proceso :).
-
-Esta estrategia es "entendida" por las tecnologías que se ocupan en Hadoop para poder hacer *queries* sobre los datos: Pig, Hive, Impala, HCatalog.
-
-1.  **Bucketing**
-
-La estrategia de particionamiento funciona cuando es posible particionar el set de datos de manera que muchos archivos "caen" en la partición, esto sucede cuando los datos se organizan por fechas, o bien cuando conocemos muy bien nuestros datos; pero si los datos no son organizados por fechas... o no los conocemos con detalle, la estrategia de *partitioning* no es una buena opción. Por ejemplo: Supongamos que queremos organizar los datos de Ecobici -porque eventualmente preguntaremos de esa manera- por usuario de ecobici... habrá usuarios que casi no ocupan Ecobici, mientras que hay otros muy comprometidos con el medio ambiente que lo ocupan todos los días... u otros que no les queda de otra :P ... en estos casos en los que es posible que haya **pocos archivos** por partición se ocupa la estrategía *bucketing*.
-
-El *bucketing* funciona hasheando los valores de una columna -`user_id`- en un número de *buckets* predeterminado por "alguien" -el número de *buckets* debe ser mucho menor que el número diferente de registros que exista en la columna hasheada -un buen tamaño de cubeta puede ser de algunos múltiplos del tamaño del bloque en HDFS, esto hará que las cubetas estén bien distribuidas-. En cada *bucket* habrá diferentes `user_id` particionando la tabla completa.
-
-Esta estrategia también beneficia el uso de *joins* entre diferentes datos ... ya veremos más adelante que hacer un *join* en *MapReduce* no está tan sencillo, aunque esta operación la podemos hacer desde Pig, Hive, Spark sin necesidad de quebrarnos la cabeza con el MapReduce ;). Cuando los datos se encuentran en *buckets* el *join* se realiza entre subsets de datos más pequeños que una tabla completa, por lo que se reduce significativamente el tiempo de procesamiento → recordemos que al estar trabajando con datos a gran escala cualquier optimiación brinda un beneficio al tiempo de procesamiento.
-
-Se recomienda que las tablas que sean muy largas -en SQL tradicional- se guarden en *bucketing* utilizando como llave para hacer el *bucketing* la variable con la que normalmente se le hace *join* a otras tablas (o *wheres*).
-
-1.  **Denormalizing**
-
-Con la estrategia de *bucketing* identificamos que los *join* pueden ser un problema en una arquitectura de Hadoop, pues son muy caros computacionalmente -requieren muchos recursos del cluster- y corresponden al conjunto de operaciones más lentas en Hadoop. Una solución para esto es **no tener que hacer joins** y para evitar tener que hacer *joins* tenemos que denormalizar los datos.
-
-En una BD tradicional los datos se guardan en tercera forma normal -3NF- asegurando que no haya redundancia en los datos y resguardando su integridad en las operaciones que se realizan sobre los mismos -actualizaciónes principalmente-. Esta forma de guardar los datos provoca tener que hacer *joins* entre diferentes tablas para encontrar más variables/atributos que necesitamos que formen parte de la respuesta de nuestro *query*. Para evitar hacer estos *joins*, esta estrategia plantea denormalizar los datos -unirlos a una sola tabla que contenga todos los atributos pertenecientes a diferentes tablas. Esto implica hacer el *join* antes de guardar los datos → en el ETL!!! :).
-
-El simil más parecido a lo que estamos haciendo con estas estrategias en BD tradicional operativa son las famosas vistas materializadas...
-
-![](./images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de alamacenamiento... nos importa la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.
