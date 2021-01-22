@@ -111,7 +111,7 @@ Fuente: [Wikipedia RAID](https://es.wikipedia.org/wiki/RAID)
     -   La idea del algoritmo era que de alguna forma se pudieran enviar pedazos de un programa a todos los nodos en un *cluster*, procesarlos por separado, recolectar las salidas y juntarlos para obtener un resultados final. Enter *MapReduce*.
     -   Google al rescate de nuevo publica en diciembre de 2004 ["MapReduce: Simplified Data Processing on Large Clusters"](https://ai.google/research/pubs/pub62)
 -   Durante 2005 se ponen a chambear en integrar MapReduce a Nutch.
--   Febrero 2006 nace Hadoop integrango Nutch, HDFS y MapReduce bajo el apoyo de Apache.
+-   Febrero 2006 nace Hadoop integrando Nutch, HDFS y MapReduce bajo el apoyo de Apache.
 -   Al mismo tiempo el equipo de Yahoo! es "obligado" a pasar su ya eficiente buscador hecho en C++ a ocupar la implementación de Google de MapReduce *open source* -a.k.a. MapReduce de Hadoop, ergo Hadoop-, el prinicipal engineer de Yahoo! se niega -¿cómo puede ser posible que quieran pasar del eficiente C++ al ineficiente Java? su pregunta principal... :/- y sus jefes contratan a Cutting para que implemente su buscador ocupando Hadoop ... pum. → Esta es la decisión que salva a Yahoo!.
 -   Para 2007 compañías como Facebook, LindekIn, Twitter ocupaban Hadoop y contribuyeron con *frameworks* y herramientas al ecosistema *open source*. Yahoo! ya cuenta con 1,000 nodos en su Hadoop *cluster*.
 -   Para 2008 Hadoop deja de ser un subproyecto de Lucene para convertirse en uno de los top en Apache y siendo el paraguas para muchos subproyectos como HBase, ZooKeeper, Pig (contribución de Yahoo!), Hive (contribución de Facebook)
