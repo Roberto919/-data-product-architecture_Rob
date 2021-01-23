@@ -167,12 +167,16 @@ Ambos tipos de nodo están diseñados para correr en máquinas que usualmente ti
 
 Un despliegue típico de una arquitectura de Hadoop ocupa un nodo para el *Name Node* mientras que el resto de las máquinas -nodos- en el *cluster* corren 1 instancia del programa *Data Node*.
 
+- Todo lo que tiene que ver con cosas distribuidas se hace en Java.
+  - Ocupan Linux por default y se traduce a Java.
+
 **File system namespace**
 
 -   HDFS puede trabajar con una organización de archivos jerárquica tradicional -aunque físicamente no se guardan de esta manera-.
 -   Como en los sistemas de archivos tradicionales en HDFS se pueden crear, borrar, renombrar y mover archivos.
 -   Se puede utilizar *user quotas* y permisos de acceso.
 -   No acepta los [*soft* o *hard* links](https://www.ostechnix.com/explaining-soft-link-and-hard-link-in-linux-with-examples/).
+    -   Es este tema de poner un path y que te redireccione a otro lugar.
 
 El *Name Node* es el responsable de mantener este *file system namespace*, cualquier cambio realizado en el sistema de archivos o en sus propiedades queda almacenado en el *Name Node*. El *Name node* también es responsable de administrar el número de réplicas que se generar por archivo -*replication factor*-.
 
@@ -182,14 +186,18 @@ El *Name Node* es el responsable de mantener este *file system namespace*, cualq
 
 ![](./images/hdfs_blocks_1.png) <br>
 
--   **Todos** los bloques de un archivo excepto el último son del mismo tamaño ... ¿por qué?. El tamaño por *default* es de **64MB** por bloque, pero el tamaño 'óptimo' depende de la naturaleza del *dataset* y de cómo se utilizarán los datos en la aplicación
--   Se puede especificar el número de réplicas de un archivo -normalmente se pone mínimo 3- ... ¿por qué?
--   El factor de replicación se puede especificar en el momento de la creación del archivo y se puede cambiar después. Los archivos en HDFS se escriben **una vez** (excepto por *appends* y *truncates*) y tienen estrictamente un solo *writer* por vez
--   El *Name Node* es el que toma las decisiones relacionadas a la replicación de los bloques y periódicamente recibe un *heartbeat* y un reporte de los bloques -*Blockreport*- de cada *Data Node* en el *cluster*. Al recibir el *heartbeat* el *Name Node* se asegura que ese nodo está "vivo" y que está funcionando correctamente, y el *Blockreport* contiene la lista de todos los bloques contenidos por *Data Node*
+-   **Todos** los bloques de un archivo excepto el último son del mismo tamaño ... ¿por qué? (Es lo que sobró). El tamaño por *default* es de **64MB** por bloque, pero el tamaño 'óptimo' depende de la naturaleza del *dataset* y de cómo se utilizarán los datos en la aplicación.
+    -   Si hacemos muy chicos los bloques, va a ser muy costoso acceder a todos.
+    -   En general no hay que intentar hacer cambios en la configuración de Hadoop. Más bien hay que consultar con un ingeniero de datos.
+        -   Mucho depende de las operaciones que vamos a hacer.
+            -   Los JOINS son muy costosos porque hay que juntar todo.
+-   Se puede especificar el número de réplicas de un archivo -normalmente se pone mínimo 3- ... ¿por qué? (Lo ideal para que no se cargue demasiado el procesamiento en un nodo.)
+-   El factor de replicación se puede especificar en el momento de la creación del archivo y se puede cambiar después. Los archivos en HDFS se escriben **una vez** (excepto por *appends* y *truncates*) y tienen estrictamente un solo *writer* por vez.
+-   El *Name Node* es el que toma las decisiones relacionadas a la replicación de los bloques y periódicamente recibe un *heartbeat* y un reporte de los bloques -*Blockreport*- de cada *Data Node* en el *cluster*. Al recibir el *heartbeat* el *Name Node* se asegura que ese nodo está "vivo" y que está funcionando correctamente, y el *Blockreport* contiene la lista de todos los bloques contenidos por *Data Node*.
 
 ![](./images/block_replication.png) Fuente: <https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Data_Replication>
 
-**Anatomía de la replicación**
+**Anatomía de la replication**
 
 -   *Replica placement*
 
@@ -208,6 +216,8 @@ Si el factor de replicación es mayor a 3, el *placement* de cada réplica a par
 -   *Replica selection*
 
 Con el propósito de minimizar la latencia de lectura y el ancho de banda de red ocupado, HDFS siempre busca satisfacer una petición de lectura con la réplica del bloque que contenga los datos más cercana al que solicitó la petición. Si existe una réplica en el mismo *rack* donde se encuentra el nodo *reader* entonces se escogerá esta réplica de entre las demás disponibles. Si el cluster incluye múltiples *data centers* entonces escogerá la réplica que se encuentre en el *data center* local antes que el remoto pues es más cercano al nodo lector.
+
+No tener cuidado con esto puede causar que nos manden muchos warnings. 
 
 -   *Safemode*
 
