@@ -219,18 +219,18 @@ Una de las primeras cosas que hay que definir para ocupar HDFS es el diseño del
 
 -   `/user/<username>`
 
-En este directorio se encuentran los archivos, datos de configuración específicos a un usuario. Los archivos que están aquí **no** son ocupados como parte del proceso de negocio y son solo ocupados por el dueño de los mismos -por eso el username-. Por ejemplo: Archivos con los que se está jugando en un pequeño proceso y con los que queremos primero experimentar, o salidas específicas a este usuario.
+En este directorio se encuentran los archivos/datos de configuración específicos a un usuario. Los archivos que están aquí **no** son ocupados como parte del proceso de negocio y son únicamente ocupados por el dueño de los mismos -por eso el *username*-. Por ejemplo: Archivos con los que se está jugando en un pequeño proceso y con los que queremos primero experimentar, o salidas específicas a este usuario.
 
 -   `/etl`
 
-En este directorio se encuentran los datos que están en alguno de los procesos de algún *etl*. Se recomienda tener una organización dentro de esta carpeta por grupo de la empresa que tenga algún proceso de *etl*, la aplicación asociada y el proceso que se realiza `etl/<group>/<application>/<process>`.
+En este directorio se encuentran los datos que están en alguno de los procesos de algún *etl*. Se recomienda tener una organización dentro de esta carpeta por grupo o área de la empresa que tenga algún proceso de *etl*, la aplicación asociada y el proceso que se realiza `etl/<group>/<application>/<process>`.
 
     |- etl
     |--- group
     |----- application
     |------- process
 
-También se recomienda agregar al final un subdirectorio `bad` para dejar en este directorio aquellas observaciones que no pudieron ser procesadas correctamente -recuerda que no queremos perderlas...-
+También se recomienda agregar al final un subdirectorio `bad` para dejar en este directorio aquellas observaciones que no pudieron ser procesadas correctamente -recuerda que no queremos perderlas...-.
 
 Por ejemplo:
 
@@ -245,9 +245,9 @@ En este directorio se guardan **temporalmente** archivos que pueden ser salidas/
 
 -   `/data`
 
-En este directorio se guardan los datasets que ya han sido procesados y que se comparten en toda la organización. Debido a que estos datasets ya están limpios y varios tienen acceso se recomienda solo dar permisos de lectura -no faltará el que la cajetee y borre/actualice los datos sin querer-. La única forma de escribir a este directorio debe ser a través de algún proceso automatizado -después del etl(s) normalmente- **auditado**.
+En este directorio se guardan los *datasets* que ya han sido procesados y que se comparten en toda la organización. Debido a que estos datasets ya están limpios y varios tienen acceso se recomienda solo dar permisos de lectura -no faltará el que la cajetee y borre/actualice los datos sin querer-. La única forma de escribir a este directorio debe ser a través de algún proceso automatizado -después del etl(s) normalmente- **auditado**.
 
-Se debe agregar un directorio por cada *dataset* para identificar de qué va ese *dataset*. Por ejemplo: Si tenemos el *dataset* de ecobici y de calidad del aire de cdmx -supongamos que somos una empresa de análisis de datos- tendríamos la siguiente estructura:
+Se debe agregar un directorio por cada *dataset* para identificar de qué va ese *dataset*. Por ejemplo: Si tenemos el *dataset* de ecobici y de calidad del aire de CDMX -supongamos que somos una empresa de análisis de datos- tendríamos la siguiente estructura:
 
     |- data
     |--- cdmx
@@ -256,9 +256,9 @@ Se debe agregar un directorio por cada *dataset* para identificar de qué va ese
 
 -   `/app`
 
-En este directorio se guarda todo lo que requiere una aplicación de hadoop para correr: jars, *workflow definitions*, *UDF*s -User Defined Functions, Hive-, archivos HQL -Hive-, etc.
+En este directorio se guarda todo lo que requiere una aplicación de Hadoop para correr: `jars`, *workflow definitions*, *UDF*s -User Defined Functions, Hive-, archivos HQL -Hive-, etc.
 
-Sigue la misma estructura propuesta que en la carpeta `etl` admás de agregarle versión/tag y/o artefacto:
+Sigue la misma estructura propuesta que en la carpeta `etl` y además se agrega la versión/tag y/o artefacto que estamos ocupando:
 
     |- app
     |--- group
@@ -271,9 +271,9 @@ Este directorio guarda la *metadata* generada por algún proceso -datos de los d
 
 Normalmente este directorio tendrá permisos de lectura para procesos del ETL y de escritura para los procesos que ingestan datos a Hadoop -Sqoop-.
 
-Dentro de este directorio se debe guardar el nombre del dataset al que pertenece la metada, también se puede agregar el proceso que "genera" la metadata. Por ejemplo:
+Dentro de este directorio se debe guardar el nombre del *dataset* al que pertenece la *metadata*, también se puede agregar el proceso que "genera" la *metadata*. Por ejemplo:
 
-    |- metada
+    |- metadata
     |--- ecobici
 
 #### Estrategias de almacenamiento
