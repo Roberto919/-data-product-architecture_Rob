@@ -318,24 +318,26 @@ La estrategia de particionamiento funciona cuando es posible particionar el set 
 
 El *bucketing* funciona "hasheando" los valores de una columna -`user_id`- en un número de *buckets* predeterminado por "alguien" -el número de *buckets* debe ser mucho menor que el número diferente de registros que exista en la columna hasheada -un buen tamaño de cubeta puede ser de algunos múltiplos del tamaño del bloque en HDFS, esto hará que las cubetas estén bien distribuidas-. En cada *bucket* habrá diferentes `user_id` particionando la tabla completa.
 
+Para saber en qué bucket debe ir cada registro el hash que se utiliza es el [MurmurHash](https://en.wikipedia.org/wiki/MurmurHash).
+
 Esta estrategia también beneficia el uso de *joins* entre diferentes datos ... ya veremos más adelante que hacer un *join* en *MapReduce* no está tan sencillo, aunque esta operación la podemos hacer desde Pig, Hive, Spark sin necesidad de quebrarnos la cabeza con el MapReduce ;). Cuando los datos se encuentran en *buckets* el *join* se realiza entre suconjuntos de datos más pequeños que una tabla completa, por lo que se reduce significativamente el tiempo de procesamiento → recordemos que al estar trabajando con datos a gran escala cualquier optimización brinda un beneficio al tiempo de procesamiento.
 
 Se recomienda que las tablas que sean muy largas -en SQL tradicional- se guarden en *bucketing* utilizando como llave para hacer el *bucketing* la variable con la que normalmente se le hace *join* a otras tablas (o *wheres*).
 
 1.  **Denormalizing**
 
-Con la estrategia de *bucketing* identificamos que los *join* pueden ser un problema en una arquitectura de Hadoop, pues son muy caros computacionalmente -requieren muchos recursos del cluster- y corresponden al conjunto de operaciones más lentas en Hadoop. Una solución para esto es **no tener que hacer joins** y para evitar tener que hacer *joins* tenemos que denormalizar los datos.
+Con la estrategia de *bucketing* identificamos que los *join* pueden ser un problema en una arquitectura de Hadoop, pues son muy caros computacionalmente -requieren muchos recursos del *cluster*- y corresponden al conjunto de operaciones más lentas en Hadoop. Una solución para esto es **no tener que hacer joins** y para evitar tener que hacer *joins* tenemos que denormalizar los datos.
 
 En una BD tradicional los datos se guardan en tercera forma normal -3NF- asegurando que no haya redundancia en los datos y resguardando su integridad en las operaciones que se realizan sobre los mismos -actualizaciónes principalmente-. Esta forma de guardar los datos provoca tener que hacer *joins* entre diferentes tablas para encontrar más variables/atributos que necesitamos que formen parte de la respuesta de nuestro *query*. Para evitar hacer estos *joins*, esta estrategia plantea denormalizar los datos -unirlos a una sola tabla que contenga todos los atributos pertenecientes a diferentes tablas. Esto implica hacer el *join* antes de guardar los datos → en el ETL!!! :).
 
 El simil más parecido a lo que estamos haciendo con estas estrategias en BD tradicional operativa son las famosas vistas materializadas...
 
-![](./images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de alamacenamiento... nos importa la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.
+![](./images/pointer.png) Notarás que en Hadoop no nos importa el espacio que ocupen los datos, ni repetirlos para guardarlos en diferentes estrategias de almacenamiento... lo que nos importa es la forma en la que los guardamos para optimizar su lectura y procesamiento en capas más arriba :). Denormalizar en una BD tradicional es un **pecado capital** además de que te tildan de ignorante :/ pero pues en ese mundo operativo tiene todo el sentido del mundo normalizar, en el nuestro **NO!**.
 
 
 ### MapReduce
 
-Es un concepto introducido por primera vez en 2004 en un paper publicado por Google [MapReduce: Simplified Data Procesing on Large Clusters](http://static.googleusercontent.com/media/research.google.com/en/us/archive/mapreduce-osdi04.pdf).
+Es un concepto introducido por primera vez en 2004 en un *paper* publicado por Google [MapReduce: Simplified Data Procesing on Large Clusters](http://static.googleusercontent.com/media/research.google.com/en/us/archive/mapreduce-osdi04.pdf).
 
 MapReduce es un paradigma de programación -un modelo de programación- creado para el procesamiento de grandes cantidades de datos a través de su procesamiento en paralelo en un *cluster*. El algoritmo de procesamiento está compuesto por dos fases: la fase *map* y la fase *reduce*, para ambas fases la entrada y la salida son pares `<llave, valor>`.
 
@@ -388,7 +390,7 @@ MapReduce no es una buena solución para algoritmos iterativos pues tiene las si
 **Recomendaciones**
 
 -   El \# de *mappers* depende del \# total de bloques de los archivos de entrada como lo vimos anteriormente, es posible poner más *mappers* configurando `Configuration.set(MRJobConfig.NUM_MAPS, int)` (en Java).
--   Conforme aumenta le número de *mappers* en un nodo, la ejecución de un *mapper* puede tomar más de un minuto.
+-   Conforme aumenta el número de *mappers* en un nodo, la ejecución de un *mapper* puede tomar más de un minuto.
 -   Incrementar el \# de *reducers* incrementa el balanceo de carga, baja los costos de fallas pero incrementa el uso de recursos del *framework*.
 -   Se puede poner el \# de *reducers* en 0 si no es necesario hacer un procesamiento *reduce* → la salida de los *mappers* **no** será ordenada ni particionada (y sería muy extraño).
 
@@ -413,7 +415,7 @@ La forma en la que corremos procesos de MapReduce es a través de un programa es
 
 Debido a que la librería de Hadoop de *streaming* implementa estas chivas mencionadas arriba, nos servirá como API para escribir el proceso de MapReduce en otros lenguajes, para ello solo hay que leer de `STDIN` y escribir a `STDOUT` ＼(＾O＾)／. Solo debemos tener en cuenta que esta librería **supone que las tuplas `<llave,valor>` están separadas por un tab `\t`**.
 
-Para correr un job de *streaming* en Hadoop solo debemos indicarle a hadoop de dónde sacar el `.jar` de *streaming* ... depende de la versión de Hadoop que hayamos instalado pero como nosotros estamos en la 2.7.x, el `.jar` se encuentra en el siguiente directorio: `/usr/local/hadoop/share/hadoop/tools/lib/`
+Para correr un job de *streaming* en Hadoop solo debemos indicarle a Hadoop de dónde sacar el `.jar` de *streaming* ... depende de la versión de Hadoop que hayamos instalado pero como nosotros estamos en la 2.7.x, el `.jar` se encuentra en el siguiente directorio: `/usr/local/hadoop/share/hadoop/tools/lib/`
 
 **Ejemplo:** El *Hello world!* de MapReduce es hacer un conteo de palabras de algún texto... juguemos con el *Hello World*.
 
@@ -444,7 +446,7 @@ Empezaremos con algo sencillo, sin pensar en MapReduce cómo contaríamos la fre
     sums = {}
 
     for line in sys.stdin:
-      line = re.sub('^\W+|\W+$', '', line) #elimina lo que no sean alfanumérico al inicio y fin de la línea
+      line = re.sub('^\W+|\W+$', '', line) #elimina lo que no sea alfanumérico al inicio y fin de la línea
       words = re.split('\W+', line)
 
       for word in words:
@@ -499,8 +501,11 @@ Recuerda que al *reducer* le llegan los pares de `<llave,valor>` **ordenados!**
 
 Probemos esto en python sin MapReduce para ver cómo demonios funciona esto ... (`ctr+d` para terminar el stdin)
 
+![](images/pointer.png) Estos scripts se encuentran en la carpeta `scripts`.
+
 Ahora probemos con MapReduce! ๏◡๏
 
+![](images/pointer.png) Necesitarás cambiar la versión del jar dependiendo de la versión de Hadoop!
 ```
     $bin/hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.7.4.jar \
     -input /iliada/input.txt \
@@ -510,3 +515,52 @@ Ahora probemos con MapReduce! ๏◡๏
     -file /home/lmillan/Documents/itam/metodos_gran_escala/datasets/reducer.py \
     -reducer reducer.py
 ```
+
+![](images/pointer.png) Ir a cluster EMR
+
+### Ejercicios de HDFS en EMR
+
+1. Cargar un archivo a HDFS desde S3
+
+* Ver qué hay en hdfs (debe estar vacío)
+```
+hdfs dfs -ls
+```
+
+* Creamos una carpeta para almacenar los datos
+
+```
+hdfs dfs -mkdir flights
+```
+
+* Cargar datos en HDFS
+```
+hdfs dfs -cp s3n://tu-bucket/path/archivo.csv flights/
+```
+
+* Revisar que ya se cargaron los datos en HDFS
+```
+hdfs dfs -ls flights
+```
+
+2. Revisar el *report block*
+```
+hdfs fsck flights/flights.csv -files -blocks
+```
+
+3. Revisar los *namenodes*
+```
+hdfs getconf -namenodes
+```
+
+4. Revisar los *datanodes*
+```
+hdfs dfsadmin -report
+```
+
+
+### Referencias
+
+* Comandos de Hdfs
+* Hadoop
+* HDFS
