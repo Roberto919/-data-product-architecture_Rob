@@ -419,7 +419,7 @@ Para correr un job de *streaming* en Hadoop solo debemos indicarle a Hadoop de d
 
 **Ejemplo:** El *Hello world!* de MapReduce es hacer un conteo de palabras de algún texto... juguemos con el *Hello World*.
 
-**Objetivo:** Contar la frecuencia de operación de cada palabra en un texto
+**Objetivo:** Contar la frecuencia de aparición de cada palabra en un texto.
 
 - ![](./images/pointer.png) ¿Cómo diseñamos el conteo de palabras para hacer en modelo de programación MapReduce?
 
