@@ -561,6 +561,6 @@ hdfs dfsadmin -report
 
 ### Referencias
 
-* Comandos de Hdfs
-* Hadoop
-* HDFS
+* [Hadoop](http://hadoop.apache.org/)
+* [Comandos de Hdfs](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html)
+* [HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html)
