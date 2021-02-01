@@ -230,9 +230,11 @@ El *Blockreport* contiene la lista de los *data blocks* que contiene, cada bloqu
 
 Una de las primeras cosas que hay que definir para ocupar HDFS es el diseño del esquema -la jerarquía y grupos que ocuparemos en el sistema de archivos-. Un diseño simple de directorios puede ser:
 
-    |- user
-    |- etl
-    |- tmp
+- Recordemos que en realidad no hay carpetas en el esquema distribuido, pero así lo hacemos para que nos facilite la cosa.
+
+    |- user ## Asociada a un username particular. Se guardan cosas particulares para cada user.
+    |- etl ## Relacionado con extracción, transformación y carga. Se recomienda que tenga más cosas (grupo, área, disciplina, sector, etc.). Es parte del pipeline.
+    |- tmp ## 
     |- data
     |- app
     |- metadata
@@ -278,6 +280,8 @@ Se debe agregar un directorio por cada *dataset* para identificar de qué va ese
 
 En este directorio se guarda todo lo que requiere una aplicación de Hadoop para correr: `jars`, *workflow definitions*, *UDF*s -User Defined Functions, Hive-, archivos HQL -Hive-, etc.
 
+- Aquí también se guardan cosas de otras cosas que se instalan.
+
 Sigue la misma estructura propuesta que en la carpeta `etl` y además se agrega la versión/tag y/o artefacto que estamos ocupando:
 
     |- app
@@ -288,6 +292,9 @@ Sigue la misma estructura propuesta que en la carpeta `etl` y además se agrega 
 -   `/metadata`
 
 Este directorio guarda la *metadata* generada por algún proceso -datos de los datos- ¿qué dato de los datos se te ocurre guardar?
+
+- Fecha en la que se crearon.
+- Cuántos bytes son.
 
 Normalmente este directorio tendrá permisos de lectura para procesos del ETL y de escritura para los procesos que ingestan datos a Hadoop -Sqoop-.
 
@@ -344,6 +351,8 @@ Esta estrategia también beneficia el uso de *joins* entre diferentes datos ... 
 
 Se recomienda que las tablas que sean muy largas -en SQL tradicional- se guarden en *bucketing* utilizando como llave para hacer el *bucketing* la variable con la que normalmente se le hace *join* a otras tablas (o *wheres*).
 
+- Se usa mucho cuando no tienes fechas pero sí IDs.
+
 1.  **Denormalizing**
 
 Con la estrategia de *bucketing* identificamos que los *join* pueden ser un problema en una arquitectura de Hadoop, pues son muy caros computacionalmente -requieren muchos recursos del *cluster*- y corresponden al conjunto de operaciones más lentas en Hadoop. Una solución para esto es **no tener que hacer joins** y para evitar tener que hacer *joins* tenemos que denormalizar los datos.
@@ -363,7 +372,7 @@ MapReduce es un paradigma de programación -un modelo de programación- creado p
 
 1.  Fase *Map*
 
-A los procesos que ejecutan el *map* se les conoce como *mappers* -proceso de Java-, normalmente hay 1 por nodo y se ejecutan en los nodos que tengan los datos sobre los que se quiere hacer el procesamiento -recordemos que en procesamiento distribuido se prefiere mover el proceso a mover los datos por el *cluster* ya que es muy costoso en recursos-
+A los procesos que ejecutan el *map* se les conoce como *mappers* -proceso de Java-, normalmente hay 1 por nodo y se ejecutan en los nodos que tengan los datos sobre los que se quiere hacer el procesamiento -recordemos que en procesamiento distribuido se prefiere mover el proceso a mover los datos por el *cluster* ya que es muy costoso en recursos-**
 
 **Características**
 
@@ -372,6 +381,7 @@ A los procesos que ejecutan el *map* se les conoce como *mappers* -proceso de Ja
 -   El número de *mappers* en el *cluster* es configurado por el *framework* no por el desarrollador -aunque es posible que el desarrollador ponga un \#-, el \# de *mappers* depende del tamaño del *set* de datos de entrada del *job* y del tamaño de los bloques, 1 bloque por *mapper* → **el \# de *mappers* de un trabajo de MapReduce es igual al número de bloques en el set de datos a procesar**. Por ejemplo: Si tenemos 10TB como entrada y un *block size* de 128MB ¿cuántos *mappers* tenemos?
     -   1 TB = 1,099,511,627,776 bytes
     -   1 MB = 1,048,576 bytes
+        -   La respuesta es de 81,290 (o algo por ahí).
 -   La salida de los *mappers* son pares `<llave, valor>` que son enviados únicamente a los *reducers*.
 -   Los *mappers* no se pueden comunicar entre ellos.
 -   Los *mappers* no ocupan mucha memoria y el tamaño del *heap* -*heap size*- de la JVM (Java Virtual Machine) es relativamente bajo.
