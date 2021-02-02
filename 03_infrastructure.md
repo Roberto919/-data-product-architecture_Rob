@@ -81,7 +81,7 @@ Si tienes varias cuentas de AWS -tu trabajo y la escuela- puedes crear un archiv
 
 Este servicio de AWS nos permite crear instancias de computadoras con sistemas operativos instalados, y dependiendo de nuestras necesidades podemos escoger entre instancias optimizadas a procesamiento, a almacenamiento, a CPU, a memoria, etc. Debido a todas estas posibles combinaciones hay muchos tipos de instancias disponibles en AWS por lo que te servirá conocer los [tipos de instancia de EC2](https://aws.amazon.com/ec2/instance-types/).
 
-+ VPC *Virtual Private Cloud*: Nos permite aprovisionar un espacio lógico en la nube de AWS para que podamos poner nuestras instancias EC2 a las que solo quienes definamos tengan acceso. Cuando cread una VPC tienes que definir un rango de direcciones IP4 en la forma de un *CIDR block (Classles Inter-Domain Routing)*, por ejemplo: `10.0.0.0/16`.
++ VPC *Virtual Private Cloud*: Nos permite aprovisionar un espacio lógico en la nube de AWS para que podamos poner nuestras instancias EC2 a las que solo quienes definamos tengan acceso. Cuando creas una VPC tienes que definir un rango de direcciones IP4 en la forma de un *CIDR block (Classles Inter-Domain Routing)*, por ejemplo: `10.0.0.0/16`. La primera vez que levantas "algo" en AWS se crea una VPC por *default*.
 
 + *Subnet*: Dentro de la VPC puedes crear un rango de direcciones para poner instancias EC2 específicas. El acceso a estas subredes se determina a través de los *Inbounds* y *Outbounds*.
 
@@ -117,7 +117,7 @@ Para que todos los usuarios se puedan conectar necesitarán agregar sus respecti
 Para hacer esto, necesitarás:
 
 1. Modificar en la instancia EC2 de Bastión, el archivo `/etc/ssh/sshd_config` para poner el atributo `PubkeyAuthentication` en `yes` -seguramente tendrás que descomentar esa línea-, modificar la opción de `PasswordAuthentication` a `yes`. Hay que hacer un *restart* del servicio de `sshd` para que el cambio se tome en cuenta utilizando el comando `sudo service sshd restart`.
-2. Salir del servidor, ir al cliente y desde ahí copiar tu llave pública con el comando: `ssh-copy-id -i la_llave_publica username@ip_del_ec2`
+2. Salir del servidor, ir al cliente y desde ahí copiar tu llave pública con el comando: `ssh-copy-id -i la_llave_publica username@ip_del_ec2`. Si el archivo no se llama `id_rsa` o se encuentra en una carpeta diferente a `.ssh` tendrás que ocupar un `-f` antes del `-i` (*force*).
 3. Una vez que hayas copiado todas las llaves de los usuarios tendremos que volver a cambiar el archivo `/etc/ssh/sshd_config` modificando únicamente la parte de `PasswordAuthentication` a `no` y volver a hacer un *restart* al servicio de `sshd`.
 
 #### Infraestructura VPC con subnets pública y privada
