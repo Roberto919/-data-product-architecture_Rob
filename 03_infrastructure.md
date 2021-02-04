@@ -95,13 +95,13 @@ Este servicio de AWS nos permite crear instancias de computadoras con sistemas o
 
 La arquitectura que construiremos en DPA es la siguiente:
 
-![](./images/ec2_subnets.png)
+![](./images/ec2_security_groups.png)
 <br>
 
 ![](./images/ec2_architecture.png)
 <br>
 
-#### Creación de usuarios en buntu
+#### Creación de usuarios en Ubuntu
 
 [Pasos](https://www.cyberciti.biz/faq/create-a-user-account-on-ubuntu-linux/)
 
@@ -120,28 +120,21 @@ Para hacer esto, necesitarás:
 2. Salir del servidor, ir al cliente y desde ahí copiar tu llave pública con el comando: `ssh-copy-id -i la_llave_publica username@ip_del_ec2`. Si el archivo no se llama `id_rsa` o se encuentra en una carpeta diferente a `.ssh` tendrás que ocupar un `-f` antes del `-i` (*force*).
 3. Una vez que hayas copiado todas las llaves de los usuarios tendremos que volver a cambiar el archivo `/etc/ssh/sshd_config` modificando únicamente la parte de `PasswordAuthentication` a `no` y volver a hacer un *restart* al servicio de `sshd`.
 
-#### Infraestructura VPC con subnets pública y privada
+#### Infraestructura que ocuparemos
 
 ¿Por qué necesitamos esta arquitectura?
 
-![](./images/pointer.png) En el pizarrón.
-
-+ ElasticIP
-+ VPC con *subnet* pública y privada
-+ Asociación de VCP con ElasticIP
-+ Configuración de *subnet* pública
-+ Creación y configuración de *security group* para la *subnet* pública
-+ Asociación de *security group* con *subnet* pública
 + Creación de Bastión
-+ Asociación de Bastión a *subnet* pública
-+ Prueba de acceso
-+ Creación y configuración de *security group* para la *subnet* privada
-+ Asociación de *security group* con *subnet* privada
+  + Creación de VPC default
+  + Configuración de *security group* con puerto 22
+  + Prueba de acceso
 + Creación de EC2 para procesamiento
-+ Asociación de EC2 a subnet privada
+  + EC2 *on-demand*
+  + EC2 *spot instance*
+  + Configuración de *security group* nuevo (sin permisos adecuados)
+  + Prueba de acceso denegado desde local
+  + Prueba de acceso a EC2 desde Bastión
 + Copiado de llave privada a Bastión
-+ Prueba de acceso a EC2 desde Bastión
-+ Prueba de acceso denegado a EC2 desde local
 
 ![](./images/pointer.png) En AWS.
 
