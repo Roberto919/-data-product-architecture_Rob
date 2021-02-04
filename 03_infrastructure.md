@@ -91,15 +91,15 @@ Este servicio de AWS nos permite crear instancias de computadoras con sistemas o
 
 + VPC *Virtual Private Cloud*: Nos permite aprovisionar un espacio lógico en la nube de AWS para que podamos poner nuestras instancias EC2 a las que solo quienes definamos tengan acceso. Cuando creas una VPC tienes que definir un rango de direcciones IP4 en la forma de un *CIDR block (Classles Inter-Domain Routing)*, por ejemplo: `10.0.0.0/16`. La primera vez que levantas "algo" en AWS se crea una VPC por *default*.
 
-+ *Subnet*: Dentro de la VPC puedes crear un rango de direcciones para poner instancias EC2 específicas. El acceso a estas subredes se determina a través de los *Inbounds* y *Outbounds*.
++ *Subnet*: Dentro de la VPC puedes crear un rango de direcciones para poner instancias EC2 específicas. El acceso a estas subredes se determina a través de las reglas *Inbounds* y *Outbounds*.
 
-+ IPs *Inbounds* y *Outbounds*: Las IPs *Inbound* indican las IPs que tienen acceso a una *subnet*, mientras que las *Outbound* indican las IPs hacia las que puede ser enviada la salida, un asterisco \* indica cualquier IP.
++ IPs *Inbounds* y *Outbounds*: Las IPs *Inbound* indican las IPs que tienen acceso a una *subnet*, mientras que las *Outbound* indican las IPs hacia las que puede ser enviada la salida, un asterisco \* significa **cualquier IP**, así como `0.0.0.0/0`.
 
 + Redes públicas y privadas: Las redes privadas tienen definidas IPs específicas que tienen acceso a los recursos dentro de ella, una VPC genera una red privada.
 
-+ *Elastic IPs*: Es una IP estática a través de la cual podemos acceder a nuestro VPC sin importar la IP interna a la VPC/Subnets. Esta IP es la misma para nosotros pero por abajo cambia dinámicamente a la instancia que se encuentre "levantada". Este tipo de IP se utiliza para asegurar que sin importar si una instancia está disponible o no, la accesibilidad a nuestra aplicación está asegurada.
++ *Elastic IPs*: Es una IP estática a través de la cual podemos acceder a nuestro VPC sin importar la IP interna a la VPC/Subnets. Esta IP es la misma para nosotros pero por abajo cambia dinámicamente a la instancia que se encuentre "levantada". Este tipo de IP se utiliza para asegurar que sin importar si una instancia está disponible o no, el acceso a nuestra aplicación está asegurada.
 
-+ AMI *Amazon Machine Image*: Máquina de Amazon que ya tienen imagenes de sistemas operativos o configuraciones específicas instaladas. Por ejemplo, existe un AMI para *deep learning* en donde ya no te tienes que pelear con instalar las librerías en las versiones correctas o configurar los *drivers* de NVIDIA, etc.
++ AMI *Amazon Machine Image*: *Snapshots* de imagenes de sistemas operativos o configuraciones específicas instaladas, tú puedes crear tu propia AMI con las cosas particulares que necesites. Por ejemplo, existe un AMI para *deep learning* en donde ya no te tienes que pelear con instalar las librerías en las versiones correctas o configurar los *drivers* de NVIDIA, etc.
 
 La arquitectura que construiremos en DPA es la siguiente:
 
