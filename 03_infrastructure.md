@@ -75,7 +75,15 @@ Nosotros nos concentraremos en algunos servicios que nos ayudarán a levantar un
 
 También ocuparemos el servicio de almacentamiento de archivos de AWS, S3 que si bien no está definido como un DFS seguramente por debajo tiene muchas de las cosas de DFS. Para interactuar de manera más sencillas con algunos de estos servicios ocuparemos el CLI (*Command Line Interface*) de AWS que puedes instalar usando  `pip install awscli` en tu ambiente `pyenv` de esta materia.
 
-Si tienes varias cuentas de AWS -tu trabajo y la escuela- puedes crear un archivo `credentials` (sin extensión) para almacenar todos los pares de `aws_access_key_id` y `aws_secret_access_key`. Este archivo se encuentra bajo el directorio `~/.aws` (este directorio se crea cuando instalas awscli). Cuando crees tu cuenta de AWS educativa tendrás que generar un par de access key de aws.
+Si tienes varias cuentas de AWS -tu trabajo y la escuela- puedes crear un archivo `credentials` (sin extensión) para almacenar todos los pares de `aws_access_key_id` y `aws_secret_access_key`. Para crear este archivo necesitas tener instalado `awscli` y poner `aws configure`, este programita te preguntará cuál es tu *access key id*, tu *secret access key*, la región y formato *default*; estos últimos 2 puedes dejarlos vacíos.
+
+![](./images/aws_configure.png)
+<br>
+Fuente: [AWS Configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+
+Esto generará el archivo `credentials` que se encuentra bajo el directorio `~/.aws` (este directorio se crea cuando instalas `awscli`).
+
+![](./images/pointer.png) Cuando creas tu cuenta de AWS educativa tendrás se generan estas llaves de *access key* y *secret access key* de aws.
 
 #### EC2
 
