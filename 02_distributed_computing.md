@@ -594,3 +594,5 @@ hdfs dfsadmin -report
 * [Hadoop](http://hadoop.apache.org/)
 * [Comandos de Hdfs](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html)
 * [HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html)
++ [Map Side Join](https://www.youtube.com/watch?v=tILEXVC95HU)
++ [Reduce Side Join](https://www.youtube.com/watch?v=ai0E4ovoA5k)
