@@ -24,7 +24,7 @@ Febrero 2021
 
 + *Tunneling*
 
-Concepto de redes, una forma de comunicación entre dos dispositivos de una forma "segura" a través de usar redes públicas consideras inseguras. Existen diferentes protocolos para poder realizar esta comunicación, uno de los más comunes es SSH (otro son las VPN).
+Concepto de redes, una forma de comunicación entre dos dispositivos de una forma "segura" a través de usar redes públicas consideras inseguras. Existen diferentes protocolos para poder realizar esta comunicación, uno de los más comunes es SSH (otro son las VPN -*Virtual Private Network*-).
 
 + SSH: *Secure Shell*
 
@@ -71,7 +71,7 @@ Acrónimo de *Amazon Web Services*, los servicios de infraestructura en la nube 
 
 AWS tiene muchos (muchos muchos!) servicios, y sigue siendo la solución de servicios de la nube más utilizada en la industria. Otros proveedores son Microsoft con Azure, Google con *Google Cloud Platform*, IBM con IBM *Cloud Services*.
 
-Nosotros nos concentraremos en algunos servicios que nos ayudarán a levantar un *cluster* con servicios de MapReduce -EMR-, y a tener un *cluster* con computadoras pequeñas que nos permitan tener una base de datos relacional -EC2, RDS respectivamente-.
+Nosotros nos concentraremos en algunos servicios que nos ayudarán a levantar un *cluster* con servicios de MapReduce -EMR (*Elastic Map Reduce*)-, y a tener un *cluster* con computadoras pequeñas que nos permitan tener una base de datos relacional -EC2, RDS (Relational Database Service) respectivamente-.
 
 También ocuparemos el servicio de almacentamiento de archivos de AWS, S3 que si bien no está definido como un DFS seguramente por debajo tiene muchas de las cosas de DFS. Para interactuar de manera más sencillas con algunos de estos servicios ocuparemos el CLI (*Command Line Interface*) de AWS que puedes instalar usando  `pip install awscli` en tu ambiente `pyenv` de esta materia.
 
@@ -81,11 +81,11 @@ Si tienes varias cuentas de AWS -tu trabajo y la escuela- puedes crear un archiv
 <br>
 Fuente: [AWS Configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
 
-Esto generará el archivo `credentials` que se encuentra bajo el directorio `~/.aws` (este directorio se crea cuando instalas `awscli`).
+Esto generará el archivo `credentials` que se encuentra bajo el directorio `~/.aws`.
 
-![](./images/pointer.png) Cuando creas tu cuenta de AWS educativa tendrás se generan estas llaves de *access key* y *secret access key* de aws.
+![](./images/pointer.png) Cuando creas tu cuenta de AWS educativa se generan estas llaves de *access key* y *secret access key* de aws.
 
-#### EC2
+#### EC2 (Elastic Cloud Computing)
 
 Este servicio de AWS nos permite crear instancias de computadoras con sistemas operativos instalados, y dependiendo de nuestras necesidades podemos escoger entre instancias optimizadas a procesamiento, a almacenamiento, a CPU, a memoria, etc. Debido a todas estas posibles combinaciones hay muchos tipos de instancias disponibles en AWS por lo que te servirá conocer los [tipos de instancia de EC2](https://aws.amazon.com/ec2/instance-types/).
 
