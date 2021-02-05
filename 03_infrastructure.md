@@ -75,6 +75,8 @@ Nosotros nos concentraremos en algunos servicios que nos ayudarán a levantar un
 
 También ocuparemos el servicio de almacentamiento de archivos de AWS, S3 que si bien no está definido como un DFS seguramente por debajo tiene muchas de las cosas de DFS. Para interactuar de manera más sencillas con algunos de estos servicios ocuparemos el CLI (*Command Line Interface*) de AWS que puedes instalar usando  `pip install awscli` en tu ambiente `pyenv` de esta materia.
 
+- Terraform y Ansible son soluciones para automatizar AWS.
+
 Si tienes varias cuentas de AWS -tu trabajo y la escuela- puedes crear un archivo `credentials` (sin extensión) para almacenar todos los pares de `aws_access_key_id` y `aws_secret_access_key`. Este archivo se encuentra bajo el directorio `~/.aws` (este directorio se crea cuando instalas awscli). Cuando crees tu cuenta de AWS educativa tendrás que generar un par de access key de aws.
 
 #### EC2
