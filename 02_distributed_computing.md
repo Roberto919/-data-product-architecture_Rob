@@ -504,6 +504,8 @@ Pasemos esto a *map* y *reduce*.
         print(word.lower() + "\t1") #mandamos a la salida la palabra separada por un tab y un 1
 ```
 
+- Ahora modificamos el código para emular el proceso de mapping (ver diagrama de arriba).
+
 **Reducer**
 
 Recuerda que al *reducer* le llegan los pares de `<llave,valor>` **ordenados!**
@@ -547,6 +549,8 @@ Ahora probemos con MapReduce! ๏◡๏
 ```
 
 ![](images/pointer.png) Ir a cluster EMR
+
+Hay que notar que nuestro proceso nunca hace el `sort` y `shuffle`.
 
 ### Ejercicios de HDFS en EMR
 
