@@ -50,7 +50,7 @@ Un script en tu carpeta `src/pipeline` que se llame `ingesta_almacenamiento.py` 
 
 + `guardar_ingesta`: Esta función recibe como parámetros el nombre de tu bucket de S3, la ruta  en el bucket en donde se guardarán los datos y el data frame que se guardará como un pickle en esa ruta.
 
-El nombre del bucket es `data-product-architecture/`
+El nombre del bucket es `data-product-architecture`
 
 #### Para la ingesta inicial
 
@@ -79,7 +79,7 @@ El límite debe ser 1,000.
 
 **Martes 23 febrero 2021 23:59:59 CST**
 
-+ Actualizar el `REAMDE.md` para incluir:
++ Actualizar el `README.md` para incluir:
   + Información sobre versión de python y cómo instalar su `requirements.txt`.
   + Información de dónde está su EDA.
   + Información de cómo funciona su proceso de ingestión (resumen).
