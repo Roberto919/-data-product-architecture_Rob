@@ -77,7 +77,7 @@ El límite debe ser 1,000.
 
 ### Fecha revisión
 
-**Martes 23 febrero 2020 23:59:59 CST**
+**Martes 23 febrero 2021 23:59:59 CST**
 
 + Actualizar el `REAMDE.md` para incluir:
   + Información sobre versión de python y cómo instalar su `requirements.txt`.
