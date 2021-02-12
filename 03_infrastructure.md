@@ -107,7 +107,7 @@ La arquitectura que construiremos en DPA es la siguiente:
 
 [Pasos](https://www.cyberciti.biz/faq/create-a-user-account-on-ubuntu-linux/)
 
-1. Como usuario `ubuntu` crea los usuarios de cada miembro del equipo.  
+1. Como usuario `ubuntu` crea los usuarios de cada miembro del equipo.
 2. Crea cada usuario a través del comando `sudo adduser username`, conforme se crea el usuario ubuntu te pedirá un password **no** olvides ese password! cada usuario lo necesitará para conectarse al bastión. Entre los datos que te pedirá para el usuario está el nombre y otros datos particulares, no ingreses ninguno.
 
 Para corroborar que el usuario fue creado puedes cambiar de usuario de  `ubuntu` al recién creado utilizando `sudo su username`.
@@ -120,6 +120,7 @@ Para hacer esto, necesitarás:
 
 1. Modificar en la instancia EC2 de Bastión, el archivo `/etc/ssh/sshd_config` para poner el atributo `PubkeyAuthentication` en `yes` -seguramente tendrás que descomentar esa línea-, modificar la opción de `PasswordAuthentication` a `yes`. Hay que hacer un *restart* del servicio de `sshd` para que el cambio se tome en cuenta utilizando el comando `sudo service sshd restart`.
 2. Salir del servidor, ir al cliente y desde ahí copiar tu llave pública con el comando: `ssh-copy-id -i la_llave_publica username@ip_del_ec2`. Si el archivo no se llama `id_rsa` o se encuentra en una carpeta diferente a `.ssh` tendrás que ocupar un `-f` antes del `-i` (*force*).
+   - Si este paso funciona el mensaje de salida será "copy keys" (o algo así).
 3. Una vez que hayas copiado todas las llaves de los usuarios tendremos que volver a cambiar el archivo `/etc/ssh/sshd_config` modificando únicamente la parte de `PasswordAuthentication` a `no` y volver a hacer un *restart* al servicio de `sshd`.
 
 #### Infraestructura que ocuparemos
