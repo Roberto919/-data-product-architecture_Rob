@@ -50,7 +50,7 @@ Un script en tu carpeta `src/pipeline` que se llame `ingesta_almacenamiento.py` 
 
 + `guardar_ingesta`: Esta función recibe como parámetros el nombre de tu bucket de S3, la ruta  en el bucket en donde se guardarán los datos y el data frame que se guardará como un pickle en esa ruta.
 
-El nombre del bucket es `data-product-architecture`
+El nombre del bucket es `data-product-architecture-equipo-n`
 
 #### Para la ingesta inicial
 
