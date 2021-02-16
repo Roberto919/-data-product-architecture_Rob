@@ -146,6 +146,27 @@ Para hacer esto, necesitarás:
 
 ![](./images/pointer.png) En AWS.
 
+### AWS a través de Python
+
+#### Boto3
+
+Es la librería de Python que nos permite interactuar de manera programática con AWS, es decir, podemos crear scripts de python que nos permitan conectarnos a diferentes servicios de AWS.
+
+Para instalar boto hay que ocupar pip `pip install boto3`, recuerda instalarlo en tu ambiente de la clase!! (`pyenv`).
+
+Para poder acceder de forma programática a AWS requeriremos también de tener un IAM *user* de AWS y roles o permisos asociados a este usuario, estos roles estará determinados por los servicios a los que accederemos a través de boto. Por ejemplo, si almacenarás los datos de tu ingestión en un *bucket* de S3, entonces tendrás que darle acceso a tu usuario IAM al permiso `AmazonS3FullAccess`.
+
+**Configuración**
+
+Para ocupar boto3 necesitarás tener tu archivo de `.aws/credentials` en donde tengas los `aws_access_key_id` y `aws_secret_access_key` asociados a tu usuario IAM.
+
+En boto hay 2 tipos de objetos base: `client` y `resource`. El objeto `client` nos permite tener un acceso de más bajo nivel y su interaccion es casi siempre a través de diccionarios o jsons. El objeto `resource` es de más alto nivel y por lo tanto más sencillo de interactuar con él, sin embargo muchas operaciones básicas son más sencillas de hacer a través del objeto `client`.
+
+En nuestro caso ocuparemos el objeto `resource` para las interacciones más generales con el *bucket* y luego ocuparemos `cliente` para gestionar el contenido del *bucket*. Para tener un `client` a partir de un `resource` se necesita acceder a los metadatos: `resource_object.meta.client.metodo_de_elección`.
+
+![](./images/pointer.png) Ir a `scripts/aws.ipynb`.
+
+
 ### CI/CD
 
 Conceptos as asociados a procesos de desarrollo de software.
