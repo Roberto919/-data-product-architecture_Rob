@@ -106,6 +106,15 @@ La arquitectura que construiremos en DPA es la siguiente:
 ![](./images/ec2_security_groups.png)
 <br>
 
+```markdown
+**Rob notes**
+- RDS
+	- Es para crear la base de datos relacional.
+	- Vamos a trabajar con Posgres.
+```
+
+
+
 ![](./images/ec2_architecture.png)
 <br>
 
@@ -151,7 +160,7 @@ Para hacer esto, necesitarás:
 
 Conceptos as asociados a procesos de desarrollo de software.
 
-+ *Continuous Integration* CI: Asociados a procesos con metodologías ágiles en dónde los cambios desarrollados se integran a la rama principal (`master`) frecuentemente. El pincipio es evitar esperar hasta 1 día antes (u horas antes) para que todos integren los cambios y luego se libere a producción <- eso es un infierno y no funciona! las integraciones nunca son correctas, alguien siempre la cajetea en algún lado.
++ *Continuous Integration* CI: Asociados a procesos con metodologías ágiles en dónde los cambios desarrollados se integran a la rama principal (`master`) frecuentemente. El principio es evitar esperar hasta 1 día antes (u horas antes) para que todos integren los cambios y luego se libere a producción <- eso es un infierno y no funciona! las integraciones nunca son correctas, alguien siempre la cajetea en algún lado.
 
 Para evitar esto, CI pone mucho énfasis en hacer pruebas unitarias, pruebas de integración, pruebas funcionales, etc. y todas son **automatizadas** para identificar que cuando se integra algo, nada se rompe, o más bien identificar rápidamente qué se rompe cuando integramos o subimos cambios.   
 
