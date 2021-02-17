@@ -48,20 +48,20 @@ Un script en tu carpeta `src/pipeline` que se llame `ingesta_almacenamiento.py` 
 
 + `get_s3_resource`: Esta función regresa un resource de S3 para poder guardar datos en el bucket (checar script de `aws_boto_s3`).
 
-+ `guardar_ingesta`: Esta función recibe como parámetros el nombre de tu bucket de S3, la ruta  en el bucket en donde se guardarán los datos y el data frame que se guardará como un pickle en esa ruta.
++ `guardar_ingesta`: Esta función recibe como parámetros el nombre de tu bucket de S3, la ruta  en el bucket en donde se guardarán los datos y los datos ingestados en csv.
 
-El nombre del bucket es `data-product-architecture/`
+El nombre del bucket es `data-product-architecture-equipo-n`
 
 #### Para la ingesta inicial
 
-La ruta del bucket es: `ingestion/initial/historic-inspections-2020-02-02.pkl`
+La ruta del bucket es: `ingestion/initial/historic-inspections-2020-02-02.csv`
 
-![](./images/pointer.png) Necesitarás cambiar el `2020-02-02.pkl` por la fecha en la que hiciste la consulta inicial a la API de manera dinámica, leer la siguiente parte.
+![](./images/pointer.png) Necesitarás cambiar el `2020-02-02.csv` por la fecha en la que hiciste la consulta inicial a la API de manera dinámica, leer la siguiente parte.
 
 #### Para la ingesta consecutiva
 
 La ruta del bucket es:
-`ingestion/consecutive/consecutive-inspections-2020-11-03.pkl`
+`ingestion/consecutive/consecutive-inspections-2020-11-03.csv`
 
 El **sufijo** de los archivos que se almacenan en el bucket debe llevar la fecha del día en la que se hizo la ingestión, se debe obtener de manera dinámica a través de la función `today` del paquete `datetime.time`
 
@@ -79,7 +79,7 @@ El límite debe ser 1,000.
 
 **Martes 23 febrero 2021 23:59:59 CST**
 
-+ Actualizar el `REAMDE.md` para incluir:
++ Actualizar el `README.md` para incluir:
   + Información sobre versión de python y cómo instalar su `requirements.txt`.
   + Información de dónde está su EDA.
   + Información de cómo funciona su proceso de ingestión (resumen).

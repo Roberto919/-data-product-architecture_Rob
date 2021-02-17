@@ -156,16 +156,37 @@ Para hacer esto, necesitarás:
 
 ![](./images/pointer.png) En AWS.
 
+### AWS a través de Python
+
+#### Boto3
+
+Es la librería de Python que nos permite interactuar de manera programática con AWS, es decir, podemos crear scripts de python que nos permitan conectarnos a diferentes servicios de AWS.
+
+Para instalar boto hay que ocupar pip `pip install boto3`, recuerda instalarlo en tu ambiente de la clase!! (`pyenv`).
+
+Para poder acceder de forma programática a AWS requeriremos también de tener un IAM *user* de AWS y roles o permisos asociados a este usuario, estos roles estará determinados por los servicios a los que accederemos a través de boto. Por ejemplo, si almacenarás los datos de tu ingestión en un *bucket* de S3, entonces tendrás que darle acceso a tu usuario IAM al permiso `AmazonS3FullAccess`.
+
+**Configuración**
+
+Para ocupar boto3 necesitarás tener tu archivo de `.aws/credentials` en donde tengas los `aws_access_key_id` y `aws_secret_access_key` asociados a tu usuario IAM.
+
+En boto hay 2 tipos de objetos base: `client` y `resource`. El objeto `client` nos permite tener un acceso de más bajo nivel y su interaccion es casi siempre a través de diccionarios o jsons. El objeto `resource` es de más alto nivel y por lo tanto más sencillo de interactuar con él, sin embargo muchas operaciones básicas son más sencillas de hacer a través del objeto `client`.
+
+En nuestro caso ocuparemos el objeto `resource` para las interacciones más generales con el *bucket* y luego ocuparemos `cliente` para gestionar el contenido del *bucket*. Para tener un `client` a partir de un `resource` se necesita acceder a los metadatos: `resource_object.meta.client.metodo_de_elección`.
+
+![](./images/pointer.png) Ir a `scripts/aws.ipynb`.
+
+
 ### CI/CD
 
-Conceptos as asociados a procesos de desarrollo de software.
+Conceptos asociados a procesos de desarrollo de software.
 
-+ *Continuous Integration* CI: Asociados a procesos con metodologías ágiles en dónde los cambios desarrollados se integran a la rama principal (`master`) frecuentemente. El principio es evitar esperar hasta 1 día antes (u horas antes) para que todos integren los cambios y luego se libere a producción <- eso es un infierno y no funciona! las integraciones nunca son correctas, alguien siempre la cajetea en algún lado.
++ *Continuous Integration* CI: Asociados a procesos con metodologías ágiles en dónde los cambios desarrollados se integran a la rama principal (`master`) frecuentemente. El principio es evitar esperar hasta un día antes (u horas antes) para que todos integren los cambios y luego se libere a producción <- eso es un infierno y no funciona! las integraciones nunca son correctas, alguien siempre la cajetea en algún lado.
 
-Para evitar esto, CI pone mucho énfasis en hacer pruebas unitarias, pruebas de integración, pruebas funcionales, etc. y todas son **automatizadas** para identificar que cuando se integra algo, nada se rompe, o más bien identificar rápidamente qué se rompe cuando integramos o subimos cambios.   
+Para evitar esto, CI pone mucho énfasis en hacer pruebas unitarias, pruebas de integración, pruebas funcionales, etc. Todas son **automatizadas** con el objetivo de identificar rápidamente qué se rompe cuando integramos o subimos cambios.   
 
 
-+ *Continuous Delivery* CD: Es como la segunda fase del CI, pues una vez que podemos integrar cambios frecuentemente y de manera rápida, también queremos que estos cambios lleguen lo más rápido posible a nuestros clientes -¡siempre asegurando calidad!- de manera sustentable! (no queremos desvelarnos continuamente para que las liberaciones a producción salgan bien... eso no es sustentable).
++ *Continuous Delivery* CD: Puede pensarse como la segunda fase del CI, pues una vez que podemos integrar cambios frecuentemente y de manera rápida, también queremos que estos cambios lleguen lo más rápido posible a nuestros clientes -¡siempre asegurando calidad!- de manera sustentable! (no queremos desvelarnos continuamente para que las liberaciones a producción salgan bien... eso no es sustentable).
 
 Este proceso implica que además de pruebas automatizadas, tengamos que tener el proceso de liberación automatizado por lo que podemos hacer *deploy* de la "aplicación" en cualquier momento, cualquier día con solo apretar un botón.
 
@@ -175,7 +196,7 @@ Este proceso implica que además de pruebas automatizadas, tengamos que tener el
 <br>
 Fuente: [CodeMaze](https://code-maze.com/what-is-continuous-integration/)
 
-![](./docs/images/dev_ops.png)
+![](./images/dev_ops.png)
 <br>
 Fuente: [AWS blogs](https://aws.amazon.com/devops/what-is-devops/)
 
@@ -196,9 +217,9 @@ Existen herramientas que nos permiten controlar estos procesos:
 + [Ansible](https://www.ansible.com/): Plataforma de gestión de infraestructura
 + [Terraform](https://www.terraform.io/): Plataforma de gestión de infraestructura.
 
-Amabas plataformas nos permiten crear, cambiar y administrar infraestructura de manera automatizada a través de *scripts*. Nosotros definimos el plan de ejecución para el despliegue de la infraestructura en los *scripts*, y luego se ejecuta.
+Las últimas dos plataformas nos permiten crear, cambiar y administrar infraestructura de manera automatizada a través de *scripts*. Nosotros definimos el plan de ejecución para el despliegue de la infraestructura en los *scripts*, y luego se ejecuta.
 
-Estas 2 herramientas están hechas específicamente para trabajar infraestructura de a nube (AWS).
+Estas 2 herramientas están hechas específicamente para trabajar infraestructura de la nube (por ejemplo AWS).
 
 ![](./docs/images/filosoraptor.jpg) ¿Qué crees que sea entonces MLOps?
 
@@ -206,6 +227,7 @@ Estas 2 herramientas están hechas específicamente para trabajar infraestructur
 
 + [ParallelM](https://www.parallelm.com/): Cuesta.  
 + [Pachyderm](https://www.pachyderm.com/)\*: Versión gratis y versión *enterprise*.
++ [MLFlow](https://mlflow.org/): Open Source.
 
 ### Referencias, ligas de interés
 
