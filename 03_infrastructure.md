@@ -186,7 +186,7 @@ Este proceso implica que además de pruebas automatizadas, tengamos que tener el
 <br>
 Fuente: [CodeMaze](https://code-maze.com/what-is-continuous-integration/)
 
-![](./docs/images/dev_ops.png)
+![](./images/dev_ops.png)
 <br>
 Fuente: [AWS blogs](https://aws.amazon.com/devops/what-is-devops/)
 
