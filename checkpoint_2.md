@@ -96,3 +96,7 @@ El límite debe ser 1,000.
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrry88D1cPQEDtNC5F5r9NntP3uwsw/FkVvsu3G84C8H+Ojpii1+uyOEmVpyXcP9Myx2w8kUFDbTPxwmTCm4WFQK4njg7IpF31Fvf6+sexFMV1RuDgRCmEQlKo20lfaWTd/fmuEYu30FOXoMGYw/G1RzM6hTLMiorOIGZwEGruZDhQSCZ64fk3Clzwfk4ShBeJUN/8REFOO0gbCm1XSdO+dqJFhc9fpFT163XMWuEsB4Z2YySbgW6+2jTvIRUcfVIMTFexLbSfwbGoYyVusdtgzmHNNNsnPP3jHIPMRe3WSyQEUpUOtrpvGlx1bxsumpNQOgIwomgTnq5aC6m9hE/CsHASbB+SDUm3Q1iK2SI1lPd7ArU/Bpdvh7Ld8marNGPZiy+oke8Z/lwURIuCvI3jPGsnLec+q1uAYuqdk1bVHjJAoA4LFyzkggvyral09wveop8BluXtHfEBNakp9n48pGbVkwZkopmPXu1u/wjTtNzb41vrI3JVGwJ7OJgWXoE= silil@turing
 ```
+
+**Just in case** Pickle:
+
+![](./images/pickle.png)
