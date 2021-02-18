@@ -46,7 +46,7 @@ Un script en tu carpeta `src/pipeline` que se llame `ingesta_almacenamiento.py` 
 
 + `ingesta_inicial`: Esta función recibe como parámetros el cliente con el que nos podemos comunicar con la API, y el límite de registros que queremos obtener al llamar a la API. Regresa una lista de los elementos que la API regresó.
 
-+ `get_s3_resource`: Esta función regresa un resource de S3 para poder guardar datos en el bucket (checar script de `aws_boto_s3`).
++ `get_s3_resource`: Esta función regresa un resource de S3 para poder guardar datos en el bucket (checar script de `aws_s3`).
 
 + `guardar_ingesta`: Esta función recibe como parámetros el nombre de tu bucket de S3, la ruta  en el bucket en donde se guardarán los datos y los datos ingestados en pkl.
 
@@ -69,6 +69,7 @@ El **sufijo** de los archivos que se almacenan en el bucket debe llevar la fecha
 
 El límite debe ser 1,000.
 
+![](./images/checkpoint_2.png)
 
 ![](./images/pointer.png) Tendrás que conectarte a la API de Food Inspections y bajar los datos:
   + La primera vez que bajes los datos será histórico, todos los que existan.
