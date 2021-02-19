@@ -29,7 +29,7 @@ Febrero 2021
 -   Eficiencia en compresión -por naturalieza-, es posible definir el nivel de compresión por columna.
 -   Diseñado para soportar estructuras de datos complejas: mapas, arreglos, etc.
 -   Guarda los metadatos del archivo al final del mismo.
--   Puede leer y escribir con los API de avro ＼(＾O＾)／.
+-   Puede leer y escribir con los API de avro ＼(＾O＾)／. 
 -   Utiliza un *encoding* de esquema eficiente.
 -   Soporta tipos de datos primitivos, lógicos y *nested*.
 -   Al igual que avro, es *compressible* y *splittable*, características importantes en sistemas de archivos distribuidos ya que son más eficientes en tareas de *MapReduce*.

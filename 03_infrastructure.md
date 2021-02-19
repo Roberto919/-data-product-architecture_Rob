@@ -182,15 +182,31 @@ En nuestro caso ocuparemos el objeto `resource` para las interacciones más gene
 Conceptos asociados a procesos de desarrollo de software.
 
 + *Continuous Integration* CI: Asociados a procesos con metodologías ágiles en dónde los cambios desarrollados se integran a la rama principal (`master`) frecuentemente. El principio es evitar esperar hasta un día antes (u horas antes) para que todos integren los cambios y luego se libere a producción <- eso es un infierno y no funciona! las integraciones nunca son correctas, alguien siempre la cajetea en algún lado.
+```
+## Rob notes
+- Las pruebas unitarias están más asociadas a los datos que a funcionalidades.
+- Por ejemplo, puede cambiar mucho la distribución de los datos y nuestro modelo puede no funcionar tan bien.
+```
 
 Para evitar esto, CI pone mucho énfasis en hacer pruebas unitarias, pruebas de integración, pruebas funcionales, etc. Todas son **automatizadas** con el objetivo de identificar rápidamente qué se rompe cuando integramos o subimos cambios.   
 
 
 + *Continuous Delivery* CD: Puede pensarse como la segunda fase del CI, pues una vez que podemos integrar cambios frecuentemente y de manera rápida, también queremos que estos cambios lleguen lo más rápido posible a nuestros clientes -¡siempre asegurando calidad!- de manera sustentable! (no queremos desvelarnos continuamente para que las liberaciones a producción salgan bien... eso no es sustentable).
+```
+## Rob notes
+- Son pruebas de calidad para asegurarnos de que no se rompe nada antes de sacar a producción
+- Lo importante es hacer cambios de forma ágil.
+- Al final sí hay alguién que da el visto bueno.
+```
 
 Este proceso implica que además de pruebas automatizadas, tengamos que tener el proceso de liberación automatizado por lo que podemos hacer *deploy* de la "aplicación" en cualquier momento, cualquier día con solo apretar un botón.
 
 + *Continuous Deployment (DevOps)*: El siguiente paso de CD, resulta que no queremos apretar un botón, queremos que todo se libere a producción (hacer *deploy*) sin intervención de un humano. Para esta fase, todas las pruebas que se desarrollan son los únicos filtros para no liberar algo a producción con efecto inmediato a los clientes. (*^▽^*)
+```
+## Rob notes
+- La idea es desarrollar todo sin la intervención de un humano.
+- A diferencia de CD es que aquí se automatiza todo.
+```
 
 ![](./images/CI_CD.png)
 <br>
@@ -199,6 +215,12 @@ Fuente: [CodeMaze](https://code-maze.com/what-is-continuous-integration/)
 ![](./images/dev_ops.png)
 <br>
 Fuente: [AWS blogs](https://aws.amazon.com/devops/what-is-devops/)
+
+```
+## Rob notes
+- Lo que hemos estado haciendo hasta ahora no se parece nada a CI/CD.
+- La idea es que automaticemos la creación de nuetros usuarios, configuración, etc.
+```
 
 Lo que nosotros hicimos de levantar una instancia, generar usuarios en la instancia, pasar llaves para que estos usuarios pudieran entrar a la instancia ... se debería hacer de manera automatizada.
 
@@ -226,7 +248,7 @@ Estas 2 herramientas están hechas específicamente para trabajar infraestructur
 #### Herramientas de MLOps
 
 + [ParallelM](https://www.parallelm.com/): Cuesta.  
-+ [Pachyderm](https://www.pachyderm.com/)\*: Versión gratis y versión *enterprise*.
++ [Pachyderm](https://www.pachyderm.com/): Versión gratis y versión *enterprise*.
 + [MLFlow](https://mlflow.org/): Open Source.
 
 ### Referencias, ligas de interés
