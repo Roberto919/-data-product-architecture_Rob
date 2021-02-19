@@ -46,22 +46,22 @@ Un script en tu carpeta `src/pipeline` que se llame `ingesta_almacenamiento.py` 
 
 + `ingesta_inicial`: Esta función recibe como parámetros el cliente con el que nos podemos comunicar con la API, y el límite de registros que queremos obtener al llamar a la API. Regresa una lista de los elementos que la API regresó.
 
-+ `get_s3_resource`: Esta función regresa un resource de S3 para poder guardar datos en el bucket (checar script de `aws_boto_s3`).
++ `get_s3_resource`: Esta función regresa un resource de S3 para poder guardar datos en el bucket (checar script de `aws_s3`).
 
-+ `guardar_ingesta`: Esta función recibe como parámetros el nombre de tu bucket de S3, la ruta  en el bucket en donde se guardarán los datos y los datos ingestados en csv.
++ `guardar_ingesta`: Esta función recibe como parámetros el nombre de tu bucket de S3, la ruta  en el bucket en donde se guardarán los datos y los datos ingestados en pkl.
 
 El nombre del bucket es `data-product-architecture-equipo-n`
 
 #### Para la ingesta inicial
 
-La ruta del bucket es: `ingestion/initial/historic-inspections-2020-02-02.csv`
+La ruta del bucket es: `ingestion/initial/historic-inspections-2020-02-02.pkl`
 
-![](./images/pointer.png) Necesitarás cambiar el `2020-02-02.csv` por la fecha en la que hiciste la consulta inicial a la API de manera dinámica, leer la siguiente parte.
+![](./images/pointer.png) Necesitarás cambiar el `2020-02-02.pkl` por la fecha en la que hiciste la consulta inicial a la API de manera dinámica, leer la siguiente parte.
 
 #### Para la ingesta consecutiva
 
 La ruta del bucket es:
-`ingestion/consecutive/consecutive-inspections-2020-11-03.csv`
+`ingestion/consecutive/consecutive-inspections-2020-11-03.pkl`
 
 El **sufijo** de los archivos que se almacenan en el bucket debe llevar la fecha del día en la que se hizo la ingestión, se debe obtener de manera dinámica a través de la función `today` del paquete `datetime.time`
 
@@ -69,6 +69,7 @@ El **sufijo** de los archivos que se almacenan en el bucket debe llevar la fecha
 
 El límite debe ser 1,000.
 
+![](./images/checkpoint_2.png)
 
 ![](./images/pointer.png) Tendrás que conectarte a la API de Food Inspections y bajar los datos:
   + La primera vez que bajes los datos será histórico, todos los que existan.
@@ -95,3 +96,7 @@ El límite debe ser 1,000.
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrry88D1cPQEDtNC5F5r9NntP3uwsw/FkVvsu3G84C8H+Ojpii1+uyOEmVpyXcP9Myx2w8kUFDbTPxwmTCm4WFQK4njg7IpF31Fvf6+sexFMV1RuDgRCmEQlKo20lfaWTd/fmuEYu30FOXoMGYw/G1RzM6hTLMiorOIGZwEGruZDhQSCZ64fk3Clzwfk4ShBeJUN/8REFOO0gbCm1XSdO+dqJFhc9fpFT163XMWuEsB4Z2YySbgW6+2jTvIRUcfVIMTFexLbSfwbGoYyVusdtgzmHNNNsnPP3jHIPMRe3WSyQEUpUOtrpvGlx1bxsumpNQOgIwomgTnq5aC6m9hE/CsHASbB+SDUm3Q1iK2SI1lPd7ArU/Bpdvh7Ld8marNGPZiy+oke8Z/lwURIuCvI3jPGsnLec+q1uAYuqdk1bVHjJAoA4LFyzkggvyral09wveop8BluXtHfEBNakp9n48pGbVkwZkopmPXu1u/wjTtNzb41vrI3JVGwJ7OJgWXoE= silil@turing
 ```
+
+**Just in case** Pickle:
+
+![](./images/pickle.png)
