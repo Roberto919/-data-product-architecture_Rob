@@ -24,7 +24,7 @@ Existen varios orquestadores, cada uno con sus respectivas ventajas y desventaja
 
 Acrónimo de *Directed Acyclic Graph*, un grafo acíclico dirigido. Esta estructura de datos conformada por vértices -nodos- y aristas -arcos. Cada arco nodo representa una tarea a ejecutar - *task*- y cada arco la dirección de flujo. No está permitido tener ciclos, más adelante quedará claro el por qué (espero).
 
- nos permite organizar cómo los diferentes *tasks* de nuestro *data pipeline* correrán. Cada nodo es un *task* y cada arista la dirección que debe seguir el flujo de procesamiento.
+Un DAG nos permite organizar cómo los diferentes *tasks* de nuestro *data pipeline* correrán. Cada nodo es un *task* y cada arista la dirección que debe seguir el flujo de procesamiento.
 
 Dado que en un DAG *no* hay ciclos, es posible determinar sin ambigüedad qué forma la entrada a un *task*, qué la salida, **qué ya fue procesado y qué no**.
 
@@ -49,7 +49,9 @@ Fuente: [What is an acyclic graph](https://medium.com/kriptapp/guide-what-is-dir
 
 Así se ve el DAG de un *data pipeline* orquestado en Luigi:
 
-
+![](./images/luigi_dag.png)
+<br>
+Fuente: https://stackoverflow.com/questions/48670553/luigi-parallel-branches
 
 ![](./images/pointer.png) ¿Un árbol es un DAG?
 
