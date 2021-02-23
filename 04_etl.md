@@ -133,9 +133,9 @@ Normalmente los archivos en HDFS son almacenados en formato comprimido -recordem
 
 -   **LZO:** También está optimizado para hacer compresiones rápidas con un nivel de compresión razonable, a diferencia de `snappy`, este formato si es *splittable*. Su desventaja es que no viene como parte de la distribución de Hadoop por lo que hay que hacer otra instalación :(. Formato recomendado para archivos de texto plano.
 
--   **GZip:** Provee muy buen nivel de compresión a costa de la velocidad de compresión -2.5 veces lo que tarde Snappy, pero casi reduce a la mitad de lo de snappy-. Es igual de bueno en desempeño de lecturas sobre Hadoop pero al igual que snappy no es *splittable* por lo que requiere de ocuparse con algún formato que lo sea -avro, parquet-
+-   **GZip:** Provee muy buen nivel de compresión a costa de la velocidad de compresión -2.5 veces lo que tarde Snappy, pero casi reduce a la mitad de lo de snappy-. Es igual de bueno en desempeño de lecturas sobre Hadoop pero al igual que snappy no es *splittable* por lo que requiere de ocuparse con algún formato que lo sea -avro, parquet-.
 
--   **bzip2:** Provee un nivel de compresión excelente -9% mejor que GZip- pero es mucho más lento que cualquier otro formato, además de que en desempeño de lectura/escritura ya que en promedio puede tardar 10 veces más que Gzip. Este formato es *splittable* sin embargo no es recomendado para ocuparse en Hadoop por el performance mencionado, se recomienda ocupar solo si es necesario reducir el espacio ocupado en hadoop $\rightarrow$ eso solo ocurriría si se ocupa Hadoop como simple almacenador de datos.
+-   **bzip2:** Provee un nivel de compresión excelente -9% mejor que GZip- pero es mucho más lento que cualquier otro formato, en promedio puede tardar 10 veces más que Gzip. Este formato es *splittable* sin embargo no es recomendado para ocuparse en Hadoop por el performance mencionado, se recomienda ocupar solo si es necesario reducir el espacio ocupado en hadoop -> eso solo ocurriría si se ocupa Hadoop como simple almacenador de datos.
 
 -   Si utilizamos avro y/o parquet haremos que cualquier formato de compresión se haga *splittable* ＼(＾O＾)／.
 
@@ -150,7 +150,7 @@ En sus productos de datos, la parte de **extracción** estará asociada a ingest
 
 Por ejemplo, para los datos de NYC 311 existe el [API](https://dev.socrata.com/foundry/data.cityofnewyork.us/erm2-nwe9) desde donde se pueden hacer solicitudes para bajar sus datos de forma diaria, incluso se incluye el *snippet* de código asociado en diferentes lenguajes.
 
-La parte de **transfomración** está asociada a los cambios que se les tienen que hacer a estos datos para que después puedan ser ocupados por otros (aplicaciones, servicios, scripts, otras personas, etc.). Estas transformaciones están más relacionadas a transformaciones de tipos de datos, formatos, estructura; que a transformción de datos para la parte de modelado.
+La parte de **transformación** está asociada a los cambios que se les tienen que hacer a estos datos para que después puedan ser ocupados por otros (aplicaciones, servicios, scripts, otras personas, etc.). Estas transformaciones están más relacionadas a transformaciones de tipos de datos, formatos, estructura; que a transformción de datos para la parte de modelado.
 
 Finalmente la parte de **cargado** está relacionada a tener los datos ordenados y estructurados en algún lugar para que todos los demás los puedan ocupar, generalmente esta parte está asociada a alamcenar los datos en bases de datos, sin embargo, en productos de datos pueden estar asociados a *DataLakes*, bases de datos no estructuradas, servicios de almacenamiento en la nube, servidios de DFS, etc.
 
@@ -182,24 +182,3 @@ Nuestro producto estará asociado a poder priorizar los lugares que requerirán 
 + ¿Dónde guardaremos los datos?
 + ¿En qué formato?
 + ¿Los transformamos antes de guardarlos?
-
-
-### AWS a través de Python
-
-#### Boto3
-
-Es la librería de Python que nos permite interactuar de manera programática con AWS, es decir, podemos crear scripts de python que nos permitan conectarnos a diferentes servicios de AWS.
-
-Para instalar boto hay que ocupar pip `pip install boto3`, recuerda instalarlo en tu ambiente de la clase!! (`pyenv`).
-
-Para poder acceder de forma programática a AWS requeriremos también de tener un IAM *user* de AWS y roles o permisos asociados a este usuario, estos roles estará determinados por los servicios a los que accederemos a través de boto. Por ejemplo, si almacenarás los datos de tu ingestión en un *bucket* de S3, entonces tendrás que darle acceso a tu usuario IAM al permiso `AmazonS3FullAccess`.
-
-**Configuración**
-
-Para ocupar boto3 necesitarás tener tu archivo de `.aws/credentials` en donde tengas los `aws_access_key_id` y `aws_secret_access_key` asociados a tu usuario IAM.
-
-En boto hay 2 tipos de objetos base: `client` y `resource`. El objeto `client` nos permite tener un acceso de más bajo nivel y su interaccion es casi siempre a través de diccionarios o jsons. El objeto `resource` es de más alto nivel y por lo tanto más sencillo de interactuar con él, sin embargo muchas operaciones básicas son más sencillas de hacer a través del objeto `client`.
-
-En nuestro caso ocuparemos el objeto `resource` para las interacciones más generales con el *bucket* y luego ocuparemos `cliente` para gestionar el contenido del *bucket*. Para tener un `client` a partir de un `resource` se necesita acceder a los metadatos: `resource_object.meta.client.metodo_de_elección`.
-
-![](./images/pointer.png) Ir a `scripts/aws.ipynb`.
