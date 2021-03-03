@@ -137,3 +137,6 @@ dmypy.json
 .doc
 .xlsx
 *credentials
+
+## Pycharm
+.idea/
