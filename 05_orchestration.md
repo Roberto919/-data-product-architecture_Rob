@@ -220,6 +220,7 @@ Podemos correr procesos de Luigi de 2 maneras:
 ## Rob notes
 - IMPORTANTE: checar lo del python path.
   - export PYTHONPATH=$PWD
+  - (Todavía hay un poco de duda del lugar donde calibarar el PYTHONPATH)
 - Lo de --local-scheduler hace que no se abra el diagrama.
 - Podemos tener problemas con los archivos nombrados con guión bajo "_"
 ```
