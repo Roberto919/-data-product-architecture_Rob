@@ -21,6 +21,8 @@ Febrero 2021
 
 
 -   Proyecto de Apache.
+    
+
 -   **Formato columnar preferido para manejar set de datos de gran escala**:
     -   Funciona mejor para *queries* que solo requieren un pequeño subconjunto del total de columnas de una tabla -de no ser así es mejor ocupar el formato por renglón tradicional-.
     -   No tiene que hacer la decompresión y I/O de columnas que no forman parte del *query*.
@@ -141,6 +143,11 @@ Normalmente los archivos en HDFS son almacenados en formato comprimido -recordem
 
 Se recomienda tener un solo formato de archivo en el cluster, y la recomendación incluye ocupar uno que permita guardar esquema, eso solo nos deja avro o parquet. Es posible leer y escribir parquet desde los API de avro, pero no es tan sencillo de parquet a avro.
 
+```
+## Rob notes
+- Diferentes tipos de compresión para sistemas distribuidos.
+```
+
 
 ### ETL
 
@@ -180,5 +187,11 @@ Nuestro producto estará asociado a poder priorizar los lugares que requerirán 
 + ¿Cada cuánto ingestaremos los datos?
 + ¿Cómo ingestaremos los datos?
 + ¿Dónde guardaremos los datos?
-+ ¿En qué formato?
++ ¿En qué formato? ## Ahorita los estamos guardando 
 + ¿Los transformamos antes de guardarlos?
+
+```
+## Rob notes
+- Lo que se guarda en las bases de datos es tanto la ingesta inicial como las consecutivas.
+    - Debemos ir agregando nuevos renglones  
+```

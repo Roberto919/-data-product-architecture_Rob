@@ -28,6 +28,14 @@ Un DAG nos permite organizar cómo los diferentes *tasks* de nuestro *data pipel
 
 Dado que en un DAG *no* hay ciclos, es posible determinar sin ambigüedad qué forma la entrada a un *task*, qué la salida, **qué ya fue procesado y qué no**.
 
+```
+## Rob notes
+- Evitemos los ciclos para definir claramente cuanedo acaba el proceso.
+- De esta forma podemos ver qué tarea es la que se queda atorada.
+- Los orquestadores deben ser DAGs.
+- Importante siempre mandar la metadata
+```
+
 ![](./images/dag.png)
 <br>
 Fuente: [What is an acyclic graph](https://medium.com/kriptapp/guide-what-is-directed-acyclic-graph-364c04662609)
@@ -37,6 +45,14 @@ Fuente: [What is an acyclic graph](https://medium.com/kriptapp/guide-what-is-dir
 + **Idempotencia:** Cuando corremos un proceso muchas veces con los mismos parámetros debemos obtener la misma salida, sin excepción. También implica que no queremos generar salidas repetidas.
 
 + **Dirección:** El grafo tiene una dirección en un solo sentido.
+```
+## Rob notes
+- Ya que corres una vez, no tienes que volver a descargar los datos.
+- Lo que hace Luigi
+  - Luigi tiene el servidor
+  - También administra recursos según el número de nodos que le asignas.
+- Vamos a estar evaluando con pruebas de calidad de datos.
+```
 
 + **Acíclico:** La salida de un nodo no puede regresar a uno que ya fue procesado.
 
@@ -81,6 +97,11 @@ Fuente: https://stackoverflow.com/questions/48670553/luigi-parallel-branches
   + Enfocado a procesamiento en *batch*, Luigi **no** está hecho para procesamiento en *streaming* (o tiempo real)
   + No tiene integrado un *trigger* (puedes ocupar cron o travis)
   + No soporta ejecución distribuida
+  
+```
+## Rob notes
+- Liliana no tiene en mente alguna herramienta para procesar en *streaming* y que sea un pipeline DAG.
+```
 
 ¿Quiénes ocupan Luigi?
 
@@ -116,6 +137,11 @@ Si bien Luigi ya tiene *templates* para tasks que generalmente se ocupan en *pip
 
 #### ¿Cómo funciona Luigi?
 
+```
+## Rob notes
+- Hay que empezar de atrás para adelante.
+```
+
 Luigi tiene 2 objetos principales para construir su DAG:
 
 1.  **Target**: De dónde sacar los datos que requiere una tarea. Estos datos pueden estar en un archivo en disco, en hdfs, en s3, en una BD. Luigi tiene diferentes *templates* ya definidos:
@@ -126,10 +152,26 @@ Luigi tiene 2 objetos principales para construir su DAG:
 + `RemoteTarget`
 + `MySqlTarget`
 + `RedshiftTarget`
-+ `PostrgresTarget`
++ `PostrgresTarget` ## e.g. quiero sacar estos datos en Posgre.
 + ... otros
 
 2.  **Task**: La tarea que queremos que Luigi administre como parte del *pipeline*. Para declarar un *task* en Luigi tenemos que hacer un *script* que tenga los siguientes 4 métodos requeridos -algunos son opcionales-: `run()`, `input()` ,`output()` y `requires()`.
+```
+## Rob notes
+- Es la cosa que nosotros queremos correr (e.g. pre-procesammiento, limpieza, feature engineering)
+- En el caso de nuestro proyecto
+  - Ingesta
+    - input() -> credentials, token (credentials.yaml)
+      - Casi todos son archivitos o información que sacas de una base de datos.
+    - output() -> información que bajamos de la API
+  - Almacenamiento
+    - output() -> s3
+- No necesariamente se nencesita una salida.
+  - Si se ejecutó bien, entonces ya podemos pasar a la siguiente tarea.
+  - Usando "Target" podemos especificar que el trabajo ya acabó (un archivito queda como evidencia)
+- Un parámetro es algo que va de "task" en "task"
+  - Un ejemplo es el "día de descarga de datos" esta va a ir de "task" en "task" 
+```
 
 + `requires()`: El método a través del cuál definimos cómo está formado el grafo de dependencias entre tareas. Por ejemplo: Si tenemos una tarea que limpia los datos de profeco `clean.py`, y otra que transforma los datos `transform.py`, la tarea `transform.py` tendría un `requires()` que indique que se requiere de `clean.py`, esta instrucción le permite saber a Luigi que se **requiere** primero correr la tarea de `clean.py` antes de correr la de `transform.py`.
 
@@ -143,11 +185,28 @@ Luigi tiene 2 objetos principales para construir su DAG:
 
 Es muy común que se requiera enviar uno o más parámetros a un *task* pertenciente a un *pipeline* y para ello se ocupa un objeto `Parameter` ver la [documentación](https://luigi.readthedocs.io/en/stable/parameters.html). Por ejemplo: enviar una fecha al flujo para que la salida de un archivo contenga la fecha de ejecución.
 
+```
+## Rob notes
+- La idea es encapsular
+- Imaginemos que MyTask es Ingesta
+  - Ingesta se comportará como una clase "Task"
+  - Solo "run" es obligatorio
+  - No es necesario tener un output, pero sí debemos indicar que la tarea terminó (task)
+- Hay que considerar que los parámetros se echan de atrás para adelante.
+  - Los parámetros vienen de atrás para adelante.
+- IMPORTANTE: el "output" siempre debe llevar un "task".
+```
+
 ![](./images/luigi_tasks.png) <br>
 
 Es posible tener dependencias dinámicas, esto significa que cuando estamos construyendo el grafo de dependencias no estamos completamente seguros de las dependencias que una tarea tendrá, sino hasta que estamos en *runtime*. Para administrar estas dependencias dinámicas Luigi ocupa una estrategia de *yield* para esperar a que termine una dependencia, es alternativo al `requires()` y se ocupa dentro de `run()`.
 
 La desventaja de ocupar `yield()` es que si se vuelve a correr el *pipeline* y las dependencias ya se cumplieron, al ser declaradas como `yield` se vuelve a ejecutar desde 0 :(, es por eso que siempre preferimos declarar explícitamente el grafo de dependencias desde la creación del workflow con `requires`.
+
+```
+## Rob notes
+- Relacionado con ejecución asíncrona.
+```
 
 ![](./images/luigi_yield.png) <br> Fuente: [Documentación Luigi](https://luigi.readthedocs.io/en/stable/tasks.html#dynamic-dependencies)
 
@@ -156,6 +215,11 @@ Podemos correr procesos de Luigi de 2 maneras:
 1.  Desde línea de comandos
 
 `luigi --module nombre_script nombre_Task --local-scheduler` o `luigi -m nombre_script nombre_Task --local-scheduler`. Si la tarea requiere de algún parámetro, se envía desde aquí. Por ejemplo:
+
+```
+## Rob notes
+- Lo de --local-scheduler hace que no se abra el diagrama.
+```
 
 ![](./images/luigi_run_parameters.png)
 <br>
