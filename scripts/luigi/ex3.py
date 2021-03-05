@@ -21,7 +21,6 @@ class S3Task(luigi.Task):
         ses = boto3.session.Session(profile_name='mge', region_name='us-west-2')
         s3_resource = ses.resource('s3')
 
-        obj = s3_resource.Bucket(self.bucket)
         print(ses)
 
         with self.output().open('w') as output_file:
@@ -37,5 +36,4 @@ class S3Task(luigi.Task):
         self.year,
         str(self.month))
 
-        #return luigi.local_target.LocalTarget('/home/silil/Documents/itam/metodos_gran_escala/data-product-architecture/luigi/test.csv')
         return luigi.contrib.s3.S3Target(path=output_path)
