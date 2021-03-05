@@ -113,6 +113,8 @@ Fuente: https://stackoverflow.com/questions/48670553/luigi-parallel-branches
 + Squarespace
 + Deloitte
 
+[Who uses Luigi?](https://github.com/spotify/luigi)
+
 En México solo sé que Klustera ocupaba Luigi para su *pipeline* sin embargo, desconozco si sigue así.
 
 En Datank ocupábamos *Pachyderm* por una necesidad puntual de tener trazabilidad, desconozco si lo siguen ocupando.
