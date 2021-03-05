@@ -14,4 +14,4 @@ class LocalFileSystemTask(luigi.Task):
 
 
     def output(self):
-        return luigi.local_target.LocalTarget('/home/silil/Documents/itam/metodos_gran_escala/data-product-architecture/luigi/test.csv')
+        return luigi.local_target.LocalTarget('/Users/rp_mbp/Documents/ReposRob_RobPer/ITAMmcd/semestre_2/Arquitectura_Prod_Dat/Venv_ArqPD/repos/data-product-architecture/scripts/luigi')

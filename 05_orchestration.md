@@ -253,6 +253,15 @@ $\rightarrow$ La forma en la que tu la ocuparás generalmente será por línea d
 + Clase sencilla, pasando parámetros (`ex1_luigi.py`)
 + Output a un archivo local (`ex2_luigi.py`)
 + Output a un archivo de S3 (`ex3_luigi.py`)
+  
+```
+## Rob notes
+
+#### Código para ejecutar ejemplo de luigi
+###### Paso 1: moverte a la posición en la que están los scripts de luigi
+###### Paso 2: ejecutar el siguiente comando:
+PYTHONPATH="." luigi --module ex1 MyTask --x 135 --local-scheduler
+```
 
 ### Otros orquestadores
 
