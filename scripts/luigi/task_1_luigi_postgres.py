@@ -2,20 +2,27 @@ from luigi.contrib.postgres import CopyToTable
 
 import pandas as pd
 import luigi
+import psycopg2
+import yaml
 
 
 class Task1(CopyToTable):
     x = luigi.IntParameter()
 
-    credentials = pd.read_csv("postgres_credentials.csv")
-    user = credentials.user[0]
-    password = credentials.password[0]
-    database = credentials.database[0]
-    host = credentials.host[0]
+    with open('credentials.yaml', 'r') as f:
+        config = yaml.safe_load(f)
+
+    credentials = config['db']
+
+    user = credentials['user']
+    password = credentials['pass']
+    database = credentials['db']
+    host = credentials['host']
+    port = credentials['port']
     table = 'metadata'
 
-    columns = [("x", "VARCHAR"),
-               ("y", "VARCHAR")]
+    columns = [("col_1", "VARCHAR"),
+               ("col_2", "VARCHAR")]
 
     def rows(self):
         z = str(self.x + self.x)

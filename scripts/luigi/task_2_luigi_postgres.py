@@ -1,4 +1,4 @@
-from task_1 import Task1
+from task_1_luigi_postgres import Task1
 
 import luigi
 
