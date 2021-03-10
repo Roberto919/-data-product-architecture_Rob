@@ -20,6 +20,7 @@ En tu repositorio:
 + Actualización de tu README.md
 + Foto de tu DAG con las tasks de este checkpoint en verde
 + Actualización del código
++ Actualización el `requirements.txt`
 
 ### En clase
 
