@@ -44,7 +44,7 @@ Niveles de madurez en *Data Lake*.
 
 ![](./images/pointer.png) ¿Por qué no ocupar entonces un RDS normal?
 
-+ *Data pond:* Una colección de al menos 2 *data puddle* **aunque** en tecnologías clásicas de alamacenamiento de datos como un *datawarehouse* o un *data mart*.
++ *Data pond:* Una colección de al menos 2 *data puddle* **aunque** en tecnologías clásicas de almacenamiento de datos como un *datawarehouse* o un *data mart*.
 
 + *Data lake:* También contiene al menos 2 *data puddle*, sin embargo, se diferencia del *data pond* en dos cosas:
   + Permite hacer *self-service* lo que implica que los usuarios de negocio pueden encontrar y usar los datos que viven en el **sin** tener que depender de la ayuda del departamento de TI.
@@ -56,7 +56,7 @@ Niveles de madurez en *Data Lake*.
 <br>
 Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-enterprise-big/9781491931547/ch01.html)
 
-Si no hacemos *data governance* bien lo que haremos es que iniciaremos con un hermosos *data lake* y pronto lo convertiremos en un *data swamp* -un *data lake*- cuya administración de *metadata* está rota o es inexistente.
+Si no hacemos *data governance* de forma adecuada, lo que haremos es que iniciaremos con un hermoso *data lake* y pronto lo convertiremos en un *data swamp* -un *data lake*- cuya administración de *metadata* está rota o es inexistente.
 
 ![](./images/data_swamp.jpeg)
 <br>
