@@ -29,6 +29,7 @@ Tienes 5 minutos para mostrar:
 1. En tu S3 bucket en la ruta adecuada, el pickle de la ingesta inicial histórica
 2. Correr el task de almacenamiento desde luigi enviando un parámetro que indica que quieres que se corra la ingesta histórica -> la ingesta histórica ya ha sido corrida previamente por lo que no correrá el task.
 3. Correr el task de almacenamiento desde luigi enviando un parámetro que indica que quieres que se corra la ingesta consecutiva con la fecha del día en el que lo corres.
-4. Mostrar tu S3 bucket en la ruta adecuada, con el pickle de la ingesta cosecutiva que se hizo
-5. Correr nuevamente el paso 3 con los mismos parámetros, Luigi no corre el task
+4. Mostrar en el servcer-scheduler el DAG que se corrió (¡esperamos en verde!)
+5. Mostrar tu S3 bucket en la ruta adecuada, con el pickle de la ingesta cosecutiva que se hizo
+6. Correr nuevamente el paso 3 con los mismos parámetros, Luigi no corre el task
 7. Mostrar tu S3 bucket en la ruta adecuada, con el pickle de la ingesta realizada previamente
