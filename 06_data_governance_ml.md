@@ -32,6 +32,11 @@ Su auge en las empresas se debe a la necesidad de cumplir con temas de regulaci�
 
 Un proyecto de gobernanza de datos exitoso requerirá de alinear personas, procesos y tecnologías para identificar, clasificar y documentar información de los datos de una compañía.
 
+```
+## Rob notes
+- Normalmente se cree que un "data lake" es suficiente para tener gobernanza de datos. No es cierto.
+- El rol de CDO es el que se encarga de administrar todos los datos. El tiene la última palabra en cuanto al uso de modelos.
+```
 #### Data Lakes
 
 Repositorio de almacenamiento de datos de una empresa/entidad.
@@ -62,6 +67,17 @@ Si no hacemos *data governance* de forma adecuada, lo que haremos es que iniciar
 <br>
 Fuente: [Kiran Donepudi](https://www.linkedin.com/pulse/data-lake-swamp-kiran-donepudi/)
 
+```
+## Rob notes
+- Antes del Data Lake era Data Warehouse
+- Surgieron por la necesidad de unificar verdades en una empresa.
+  - Si preguntan cuántos clientes tenemos, todos deben coincidir.
+- También sirven mucho para el tema del reporteo.
+- El data warehouse es muy estricto, tiene muchas trabas para meter información.
+- El data lake trata de ser más flexible.
+- Se vuelve un data swamp cuando no tiene gobernanza, cuando solo se almacenan cosas sin control.
+- El chiste es que se tenga un propósito para los datos, y se conozcan bien los metadatos.
+```
 #### Organización sugerida de un Data Lake
 
 + *Raw* o *landing zone*: Donde la ingesta de datos es almacenada y se queda lo más "cerca" posible a su estado original.  
@@ -72,7 +88,6 @@ Fuente: [Kiran Donepudi](https://www.linkedin.com/pulse/data-lake-swamp-kiran-do
 ![](./images/data_lake_organization.png)
 <br>
 Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-enterprise-big/9781491931547/ch01.html)
-
 
 ### Herramientas de Data Governance
 
