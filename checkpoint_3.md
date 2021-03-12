@@ -18,6 +18,7 @@ Marzo 2021
 En tu repositorio:
 
 + Actualización de tu README.md
+    - Para agregar `luigi`
 + Foto de tu DAG con las tasks de este checkpoint en verde
 + Actualización del código
 
