@@ -1,4 +1,4 @@
-# PYTHONPATH='.' luigi --module ex2 LocalFileSystem --local-scheduler
+# PYTHONPATH='.' luigi --module ex2 LocalFileSystemTask --local-scheduler
 import luigi
 import luigi.contrib.s3
 import boto3
@@ -14,4 +14,4 @@ class LocalFileSystemTask(luigi.Task):
 
 
     def output(self):
-        return luigi.local_target.LocalTarget('/Users/rp_mbp/Documents/ReposRob_RobPer/ITAMmcd/semestre_2/Arquitectura_Prod_Dat/Venv_ArqPD/repos/data-product-architecture/scripts/luigi')
+            return luigi.local_target.LocalTarget('/Users/rp_mbp/Documents/ReposRob_RobPer/ITAMmcd/semestre_2/Arquitectura_Prod_Dat/Venv_ArqPD/repos/data-product-architecture/scripts/luigi/ex2_output.txt')
