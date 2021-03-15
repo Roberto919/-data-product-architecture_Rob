@@ -1,7 +1,7 @@
 # existe un bug con bot3 y luigi para pasar las credenciales
 # necesitas enviar el parámetro AWS_PROFILE e indicar el profile
 # con el que quieres que se corra
-# PYTHONPATH='.' AWS_PROFILE=mge luigi --module ex3_luigi S3Task --local-scheduler ...
+# PYTHONPATH='.' AWS_PROFILE=robper_dpa luigi --module ex3 S3Task --local-scheduler ...
 import luigi
 import luigi.contrib.s3
 import boto3
@@ -18,7 +18,7 @@ class S3Task(luigi.Task):
     month = luigi.Parameter()
 
     def run(self):
-        ses = boto3.session.Session(profile_name='mge', region_name='us-west-2')
+        ses = boto3.session.Session(profile_name='robper_dpa', region_name='us-west-2')
         s3_resource = ses.resource('s3')
 
         print(ses)
@@ -28,12 +28,14 @@ class S3Task(luigi.Task):
 
 
     def output(self):
-        output_path = "s3://{}/{}/{}/{}/YEAR={}/MONTH={}/test.csv".\
-        format(self.bucket,
-        self.root_path,
-        self.etl_path,
-        self.task_name,
-        self.year,
-        str(self.month))
+
+        output_path = "s3://{}/{}/{}/{}/YEAR={}/MONTH={}/test.csv".format(
+            self.bucket,
+            self.root_path,
+            self.etl_path,
+            self.task_name,
+            self.year,
+            str(self.month),
+        )
 
         return luigi.contrib.s3.S3Target(path=output_path)
