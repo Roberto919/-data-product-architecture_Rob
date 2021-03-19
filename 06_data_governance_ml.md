@@ -91,6 +91,19 @@ Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-
 
 ### Herramientas de Data Governance
 
+```
+## Rob notes
+- Lo más importante de governance es metadata.
+  - Esta nos permite habilitar la gobernanza.
+  - La única forma de habilitar linaje es con metadatos.
+  - Es algo así como tener un "log" donde se guarda todo.
+- El data steward
+  - Funciona que sea gente de negocio.
+  - Debe de saber para qué se usan los datos.
+  - Administra y gestiona controles para gobernanza.
+  - Se centra en ver que "sensitive" y "gold" estén muy bien organizados. 
+```
+
 #### Metadata
 
 Descripción de las características de tus datos, o datos de tus datos.
@@ -100,8 +113,8 @@ En el contexto de *data governance*, *metadata* habilita el *data governance* y 
 + Definición de datos
 + Uso de los datos
 + Seguridad de los datos
-+ Organizar la información de los datos para que éstos puedan ser buscados por los usuarios de negocio.
-+ Enriquecer y mantener registro detallado del flujo de datos.
++ Organizar la información de los datos para que estos puedan ser buscados por los usuarios de negocio
++ Enriquecer y mantener registro detallado del flujo de datos
 + Linaje de los datos
 
 La administración de esta *metadata* resulta crucial para mantener disciplina y control en la recolección de datos durante el *data governance*, algunas responsabilidades dentro de esta administración son:
@@ -123,6 +136,18 @@ Fuente: [The enterprise big data lake](https://www.oreilly.com/library/view/the-
 
 
 #### Data Lineage
+```
+## Rob notes
+- Linanje de datos
+  - Literalmente es ver como el arbol genealógico de tus datos.
+  - Desde que se originaron hasta que se ocuparon.
+  - Hay que ver el flujo de los datos.
+  - La idea es dejar de jugar teléfono descompuesto.
+  - Esto nos ayuda también a dar transparencia a nuestro pipeline para los usuarios.
+  - Si hay brecha de vulnerabilidad, podemos saber cuál fue el problema.
+  - En nuestro pipeline:
+    - Las fechas en las que se  
+```
 
 El linaje de tus datos.
 
@@ -186,7 +211,23 @@ Tan solo en tu ETL:
 
   ¿Quién genera esta *metadata*? ... ¡Tú!, a través de tus *tasks*.
 
+```
+## Rob notes
+- La manera más conveniente es guardar en una tabla relacional en Posgres.
+  - Esto para que esté más disponible. 
+```
+
 ### Machine learning governance
+
+```
+## Rob notes
+- El diagrama entidad-relación nos da una guía.
+- Está pensado principalmente para problemas que tienen cortes en el tiempo.
+  - Modelos sin cortes en el tiempo son más sencillos.
+- Diagrama de evaluación de modelos.
+  - Se refieren al mismo modelo con diferentes configuraciones (hiperparámetros)
+  - El diagrama entidad relación es solo para 1 modelo. 
+```
 
 Para poder habilitar la parte de *Data Lineage* en nuestro proceso de modelado deberemos incluir la generación de *metadata*.
 
