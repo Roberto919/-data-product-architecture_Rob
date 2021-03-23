@@ -66,15 +66,17 @@ Spark está integrado a muchas de las herramientas del ecosistema de Hadoop:
 -   Tiene una librería para SQL -SparkSQL- con la que se puede interactuar con el metastore de Hive o los datos que cargarmos a través de Parquets o Avro.
 -   Puede correr con YARN lo que permite compartir recursos del cluster dinámicamente.
 
-![](./images/pointer.png) ... Por cierto, Spark está desarrollado en Scala, por lo que la gente que desarrolló Spark sugiere **fuertemente** utilizar Scala...pero, puedes ocupar **PySpark** -un *wraper* de Python para Spark- (también puedes conectar R con Spark con la libería **sparklyr**, por cierto, un mexicano está en el desarrollo de esta librería （っ＾▿＾）-Javier Luraschi-)
+![](./images/pointer.png) ... Por cierto, Spark está desarrollado en Scala, por lo que la gente que desarrolló Spark sugiere **fuertemente** utilizar Scala...pero, puedes ocupar **PySpark** -un *wraper* de Python para Spark- (también puedes conectar R con Spark con la libería **sparklyr**, por cierto, un mexicano estuvo en el desarrollo de esta librería （っ＾▿＾）-Javier Luraschi-, dio una plática en el Data Days de este año... aunque de Javascript!)
 
 #### Teoría de Spark
 
 ##### Ecosistema de Spark
 
-![](./images/spark_ecosystem.png) Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
+![](./images/spark_ecosystem.png)
+<br>
+Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
 
--   SparkSQL: La librería que le permite a Spark ingestar, limpiar, analizar y manipular datos como **dplyr** (EDA).
+-   SparkSQL: La librería que le permite a Spark ingestar, limpiar, analizar y manipular datos como **dplyr** en R o **pandas** en Python (EDA).
 -   Spark MLlib: La librería que le permite a Spark realizar *machine learning*, como **scikitlearn**.
 -   Spark GraphX: La librería que le permite a Spark hacer análisis y representación de grafos, como Neo4j y la librería de **networkx** de Python.
 -   Spark Streaming: La librería que le permite a Spark hacer análisis en *streaming*.
