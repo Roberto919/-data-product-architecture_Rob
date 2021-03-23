@@ -126,13 +126,13 @@ El objeto más importante dentro de Spark es **Resilent Distributed Dataset** (R
 1.  Utilizar el *SparkContext* para crear un RDD de una fuente externa.
 2.  Ejecutar una transformación en uno o más RDDs.
 
-→ Todo en Spark son **acciones** o **transformaciones** y solo las acciones hacen que el procesamiento distribuido se lleve a cabo -antes no, ¡Spark es lazy!-. Las transformaciones son las operaciones que realizamos a los datos para "modificarlos": filtros, agregaciones, intersecciones, uniones, joins, etc. [Transformations](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#transformations).
+→ Todo en Spark son o **acciones** o **transformaciones** y únicamente las acciones hacen que el procesamiento distribuido se lleve a cabo -antes no, ¡Spark es lazy!-. Las transformaciones son las operaciones que realizamos a los datos para "modificarlos": filtros, agregaciones, intersecciones, uniones, joins, etc. [Transformations](https://spark.apache.org/docs/2.4.7/rdd-programming-guide.html#transformations).
 
-Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, `show`, etc. [Actions](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#actions)
+Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, `show`, etc. [Actions](https://spark.apache.org/docs/2.4.7/rdd-programming-guide.html#actions)
 
 ![](./images/spark_actions_transformations_dag.png) <br>
 
-En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son semejantes a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
+En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son iguales a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
 
 ![](./images/sparkcontext_sparksession.png) <br>
 
