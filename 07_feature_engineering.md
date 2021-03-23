@@ -42,7 +42,7 @@ Es considerada como la evolución de *MapReduce* de Hadoop. *MapReduce* revoluci
 
 Spark también mantiene la escalabilidad lineal y la tolerancia a fallos, pero **extiende** *MapReduce* en 3 formas:
 
-1.  En lugar de tener un formato rígido de *map* $\rightarrow$ *reduce*, Spark ejecuta operaciones más generales a través de un DAG -*Directed Acyclic Graph*- la implicación más grande de este cambio es que mientras que *MapReduce* requiere de escribir constantemente al DFS seleccionado para poder pasar resultados intermedios del *map(pers)* al *reducer(s)*, Spark sólo **pasa** los resultados intermedios al siguiente "paso" en el *pipeline*.
+1.  En lugar de tener un formato rígido de *map* -> *reduce*, Spark ejecuta operaciones más generales a través de un DAG -*Directed Acyclic Graph*- la implicación más grande de este cambio es que mientras que *MapReduce* requiere de escribir constantemente al DFS seleccionado para poder pasar resultados intermedios del *map(pers)* al *reducer(s)*, Spark sólo **pasa** los resultados intermedios al siguiente "paso" en el *pipeline*.
 
 2.  Spark complementa las mejoras que brinda la estructura de DAG con un conjunto de transformaciones que permiten al usuario expresar los procesamientos de manera más natural por lo que se pueden expresar *pipelines* complejos en pocas líneas de código.
 
