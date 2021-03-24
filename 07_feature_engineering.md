@@ -21,6 +21,11 @@ M. Sc. Liliana Millán Núñez liliana.millan@itam.mx
 ### Spark
 
 #### Contexto
+```
+## Rob notes
+- La idea es no salir del ambiente para hacer todo lo que hace un científico de datos.
+  - No deberíamos salir de la herramienta para trabajar nuestro proyecto.
+```
 
 ¿Por qué existe Spark?
 
