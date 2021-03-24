@@ -47,7 +47,7 @@ Es considerada como la evolución de *MapReduce* de Hadoop. *MapReduce* revoluci
 
 Spark también mantiene la escalabilidad lineal y la tolerancia a fallos, pero **extiende** *MapReduce* en 3 formas:
 
-1.  En lugar de tener un formato rígido de *map* $\rightarrow$ *reduce*, Spark ejecuta operaciones más generales a través de un DAG -*Directed Acyclic Graph*- la implicación más grande de este cambio es que mientras que *MapReduce* requiere de escribir constantemente al DFS seleccionado para poder pasar resultados intermedios del *map(pers)* al *reducer(s)*, Spark sólo **pasa** los resultados intermedios al siguiente "paso" en el *pipeline*.
+1.  En lugar de tener un formato rígido de *map* -> *reduce*, Spark ejecuta operaciones más generales a través de un DAG -*Directed Acyclic Graph*- la implicación más grande de este cambio es que mientras que *MapReduce* requiere de escribir constantemente al DFS seleccionado para poder pasar resultados intermedios del *map(pers)* al *reducer(s)*, Spark sólo **pasa** los resultados intermedios al siguiente "paso" en el *pipeline*.
 
 2.  Spark complementa las mejoras que brinda la estructura de DAG con un conjunto de transformaciones que permiten al usuario expresar los procesamientos de manera más natural por lo que se pueden expresar *pipelines* complejos en pocas líneas de código.
 
@@ -71,15 +71,17 @@ Spark está integrado a muchas de las herramientas del ecosistema de Hadoop:
 -   Tiene una librería para SQL -SparkSQL- con la que se puede interactuar con el metastore de Hive o los datos que cargarmos a través de Parquets o Avro.
 -   Puede correr con YARN lo que permite compartir recursos del cluster dinámicamente.
 
-![](./images/pointer.png) ... Por cierto, Spark está desarrollado en Scala, por lo que la gente que desarrolló Spark sugiere **fuertemente** utilizar Scala...pero, puedes ocupar **PySpark** -un *wraper* de Python para Spark- (también puedes conectar R con Spark con la libería **sparklyr**, por cierto, un mexicano está en el desarrollo de esta librería （っ＾▿＾）-Javier Luraschi-)
+![](./images/pointer.png) ... Por cierto, Spark está desarrollado en Scala, por lo que la gente que desarrolló Spark sugiere **fuertemente** utilizar Scala...pero, puedes ocupar **PySpark** -un *wraper* de Python para Spark- (también puedes conectar R con Spark con la libería **sparklyr**, por cierto, un mexicano estuvo en el desarrollo de esta librería （っ＾▿＾）-Javier Luraschi-, dio una plática en el Data Days de este año... aunque de Javascript!)
 
 #### Teoría de Spark
 
 ##### Ecosistema de Spark
 
-![](./images/spark_ecosystem.png) Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
+![](./images/spark_ecosystem.png)
+<br>
+Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.html) <br>
 
--   SparkSQL: La librería que le permite a Spark ingestar, limpiar, analizar y manipular datos como **dplyr** (EDA).
+-   SparkSQL: La librería que le permite a Spark ingestar, limpiar, analizar y manipular datos como **dplyr** en R o **pandas** en Python (EDA).
 -   Spark MLlib: La librería que le permite a Spark realizar *machine learning*, como **scikitlearn**.
 -   Spark GraphX: La librería que le permite a Spark hacer análisis y representación de grafos, como Neo4j y la librería de **networkx** de Python.
 -   Spark Streaming: La librería que le permite a Spark hacer análisis en *streaming*.
@@ -129,13 +131,13 @@ El objeto más importante dentro de Spark es **Resilent Distributed Dataset** (R
 1.  Utilizar el *SparkContext* para crear un RDD de una fuente externa.
 2.  Ejecutar una transformación en uno o más RDDs.
 
-→ Todo en Spark son **acciones** o **transformaciones** y solo las acciones hacen que el procesamiento distribuido se lleve a cabo -antes no, ¡Spark es lazy!-. Las transformaciones son las operaciones que realizamos a los datos para "modificarlos": filtros, agregaciones, intersecciones, uniones, joins, etc. [Transformations](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#transformations).
+→ Todo en Spark son o **acciones** o **transformaciones** y únicamente las acciones hacen que el procesamiento distribuido se lleve a cabo -antes no, ¡Spark es lazy!-. Las transformaciones son las operaciones que realizamos a los datos para "modificarlos": filtros, agregaciones, intersecciones, uniones, joins, etc. [Transformations](https://spark.apache.org/docs/2.4.7/rdd-programming-guide.html#transformations).
 
-Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, `show`, etc. [Actions](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#actions)
+Una acción hace que todas las transformaciones definidas antes de la acción se ejecuten en el cluster\*, algunos ejemplos de acciones son: `count`, `collect`, `first`, `take`, `saveAs`, `foreach`, `show`, etc. [Actions](https://spark.apache.org/docs/2.4.7/rdd-programming-guide.html#actions)
 
 ![](./images/spark_actions_transformations_dag.png) <br>
 
-En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son semejantes a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
+En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son iguales a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
 
 ![](./images/sparkcontext_sparksession.png) <br>
 

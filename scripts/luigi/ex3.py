@@ -6,6 +6,9 @@ import luigi
 import luigi.contrib.s3
 import boto3
 import os
+import yaml
+
+from luigi.contrib.s3 import S3Client
 
 
 class S3Task(luigi.Task):
