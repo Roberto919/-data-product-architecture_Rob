@@ -50,8 +50,13 @@ Spark también mantiene la escalabilidad lineal y la tolerancia a fallos, pero *
 1.  En lugar de tener un formato rígido de *map* -> *reduce*, Spark ejecuta operaciones más generales a través de un DAG -*Directed Acyclic Graph*- la implicación más grande de este cambio es que mientras que *MapReduce* requiere de escribir constantemente al DFS seleccionado para poder pasar resultados intermedios del *map(pers)* al *reducer(s)*, Spark sólo **pasa** los resultados intermedios al siguiente "paso" en el *pipeline*.
 
 2.  Spark complementa las mejoras que brinda la estructura de DAG con un conjunto de transformaciones que permiten al usuario expresar los procesamientos de manera más natural por lo que se pueden expresar *pipelines* complejos en pocas líneas de código.
+```
+## Rob notes
+- Habilitar el DAG permite que todo corra más rápido.
+```
 
 3.  Spark permite tener procesamiento en memoria a través de las abstraciones *Dataset* y *DataFrame* con las que es posible que podamos materializar cualquier punto de procesamiento de un *pipeline* en memoria por lo que si hay *steps* más adelante en el *pipeline* que ocupen estos datos no requieren de ser reprocesados o vueltos a cargar de disco!!!. Esta característica permite que Spark sea el *framework* seleccionado en algoritmos iterativos que requieren de pasar varias veces sobre un set de datos. Esta es característica de modelado!.
+
 
 La razón más importante para seleccionar Spark por sobre otros *frameworks* es que resuelve varios de los retos de ciencia de datos:
 
@@ -61,6 +66,15 @@ La razón más importante para seleccionar Spark por sobre otros *frameworks* es
 -   Es posible ocupar Spark utilizando Python, R, Java o Scala.
 -   La capacidad de Spark de mantener objetos en memoria lo hace ideal para hacer *machine learning*.
 -   Spark reduce el espacio entre analítica de laboratorio y analítica para producción.
+
+```
+## Rob notes
+- Un posible competidor podría ser Dask
+  - Se podría argumentar que tiene otros objetivos.
+  - Compiten en la forma que se manejan los dataframes distribuidos.
+- También podemos uas "koalas"
+  - Estos hacen que podamos usar "pandas" directamente.
+```
 
 Spark está integrado a muchas de las herramientas del ecosistema de Hadoop:
 
@@ -87,6 +101,15 @@ Fuente: [Spark overview](https://spark.apache.org/docs/2.3.0/cluster-overview.ht
 -   Spark Streaming: La librería que le permite a Spark hacer análisis en *streaming*.
 
 #### Arquitectura de Spark
+```
+## Rob notes
+- El cluster manager puede tener muchos sabores, por ejemplo:
+  - YARN HDFS
+  - Kubertnetes
+  - Sentos
+  - etc.
+- Es importante que el manager y maestro estén en la misma red para no tener overhead de estar buscando cositas.
+```
 
 ![](./images/spark_cluster_driver.png)
 <br>
@@ -96,6 +119,11 @@ Fuente: [Overview Spark](https://spark.apache.org/docs/2.3.0/cluster-overview.ht
 -   El *SparkContex* se conecta al *cluster manager* que puede ser de diferentes tipos: YARN, Mesos -otro cluster manager- , Kubernetes (la última version, 2.3.0) -centrado en infraestructura en contenedores- o un cluser standalone. El *cluster manager* como YARN es el que adminstra todos los recursos en el cluster.
 -   En los nodos del cluster se crean *Executors* que son procesos que correrán el procesamiento y que guardarán datos de la aplicación -*job* de *MapReduce*-.
 -   El *cluster manager* será el responsable de enviar el código de la aplicación -en un JAR si se ocupó Scala o en Python si se ocupó pyspark- a los *executors*.
+
+```
+## Rob notes
+- Al SparkContext se le llama aplicación.
+```
 
 **Características:**
 
@@ -111,6 +139,12 @@ Hacer un programa en Spark consiste a grandes rasgos de los siguientes 3 pasos:
 1.  Definir un conjunto de transformaciones en el conjunto de datos de entrada -que normalmente se encuentra en algún sabor de DFS-.
 2.  Invocar acciones que hacen que la salida de las transformaciones hechas a los datos sea persistida o regresarlos a la memoria local.
 3.  Hacer procesamiento local de los resultados obtenidos de forma distribuida.
+
+```
+## Rob notes
+- Lo imporatnte es pensar que los datos están distribuidos en varios lugares.
+- Trabajamos con ellos de manera distribuida.
+```
 
 #### Spark Shell
 
