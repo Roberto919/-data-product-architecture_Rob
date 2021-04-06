@@ -132,7 +132,7 @@ Una acción hace que todas las transformaciones definidas antes de la acción se
 
 ![](./images/spark_actions_transformations_dag.png) <br>
 
-En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son iguales a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
+En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no** son iguales  a los *dataframes* de Python Pandas o a R principalmente porque un DataFrame en Spark representa data sets distribuidos en un *cluster*, no datos locales donde cada renglón está en la misma máquina -pequeña sutil diferencia-. Para trabajar con los *DataFrames* se ocupa el *SparkSession*, para trabajar directamente con los RDD se ocupa el *SparkContext*.
 
 ![](./images/sparkcontext_sparksession.png) <br>
 
@@ -145,7 +145,7 @@ Debido a que *SparkSession* es un *wrapper* al *SparkContext*, la única forma d
 
 El módulo de Spark que nos permite realizar manipulaciones y transformaciones a los datos. [Spark SQL Documentación API](https://spark.apache.org/docs/latest/sql-programming-guide.html)
 
-Cuando levantas el EMR la variables `spark` ya se encuentra creada. Esta varible contiene el *SparkSession* por lo que es posible
+Cuando levantas el EMR la variables `spark` ya se encuentra creada. Esta varible contiene el *SparkSession* a través de la cual tenemos acceso a varias operaciones de I/O.
 
 #### I/O
 
