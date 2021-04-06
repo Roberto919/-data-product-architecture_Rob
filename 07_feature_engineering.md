@@ -179,6 +179,18 @@ En Spark un **DataFrame** es una abstracción construida arriba de un RDD **no**
 
 Debido a que *SparkSession* es un *wrapper* al *SparkContext*, la única forma de acceder al *SparkContext* es a través del *SparkSession*.
 
+```
+## Rob notes
+- Los RDD's son nuestros dataframes. Se hacen amigables con SparkSession.
+  - Interactuar sin SparkSession es algo complicado más como de ingeniería de datos.
+- SparkContext es el que está ligado al RDD.
+- Se le Resilent es porque vas creando nuevos RDDs con los cambios que implementas.
+- Podemos elegir guardar en caché las cosas, esto nos ayuda a que sea más rápido todo. Puede ser buena idea usarlo.
+- Las transformaciones se ejecutan hasta que se llaman las acciones. Estas se ejecutan como DAG.
+- Para ligar nuestra máquina local al EMR es con FoxyProxy
+  - En AWS (Enable SSH connection) vienen los pasos para instalar FoxyProxy
+- 
+```
 
 ### SparkSQL
 
