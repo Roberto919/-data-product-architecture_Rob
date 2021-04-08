@@ -20,6 +20,8 @@ Abril 2021
 
 **Demo en clase**
 
+(5-7 minutos máximo)
+
 1. Correr preprocesamiento y limpieza "nuevo" -> luigi corre
 * Se muestra que se generan los metadatos de preprocesamiento y limpieza en la base de datos
 * Se muestra la salida del preprocesamiento y limpieza (S3 o RDS)
