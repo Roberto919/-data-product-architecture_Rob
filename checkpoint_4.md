@@ -37,6 +37,6 @@ Abril 2021
 * Se muestra que no se generan los metadatos de FE en la base de datos
 * Se muestra que no se genera nueva salida del FE (S3 o RDS)
 
-**Fecha de entrega sugerida: 15 abril 2021**
+**Fecha de entrega: 20 abril 2021**
 
 #### ¡Ánimo!
