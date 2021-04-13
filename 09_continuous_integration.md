@@ -55,6 +55,10 @@ Otros menos directos pero igual de importantes:
 
 #### Unit test
 
+![](./images/dilbert_unit_test.jpeg)
+<br>
+Fuente: [Dilbert](dilbert.com)
+
 Nosotros nos concentraremos en este tipo de pruebas porque son las que **nos competen** como científicos de datos.
 
 El objetivo de estas pruebas es verificar que un función hace lo que esperamos que haga. Se require que sea atómica -que solo haga 1 cosa-, a veces pudiera llegar a ser ambiguo la definición de hacer una sola cosa o funcionalidad, pero conforme vayas empezando a generar pruebas unitarias de tu código te irás dando cuenta cuando un función hace más de una cosa, porque será difícil hacer su prueba.
