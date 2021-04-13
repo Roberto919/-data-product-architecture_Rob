@@ -40,11 +40,12 @@ Otros menos directos pero igual de importantes:
 
 #### Tipos de pruebas
 
-+ *Unit test:* Probar una unidad/funcionalidad de código aislada
++ *Unit test:* Probar una unidad/funcionalidad de código aislada.
+  + *Prueba de cobertura:* Permite cuantificar cuánto de tu código ha sido probado a través de las pruebas unitarias.
 + *Integration test:* Probar cómo difrentes componentes (unidades) que forman parte de un sistema trabajan en conjunto. Verificar si la interacción entre estos componentes funciona y es la requerida.
 + *Functional test:* Tratamos al componente como una caja negra verificando que la funcionalidad cumple con los requerimientos, SLA, outputs, etc.
 + *End to end test:* Probar todos los componentes del sistema de inicio a fin. El objetivo es simular el escenario real en el que vivirá el sistema, identificando integración entre todos los componentes e integridad en los datos.
-+ *Acceptance test:* Verificar que los requerimientos hechos por el usuario
++ *Acceptance test:* Verificar que los requerimientos hechos por el usuario están completos en número y en funcionalidad.
 + *Performance test:* Probar todo el sistema bajo condiciones de estrés: exceso de peticiones, exceso de lectura a BD, etc.  
 + *Regression test:* Probar un programa/aplicación que ya funcionaba una vez que se le ha hecho un cambio para verificar que todo lo que antes funcionaba siga funcionando igual.
 + *Smoke test:* Un conjunto de pruebas a componentes específicos que forman el *core* de un sitema/aplicación.
@@ -58,20 +59,20 @@ Nosotros nos concentraremos en este tipo de pruebas porque son las que **nos com
 
 El objetivo de estas pruebas es verificar que un función hace lo que esperamos que haga. Se require que sea atómica -que solo haga 1 cosa-, a veces pudiera llegar a ser ambiguo la definición de hacer una sola cosa o funcionalidad, pero conforme vayas empezando a generar pruebas unitarias de tu código te irás dando cuenta cuando un función hace más de una cosa, porque será difícil hacer su prueba.
 
-Es pos eso, que hacer pruebas unitarias te hace generar mejor código.
+Es por eso, que hacer pruebas unitarias te hace generar mejor código.
 
 Hay dos vertientes en el mundo de ingeniería de *software* con respecto a cuándo hay que generar la prueba de unidad.
 
-1. Un grupo opina que es mejor diseñar la prueba de unidad **antes** de hacer la función *Test-driven development*. De esta manera evitas estar sesgado a la implementación que ya hiciste. $\leftarrow$ recuerda que tú eres quien desarrolla la prueba unitaria de la función que desarrollaste!
+1. Un grupo opina que es mejor diseñar la prueba de unidad **antes** de hacer la función *Test-driven development*. De esta manera evitas estar sesgado a la implementación que ya hiciste. -> recuerda que tú eres quien desarrolla la prueba unitaria de la función que desarrollaste!
 2. Otro grupo opina que es mejor diseñar la prueba de unidad **después** de hacer la función, pues para este momento ya sabes qué hiciste y cómo lo hiciste.
 
 Ambos tienen puntos a favor y puntos en contra, sin embargo para poder aplicar la primer opción requieres tener mucha experiencia tanto desarrollando software como en desarrollar pruebas unitarias. En nuestro caso haremos la segunda opción, primero haremos la funcionalidad y luego haremos la prueba de unidad, porque además, pruebas unitarias para ciencia de datos son "un poquito" diferentes a las de software... hay cosas que no son determinísticas!
 
-+ Métrica: cobertura , *successful vs failed*
++ Métrica: cobertura, *successful vs failed*.
 
 #### Unit Testing
 
-`unittest` es uno de los *frameworks* más utilizados de pruebas de código. Está basado en JUnit (del mundo de java), estaremos utilizando éste *framework* en python en lugar del PyTest **solo** porque `marbles` -una librería que veremos más adelante- está basado en este framework, de otra forma ocuparíamos PyTest.
+`unittest` es uno de los *frameworks* más utilizados de pruebas de código. Está basado en JUnit (del mundo de java), estaremos utilizando éste *framework* en python en lugar del PyTest **solo** porque `marbles` -una librería que veremos más adelante- está basado en este *framework*, de no ser así, ocuparíamos PyTest.
 
 En realidad todos los *frameworks* de pruebas unitarias se parecen mucho en su funcionamiento, solo cambian algunos detalles.
 
@@ -140,7 +141,7 @@ Son objetos que nos permiten hacer un *setup* inicial y que sirven para no tener
 
 Un *fixture* muy utilizado es la definición de un *DataFrame*, o una sesión de Spark, o una conexión a una BD.
 
-En `unittest` se ocupan dos métodos:
+En `unittest` se ocupan 2 métodos -a diferentes niveles-:
 
 + `SetUp()`: Éste método corre antes de la prueba.
 + `TearDown()`: Éste método corre después de la prueba.
@@ -200,17 +201,17 @@ Esta librería está construida sobre `unittest` no sobre `pytest` razón por la
 
 Para ocupar *marbles* como *unit testing*:
 
-+ Necesitas instalar en tu ambiente virtual de pyenv/virtualenv/conda/anaconda de la clase un `pip install marbles`.
++ Necesitas instalar en tu ambiente virtual de `pyenv/virtualenv/conda/anaconda` de la clase un `pip install marbles`.
 + En lugar de importar `unittest` tendrás que importar `marbles.core`.
 + En lugar de correr las pruebas con `python -m unittest` hay que correrlas con `python -m marbles`.
 
-Dado que en marbles lo más importante es el contexto, los mensajes de salida cuando una prueba falla, incluyen más información.
+Dado que en `marbles` lo más importante es el contexto, los mensajes de salida cuando una prueba falla, incluyen más información.
 
 1. Agrega el código "alrededor" de donde se originó la falla.
-2. Agrega la visualización de los valores en las variables locales (las públicas), para tener contexto de cómo estaba el "estado del mundo" en el momento de la falla. Esto evita tener que estar poniendo prints por todos lados <- qué por cierto es una muy mala práctica para hacer debugueo!.
+2. Agrega la visualización de los valores en las variables locales (las públicas), para tener contexto de cómo estaba el "estado del mundo" en el momento de la falla. Esto evita tener que estar poniendo `prints` por todos lados <- qué por cierto es una muy mala práctica para hacer debugueo!, utiliza `logging`.
 3. Agrega una **nota** generada por el autor de la prueba unitaria para tener el contexto correcto.  
 
-La diferencia entre el mensaje de una prueba unitaria normal de *unit testing* y la nota de marbles, consiste en que la primera debe ser un mensaje corto, concreto y no ambiguo del error, mientras que la segunda es el contexto asociado a lo que estamos probando; es aquí donde deberíamos poner la severidad del error, o qué es lo normal de esperar en esa prueba.
+La diferencia entre el mensaje de una prueba unitaria normal de *unit testing* y la nota de `marbles`, consiste en que la primera debe ser un mensaje corto, concreto y no ambiguo del error, mientras que la segunda es el contexto asociado a lo que estamos probando; es aquí donde deberíamos poner la severidad del error, o qué es lo normal de esperar en esa prueba.
 
 Marbles también agrega sus propios métodos de `assert` a través del módulo `mixins`.
 
@@ -251,7 +252,7 @@ Esta librería está enfocada en verificar *propiedades* en los datos. Dado que 
 
 Funciona generando datos aleatorios que cumplen con las especificaciones que nosotros definimos, verifica que las pruebas se siguen cumpliendo con estos nuevos datos. Si encuentra una muestra que "rompe" la prueba, la hará más pequeña hasta encontrar cuál es el problema. Guarda ese ejemplo para después para no olvidar el problema que causó en tu código en el futuro.
 
-La definición de las pruebas en este sentido consiste en decidir y definir qué garantias o propiedades debe cumplir el código siempre, sin importar los datos que entren. Por ejemplo: Si borras un objeto ya no es visible en ningún lado, si serializas y deserializas un objeto debe ser exactamente el mismo.
+La definición de las pruebas en este sentido consiste en decidir y definir qué garantías o propiedades debe cumplir el código siempre, sin importar los datos que entren. Por ejemplo: Si borras un objeto ya no es visible en ningún lado, si serializas y deserializas un objeto debe ser exactamente el mismo.
 
 Al igual que Bulwark, funciona con decoradores sobre las funciones que quieres probar.
 
@@ -285,3 +286,4 @@ Esta librería nos permitie verificar que las supociones que tenemos de los dato
 + [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)
 + [PyTest](https://docs.pytest.org/en/latest/)
 + [API PyTest](https://docs.pytest.org/en/latest/reference.html#)
++ [Ejemplo de PySpark con pruebas unitarias -pytest-](https://engblog.nextdoor.com/unit-testing-apache-spark-with-py-test-3b8970dc013b)
