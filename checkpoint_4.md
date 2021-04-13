@@ -15,7 +15,6 @@ Abril 2021
 + `README.md` actualizado
 + `requirements.txt` actualizado
 + Imagen de DAG en verde con las 8 tareas
-+ DAG con todos los task en verde
 + Código
 
 **Demo en clase**
