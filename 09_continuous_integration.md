@@ -11,7 +11,7 @@ Abril 2021
 + Pruebas de código
 + Tipos de pruebas
 + Pruebas unitarias
-+ PyTest
++ unittest
   + Asserts
   + Fixtures
   + Mocks
