@@ -17,14 +17,16 @@ Abril 2021
 
 ¿Qué se entrega?
 
-+ Actualización de tu `README.md`, agregar tu DAG en verde completo.
++ Actualización de tu `README.md`
+  + Agregar tu DAG en verde completo
+  + Incluye instrucciones de cómo correr tu luigi
 + Actualización de tu `requirements.txt`.
 + Si aún no lo tienes, sección de instalación de tu producto de datos: Qué pasos debo seguir para bajar tu producto y echarlo a andar.
 + Código
 
 **Demo en clase**
 
-Tienes de 5 a 7 minutos para presentar:
+Tienes de 5 a 7 minutos para presentar, **en tu EC2**:
 
 1. Correr desde "ingestión metadata" -> luigi corre
 * Se muestra que la prueba unitaria pasa
