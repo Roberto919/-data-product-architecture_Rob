@@ -140,3 +140,6 @@ dmypy.json
 
 ## Pycharm
 .idea/
+
+## Recordings
+recordings/
