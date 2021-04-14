@@ -12,7 +12,7 @@ Abril 2021
 
 ¿Qué se entrega?
 
-+ `README.md` actualizado
++ `README.md` actualizado -> incluye instrucciones de cómo correr tu luigi
 + `requirements.txt` actualizado
 + Imagen de DAG en verde con las 8 tareas
 + Código
