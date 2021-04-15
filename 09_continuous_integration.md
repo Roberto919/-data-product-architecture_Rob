@@ -121,7 +121,7 @@ a = np.array([0.54, 0.33])
 b = np.array([0.13, 0.22])
 
 def test_sum():
-  self.assertAlmostEqual(a+b, np.array([0.678, 0.554]), 2)
+  np.assert_almost_equal(a+b, np.array([0.678, 0.554]), 2)
 ```
 
 #### Pandas unit test
