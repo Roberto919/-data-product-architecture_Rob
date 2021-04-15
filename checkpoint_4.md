@@ -17,6 +17,8 @@ Abril 2021
 + Imagen de DAG en verde con las 8 tareas
 + Código
 
+-> En tu carpeta `sql` debe existir un script `create_metadata_tables.sql` en donde está el código en sql correspondiente a la creación de las tablas que ocuparás para almacenar la metadata.
+
 **Demo en clase**
 
 (5-7 minutos máximo)
