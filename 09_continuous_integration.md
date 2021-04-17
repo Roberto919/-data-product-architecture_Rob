@@ -124,6 +124,11 @@ def test_sum():
   np.assert_almost_equal(a+b, np.array([0.678, 0.554]), 2)
 ```
 
+```
+## Rob notes
+- Algunas de las pruebas podrían ser para ver si tenemos valores nulos por ejemplo.
+```
+
 #### Pandas unit test
 
 Pandas también tiene su propio *set* de funciones que ayudan a realizar *unit testing* muy acoplado a la manipulación y análisis de datos :). Los métodos disponibles se encuentran en la sección [*General utility functions*](https://pandas.pydata.org/pandas-docs/stable/reference/general_utility_functions.html).
@@ -153,7 +158,6 @@ En `unittest` se ocupan 2 métodos -a diferentes niveles-:
 + `TearDownClass()`: Corre después de que se ejecuten los métodos de la clase.
 
 **NOTA:** Hasta este momento no habíamos comentado que el orden en el que se ejecutan las pruebas es ordenado de acuerdo al nombre de la prueba. **No** hay secuencia entre pruebas, pues no estamos haciendo una prueba de integración, por lo que debe ser posible ejecutar las pruebas bajo cualquier orden -son pruebas unitarias!-.
-
 
 
 
