@@ -12,22 +12,24 @@ Abril 2021
 + Aequitas
 + AIFairness360
 
+***
+
 ### Contexto
 
 *Machine Learning* por **naturaleza** es discriminante, pues justo lo que hacemos es discriminar datos a través del uso de la estadística. Sin embargo, esta discriminación puede ser un problema cuando brinda ventajas sistemáticas a grupos privilegiados y desventajas sistemáticas a grupos no privilegiados. Por ejemplo: Privilegiar la atención médica a pacientes blancos sobre pacientes afroamericanos. [A biased medical algorithm favored white people for health-care programs](https://www.technologyreview.com/2019/10/25/132184/a-biased-medical-algorithm-favored-white-people-for-healthcare-programs/).
 
 Un sesgo en el set de entrenamiento ya sea por prejuicio o por un sobre/sub sampleo lleva a tener modelos con sesgo.
 
+Un mal entendido común al hacer modelos de *machine learning* consiste en evitar utilizar *features* que pueden generar una inquedidad por ejemplo: sexo, edad, etnia, etc. Sin embargo, no ocuparlos nos lleva a tener puntos ciegos en nuestros modelos para cuantificar si efectivamente tenemos un sesgo o inequidad en algunos grupos.
+
+Deberemos de ocupar estos *features* en los modelos, justo porque queremos evitar estos sesgos. Para ello, identificaremos y cuantificaremos estos sesgos e inequedades en diferentes grupos para después mitigarlos y cuantificar la consecuencia en nuestras métricas de desempelo *off line*.
+
+
 ### Aequitas
 
-Latín de equidad. Es un *toolkit open source* para medir *bias* y *fairness* desarrollado por [DSSG](http://www.dssgfellowship.org/).
+Latín de equidad. Es un *toolkit open source* para medir el sesgo e inqueidad desarrollado por [DSSG](http://www.dssgfellowship.org/).
 
 El siguiente árbol de decisión está desarrollado pensando desde el punto de vista del tomador de decisiones -operativas- al que ayudamos desarrollando un modelo de *machine learning* para identificar en qué métricas deberíamos de concentrarnos para cuantificar el *bias* y *fairness*.
-
-
-![](./images/fairness_tree.png)
-<br>
-Fuente: [Versión anterior Aequitas](http://www.datasciencepublicpolicy.org/projects/aequitas/)
 
 ![](./images/fairness_tree_amplified.png)
 <br>
@@ -38,9 +40,9 @@ Donde:
 
 + *Punitive*: Corresponde a modelos en donde al menos una de las acciones asociadas a nuestro modelo de predicción está relacionada con un "castigo". Por ejemplo: Algoritmos donde se predice la probabilidad de reincidencia en algún delito y que es tomada como variable para decidir si dan libertad provisional o no.
 
-+ *Assistive*: Corresponde a modelos en donde la acción asociada al modelo son del estilo de triage. Por ejemplo: Priorización de inspecciones a realizar: médicas, a hogares, a *foster homes*, a estaciones de generación de energía, etc.  
++ *Assistive*: Corresponde a modelos en donde la acción asociada al modelo son del estilo de preventivo. Por ejemplo: Priorización de inspecciones a realizar: médicas, a hogares, a *foster homes*, a estaciones de generación de energía, etc.  
 
-![](./images/pointer.png) Rercordemos:
+![](./images/pointer.png) Rercordemos que:
 
 ||Predicted|Real|
 |:------|:-------|:-------|
@@ -58,12 +60,17 @@ Y que:
 
 Además:
 
-+ Precision: $\frac{TP}{TP+FP}$
-+ Recall: $\frac{TP}{TP+FN}$
++ Precision:
+
+![](./images/precision_eq.png)
+
++ Recall:
+
+![](./images/recall_eq.png)
 
 Ahora si...
 
-1. *Equal Parity* o *Demographic or Statistical Parity*: Cuando nos interesa que cada grupo de la variable "protegida" -género- tenga la misma proporción de etiquetas positivas predichas (TP). Por ejemplo: En un modelo que predice si darte o no un crédito, nos gustaría que sin importar el género de la persona -*demographic parity*- tuvieran la misma oportunidad.
+1. *Equal Parity* o *Demographic or Statistical Parity*: Cuando nos interesa que cada grupo de la variable "protegida" -i.e. género- tenga la misma proporción de etiquetas positivas predichas (TP). Por ejemplo: En un modelo que predice si darte o no un crédito, nos gustaría que sin importar el género de la persona -*demographic parity*- tuvieran la misma oportunidad.
 
 ![](./images/fairness_demographic_parity.png)
 <br>
@@ -73,7 +80,7 @@ Se utiliza esta métrica cuando:
 
 a) Queremos cambiar el estado actual para "mejorarlo". Por ejemplo: Ver más personas de grupos desfavorecidos con mayor oportunidad de tener un préstamo.
 
-b) Conocemos que hay habido una ventaja histórica que afecta los datos con los que construiremos el modelo.
+b) Conocemos que ha habido una ventaja histórica que afecta los datos con los que construiremos el modelo.
 
 ##### *Caveats*
 
@@ -93,7 +100,7 @@ a) El modelo necesita ser muy bueno en detectar la etiqueta positiva.
 
 b) No hay -mucho- costo en introducir falsos negativos al sistema -tanto al usuario como a la empresa-. Por ejemplo: Generar FPs en tarjeta de crédito.
 
-c) La definición de la variable *target* no es subjetiva. Por ejemplo: Fraude o No Fraude no es alog subjetivo, buen empleado o no puede ser muy subjetivo.
+c) La definición de la variable *target* no es subjetiva. Por ejemplo: Fraude o No Fraude no es algo subjetivo, buen empleado o no, puede ser muy subjetivo.
 
 ##### *Caveats*
 
@@ -101,20 +108,32 @@ Para poder cumplir con tener el mismo porcentaje de TPR en todos los grupos de l
 
 4. *Proportional Parity* o *Impact Parity* o *Minimizing Disparate Impact*: Cuando nos interesa que cada grupo de la variable "protegida" tenga el mismo impacto. Por ejemplo, en la imagen anterior de *False negative parity*, no se tiene el mismo *impact parity* pues en el grupo B el impacto resultante de tener la misma proporción de TPR introdujo muchos más FPs.
 
-5. *False Omission Rate (FOR)*: Esta métrica está asociada a las etiquetas negativas. Se calcula como $\frac{FN}{FN+TN}$, y nos permite identificar la proporción de Falsos Negativos que existen entre todas las etiquetas predichas como negativas. Ocupamos esta métrica cuando nos interesa conocer si hay un sesgo hacia algún grupo de no ser selección como etiqueta positiva, por lo que se busca tener paridad entre los FNR de todos los grupos de la variable "protegida". Asociada a modelos *assistive*.
+5. *False Omission Rate (FOR)*: Esta métrica está asociada a las etiquetas negativas. Se calcula como:
 
-6. *False Discovery Rate (FDR)*: Esta métrica está asociada a las etiquetas positivas pero enfocadas a los False Positive. Se calcula como $\frac{FP}{FP+TP}$, y nos permite identificar la proporción de Falsos Positivos que existen entre todas las etiquetas predichas como positivas. Ocupamos esta métrica cuando nos interesa conocer si hay sesgo hacia un grupo para que salga FP. Asociada a modelos *punitive*.  
+![](./images/for.png)
+
+Nos permite identificar la proporción de Falsos Negativos que existen entre todas las etiquetas predichas como negativas. Ocupamos esta métrica cuando nos interesa conocer si hay un sesgo hacia algún grupo de no ser seleccionado como etiqueta positiva, por lo que se busca tener paridad entre los FNR de todos los grupos de la variable "protegida". Asociada a modelos *assistive*.
+
+![](./images/pointer.png) De aquellos que necesitaban asistencia, cuántos fueron negados por su etnia.
+
+6. *False Discovery Rate (FDR)*: Esta métrica está asociada a las etiquetas positivas pero enfocadas a los False Positive. Se calcula como:
+
+![](./images/fdr.png)
+
+Nos permite identificar la proporción de Falsos Positivos que existen entre todas las etiquetas predichas como positivas. Ocupamos esta métrica cuando nos interesa conocer si hay sesgo hacia un grupo para que salga FP. Asociada a modelos *punitive*.  
+
+![](./images/pointer.png) De aquellos que dijimos 1 -reinciden-, cuántos fueron mal predichos por su etnia.
 
 #### Conceptos preliminares para Aequitas
 
 + *Atrribute*: Un *feature* en nuestro *dataset*. Por ejemplo: `genero`.
-+ *Group*: Un **grupo** está formado por las observaciones que tienen un valor espécifico del atributo. Por ejemplo: El grupo `genero-femenino`.
++ *Group*: Un **grupo** está formado por las observaciones que tienen un valor espécifico del atributo. Por ejemplo: Del atributo `genero` un grupo es `femenino`, otro `masculino` (2 grupos).
 + *Referenced group*:  Seleccionamos uno de los grupos que nos servirá como referencia. Existen 3 formas de seleccionar este grupo base:
   + El grupo de mayor tamaño entre todos los grupos existentes -de mayor elementos en él-. Por ejemplo: `genero-masculino`.
   + El grupo de menor tamaño. Por ejemplo: `genero-otro`.
-  + Aquél que históricamente ha sido un grupo favorecido. Por ejemplo: Para la variable raza, el grupo `raza-blanca`.
-+ *Labeled Positive*: El número de elementos etiquetados como positivo dentro de un grupo.
-+ *Labeled Negative*: El número de elementos etiquetados como negativo dentro de un grupo.
+  + Aquél que históricamente ha sido un grupo favorecido. Por ejemplo: Para la variable etnia, el grupo `etnia-blanca`.
++ *Labeled Positive*: El número de elementos con etiqueta  positiva dentro de un grupo.
++ *Labeled Negative*: El número de elementos con etiqueta negativa dentro de un grupo.
 + *Predicted Positive (PP)*: Número de observaciones en un grupo con predicción de etiqueta positiva.
 + *Total predicted positive*: Número total de observaciones con predicción de etiqueta positiva en todos los grupos.
 + *Predicted Negative (PN)*: Número de observaciones en un grupo con predicción de etiqueta negativa.
@@ -128,9 +147,9 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
 En estas métricas nos interesa conocer las distribuciones de las observaciones en cada grupo de la variable "protegida".
 
-1. *Prevalence*: La fracción de observaciones en un grupo cuya predicción fue TP.
+1. *Prevalence*: La fracción de observaciones en un grupo con etiqueta positiva.
 2. *Predicted Prevalence (PPrev)*: La fracción de observaciones en un grupo con predicción de etiqueta positiva.
-3. *Predicted Positive Rate (PPR)*: La fracción de observaciones con predicción de etiqueta positiva que pertenecen a cierto grupo.
+3. *Predicted Positive Rate (PPR)*: La fracción de observaciones con predicción de etiqueta positiva que pertenecen a cierto grupo. Número de observaciones predichas como etiqueta 1 que pertenecen a un grupo.
 
 ![](./images/bias_metrics.png)
 <br>
@@ -140,10 +159,22 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
 En estas métricas requerimos de la verdadera etiqueta para encontrar los TP, FP, TN y FN. A través de estas medidas podemos obtener las siguientes 4 métricas asociadas al error:
 
-1. *False Discovery Rate (FDR)*: $FDR=\frac{FP}{FP+TP}$ La fracción de falsos positivos en un grupo de aquellos predichos como positivos del mismo grupo.
-2. *False Omission Rate (FOR)*: $FOR=\frac{FN}{FN+TN}$ La fracción de falsos negativos de un grupo de aquellos predichos como negativos en el grupo.
+1. *False Discovery Rate (FDR)*: La fracción de falsos positivos en un grupo de aquellos predichos como positivos del mismo grupo.
+
+![](./images/fdr.png)
+
+2. *False Omission Rate (FOR)*: La fracción de falsos negativos de un grupo de aquellos predichos como negativos en el grupo.
+
+![](./images/for.png)
+
 3. *False Positive Rate (FPR)*: La fracción de falsos positivos de un grupo de los etiquetados como negativos en el grupo.
+
+![](./images/fpr.png)
+
 4. *False Negative Rate (FNR)*: La fracción de falsos negativos de un grupo de los etiquetados como positivos en el grupo.
+
+![](./images/fnr.png)
+
 
 #### Cálculo de *bias* y *fairness*
 
@@ -153,7 +184,7 @@ En este *framework* se define *bias* como una métrica de disparidad entre los v
 
 1. Seleccionar los grupos que serán referencia para cada variable "protegida".
 2. Calcular las métricas de *fairness* de interés: PPR, PPrev, FDR, FPR, FOR, FNR.
-3. Calcular *disparity* y *bias* entre los diferentes grupos y el grupo referencia.
+3. Calcular *disparity* -*bias*- entre los diferentes grupos y el grupo referencia.
 4. Obtener el *fairness criteria assessment* de cada grupo (nosotros definimos el *threshold*).
 
 **Detalles de implementación:**
@@ -174,8 +205,8 @@ Las diferentes métricas de *fairness* se aplican comparando pares de grupos def
 <br>
 Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
-2. Calcular *disparity* y *bias*
-+ Para cada grupo, dividir entre el grupo de referencia de la misma métrica para obtener *parity*.
+2. Calcular disparidad -sesgo-.
++ Para cada grupo, dividirlo entre el grupo de referencia de la misma métrica para obtener su paridad.
 
 **Métricas de bias**
 
@@ -185,7 +216,7 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 + *False Negative Parity*
 + ...
 
-En el reporte de Aequitas, un modelo es *fair* **si y solo si** todas las métricas de interés calculadas son *fair*, si alguna es *unfair* el modelo completo se considera *unfair*.
+En el reporte de Aequitas, un modelo es **justo, si y solo si** todas las métricas de interés calculadas son **justas/equitativas**, si alguna es **inequitativa** el modelo completo se considera como **inequitativo**.
 
 ![](./images/bias_report.png)
 <br>
@@ -198,9 +229,9 @@ Fuente: [Aequitas API](https://dssg.github.io/aequitas/metrics.html)
 
 3. Obtener el *fairness criteria assessment*
 
-$$(1-\tau) \le \text{DisparityMeasure}_{group_i} \le \frac{1}{(1-\tau)}$$
+![](./images/fairness_criteria_assessment_eq.png)
 
-Donde $\tau$ es el *fairness threshold* definido por nosotros. En el siguiente ejemplo, $\tau=20%$ por lo que cualquier métrica de paridad que se encuentre entre 0.8 y 1.25 va a ser tratado como *fair*.
+Donde $\tau$ es el *fairness threshold* definido por nosotros. En el siguiente ejemplo, $\tau=20%$ por lo que cualquier métrica de paridad que se encuentre entre 0.8 y 1.25 va a ser tratado como **justo** -sin sesgo-.
 
 ![](./images/fairness_criteria_assessments.png)
 <br>
@@ -265,6 +296,8 @@ La selección del algoritmo depende en gran medida de si podemos o no hacer modi
 + *Equality of Odds*. Del paper [Equality of Opportunity in Supervised Learning](https://papers.nips.cc/paper/6374-equality-of-opportunity-in-supervised-learning.pdf)
 + *Reject Opinion Based Classification*. Del paper [Decision Theory for Discrimination-Aware Classification](https://mine.kaust.edu.sa/Documents/papers/ICDM_2012.pdf)
 
+![](./images/pointer.png) Notebook de [Aequitas](https://github.com/dssg/aequitas/blob/master/docs/source/examples/compas_demo.ipynb)
+
 
 ### Referencias
 
@@ -276,3 +309,4 @@ La selección del algoritmo depende en gran medida de si podemos o no hacer modi
 + [Aequitas with Python](https://dssg.github.io/aequitas/using_python.html)
 + [AI Fairness 360](https://aif360.mybluemix.net/)
 + [AI Fairness 360 API](https://aif360.readthedocs.io/en/latest/)
++ [KDD Fairness Tutorial 2020](https://github.com/dssg/fairness_tutorial)
