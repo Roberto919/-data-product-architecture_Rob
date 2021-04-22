@@ -18,7 +18,7 @@ Abril 2021
 
 *Machine Learning* por **naturaleza** es discriminante, pues justo lo que hacemos es discriminar datos a través del uso de la estadística. Sin embargo, esta discriminación puede ser un problema cuando brinda ventajas sistemáticas a grupos privilegiados y desventajas sistemáticas a grupos no privilegiados. Por ejemplo: Privilegiar la atención médica a pacientes blancos sobre pacientes afroamericanos. [A biased medical algorithm favored white people for health-care programs](https://www.technologyreview.com/2019/10/25/132184/a-biased-medical-algorithm-favored-white-people-for-healthcare-programs/).
 
-Un sesgo en el set de entrenamiento ya sea por prejuicio o por un sobre/sub sampleo lleva a tener modelos con sesgo.
+Un sesgo en el conjunto de entrenamiento ya sea por prejuicio o por un sobre/sub *sampleo* lleva a tener modelos con sesgo.
 
 Un mal entendido común al hacer modelos de *machine learning* consiste en evitar utilizar *features* que pueden generar una inquedidad por ejemplo: sexo, edad, etnia, etc. Sin embargo, no ocuparlos nos lleva a tener puntos ciegos en nuestros modelos para cuantificar si efectivamente tenemos un sesgo o inequidad en algunos grupos.
 
@@ -27,7 +27,7 @@ Deberemos de ocupar estos *features* en los modelos, justo porque queremos evita
 
 ### Aequitas
 
-Latín de equidad. Es un *toolkit open source* para medir el sesgo e inqueidad desarrollado por [DSSG](http://www.dssgfellowship.org/).
+Latín de equidad. Es un *toolkit open source* para medir el sesgo e inequidad desarrollado por [DSSG](http://www.dssgfellowship.org/).
 
 El siguiente árbol de decisión está desarrollado pensando desde el punto de vista del tomador de decisiones -operativas- al que ayudamos desarrollando un modelo de *machine learning* para identificar en qué métricas deberíamos de concentrarnos para cuantificar el *bias* y *fairness*.
 
@@ -38,9 +38,9 @@ Fuente: [Versión actualizada Aequitas](http://www.datasciencepublicpolicy.org/p
 
 Donde:
 
-+ *Punitive*: Corresponde a modelos en donde al menos una de las acciones asociadas a nuestro modelo de predicción está relacionada con un "castigo". Por ejemplo: Algoritmos donde se predice la probabilidad de reincidencia en algún delito y que es tomada como variable para decidir si dan libertad provisional o no.
++ *Punitive*: Corresponde a modelos en donde al menos una de las acciones asociadas a nuestro modelo de predicción está relacionada con un "castigo" hacia la entidad hacia la que se genera la acción. Por ejemplo: Algoritmos donde se predice la probabilidad de reincidencia en algún delito y que es tomada como variable para decidir si dan libertad provisional o no.
 
-+ *Assistive*: Corresponde a modelos en donde la acción asociada al modelo son del estilo de preventivo. Por ejemplo: Priorización de inspecciones a realizar: médicas, a hogares, a *foster homes*, a estaciones de generación de energía, etc.  
++ *Assistive*: Corresponde a modelos en donde la acción asociada al modelo son del estilo preventivo. Por ejemplo: Priorización de inspecciones a realizar: médicas, a hogares, a *foster homes*, a estaciones de generación de energía, etc.  
 
 ![](./images/pointer.png) Rercordemos que:
 
