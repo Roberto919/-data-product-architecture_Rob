@@ -57,7 +57,7 @@ Desde 2014 las API correspondientes a servicios de datos, financieros, analític
 
 El top 5 para 2019: Facebook, Google maps, Twitter, YouTube, Accuweather.
 
-Por lo pronto estamos a punto de llegar al **Trillon** de *endpoints*! (Dell Technologies Capital).
+Por lo pronto estamos a punto de llegar al **Trillón** de *endpoints*! (Dell Technologies Capital).
 
 ![](./images/all_about_apis.jpg)
 <br>
@@ -84,14 +84,14 @@ También conocidos como verbos, cada uno de estos métodos tiene un estatus de r
 
 Existen varios *frameworks* para desarrollar una API, en particular para python hay varias opciones: Flask, Bottle, Django, entre otros.
 
-Ocuparemos Flask porque es muy sencillo de implementar y trae lo mínimo necesario para hacer una API por lo que si necesitamos más cosas necesitaremos agregar extensiones a Flask (de Flask) o bien si ya te sientes con más confianza a conceptos de ingeniería de software pasarnos a Djando.
+Ocuparemos Flask porque es muy sencillo de implementar y trae lo mínimo necesario para hacer una API por lo que si necesitamos más cosas necesitaremos agregar extensiones a Flask (de Flask) o bien si ya te sientes con más confianza a conceptos de ingeniería de software pasarnos a Django.
 
-Si en tu equipo de trabajo hay un ingenieró de datos entonces la opción uno debería ser Django que trae todo lo que pudieras necesitar: seguridad en las llamdas, soporte para aguantar n llamadas por segundo, tiempo de respuesta, etc.
+Si en tu equipo de trabajo hay un ingenieró de datos entonces la opción uno debería ser Django que trae todo lo que pudieras necesitar: seguridad en las llamdas, soporte para aguantar `n` llamadas por segundo, tiempo de respuesta, etc.
 
 
 ##### Flask
 
-Es un *micro-framework* para APIs escrito en Python. Para instalarlo solo necesitas bajarlo con pip `pip install Flask` en tu ambiente virtual de la clase.
+Es un *micro-framework* para APIs escrito en Python. Para instalarlo únicamente requieres bajarlo con pip `pip install Flask` en tu ambiente virtual de la clase.
 
 Para utilizar Flask ocuparemos decoradores que nos permitarán "exponer" funciones a través de una API.
 
