@@ -19,7 +19,7 @@ class Task1(CopyToTable):
     database = credentials['db']
     host = credentials['host']
     port = credentials['port']
-    table = 'metadata'
+    table = 'raw.metadata'
 
     columns = [("col_1", "VARCHAR"),
                ("col_2", "VARCHAR")]
