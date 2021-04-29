@@ -28,24 +28,23 @@ Abril 2021
 
 Tienes de 5 a 7 minutos para presentar, **en tu EC2**:
 
-1. Correr desde "ingestión metadata" -> luigi corre
+1. Correr desde "entrenamiento metadata" -> luigi corre. Correr desde la sección de entrenamiento_metadata -> entrenamiento_pruebas_unitarias -> entrenamiento)
 * Se muestra que la prueba unitaria pasa
 * Se muestra la metadata generada en RDS
 * Se muestra DAG en verde
-2. Correr desde "ingestión metadata" mismos parámetros -> luigi no corre
+2. Correr desde "entrenamiento metadata" mismos parámetros -> luigi no corre
 * Se muestra la salida de luigi que todo está bien, pero no corrió nuevos tasks
-3. Correr desde "ingestión metadata" nuevos parámateros -> luigi corre
+3. Correr desde "entrenamiento metadata" nuevos parámateros -> luigi corre
 * La prueba unitaria falla, se muestra mensaje de error con contexto
 * Se muestra el DAG en rojo, no se corre metadata  
 * Se muestra en RDS que la metadata no se generó
-4. Correr desde "Feature engineering metadata" -> luigi corre
-* Únicamente lo nuevo a correr son los siguientes tasks: "Feature engineering", "feature engineering unit test", "feature engineering metadata".
+4. Correr desde "selección de modelo metadata" -> luigi corre. Correr desde la sección de "selección de modelo metadata" -> "selección de modelo unit test" -> "selección de modelo".
 * Se muestra que la prueba unitaria pasa y la metadata se almacena en RDS
 * Se muestra la metadata generada en RDS  
 * Se muestra DAG en verde
-5. Correr desde "feature engineering metadata" mismos parámetros -> luigi no corre
+5. Correr desde "selección de modelo metadata" mismos parámetros -> luigi no corre
 * Se muestra la salida de luigi que todo está bien, pero no corrió nuevos tasks
-6. Correr desde "feature engineering metadata" nuevos parámetros -> luigi corre
+6. Correr desde "selección de modelo metadata" nuevos parámetros -> luigi corre
 * La prueba unitaria falla, se muestra mensaje de error asociado con contexto
 * Se muestra el DAG en rojo, no se corre metadata
 * Se muestra en RDS que la metadata no se generó
