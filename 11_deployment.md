@@ -23,27 +23,28 @@ Para que esto funcione previamente se deberá haber definido junto con el client
 
 ### API
 
-Acrónimo de *Application Programming Interface*. Un(a) API nos permite poder acceder a desarrollo de alguien más de manera programática. Donde alguien más puede ser una empresa, una ONG, un proyecto escolar, etc. Nos permiten compartir datos entre diferentes piezas de *software*, en particular a través de Internet.
+Acrónimo de *Application Programming Interface*. Un(a) API nos permite comunicar dos componentes o sistemas de forma programática. O bien, interactuar con un sistema o componente de forma programática. Este sistema o componente puede ser una empresa, un módulo, un sistema, una ONG, etc.
 
-Por ejemplo: La mayoría de sus proyectos utilizan una API a través de la cuál obtienen los datos que necesitan para sus productos de datos.
+Por ejemplo: La mayoría sus proyectos utilizan una API a través de la cuál obtienen los datos que necesitan para sus productos de datos.
 
-![](,/images/pointer.png) Te recomiendo leer un pequeño artículo de Forbes de enero de 2020 donde se habla de la economía que está generando el desarrollo de APIs.
+![](,/images/pointer.png) Te recomiendo leer un pequeño [artículo de Forbes]((https://www.forbes.com/sites/tomtaulli/2020/01/18/api-economy--is-it-the-next-big-thing/#22c51ef642ff)) de enero de 2020 donde se habla de la economía que está generando el desarrollo de APIs.
 
 ![](./images/pointer.png) La forma más eficiente de integrar nuestro trabajo como científicos de datos a una empresa/proceso es utilizar una API para "exponer" las predicciones de nuestro modelo. De esta manera, el área de sistemas "solo" tiene que hacer una petición a la API para obtener los resultados del modelo.
 
-También preferimos ocupar APIs porque de esta manera nos aseguramos que el desarrollo o implementación de los modelos están bien hechos -los hicimos nosotros con nuestras herramientas de trabajo: R, Sklearn, PySpark, etc.- y que no hubo ningún cambio en el código que pueda ser problema. --> ¡No queremos que ingenieros de software implementen nuestra solución!.
+También preferimos ocupar APIs porque de esta manera nos aseguramos que el desarrollo o implementación de los modelos están bien hechos -los hicimos nosotros con nuestras herramientas de trabajo: R, Sklearn, PySpark, etc.- y que no hubo ningún cambio en el código que pueda ser problema. --> ¡No queremos que ingenieros de *software* implementen nuestra solución!.
+
 
 #### Protocolos para API
 
-+ SOAP: Acrónimo de *Simple Object Access Protocol*, en este protocolo el intercambio de datos se realiza a través de mensajes a través de Internet. Los mensajes SOAP están en formato XML y se utilizan sobre métodos de HTTP: POST, PUT, GET, DELETE, HEAD.  
++ `SOAP`: Acrónimo de *Simple Object Access Protocol*, en este protocolo el intercambio de datos se realiza a través de mensajes a través de Internet. Los mensajes SOAP están en formato XML y se utilizan sobre métodos de `HTTP`: `POST`, `PUT`, `GET`, `DELETE`, `HEAD`.  
 
-+ REST: Acrónimo de *Representational State Transfer*, en este protocolo también conocido como *RESTful* el intercambio de datos se realiza entre servidor y cliente y hay varios formatos de entrega: JSON, XML, texto plano, etc., aunque el más utilizado es JSON. Dado que no hay un formato estándar, es más flexible que el protocolo SOAP y por lo tanto más utilizado, en un estudio del 2017, 81% de los APIs hosteados por [Programmingweb](https://www.programmableweb.com/news/which-api-types-and-architectural-styles-are-most-used/research/2017/11/26) eran REST vs 9% SOAP.
++ `REST`: Acrónimo de *Representational State Transfer*, en este protocolo también conocido como *RESTful* el intercambio de datos se realiza entre servidor y cliente y hay varios formatos de entrega: JSON, XML, texto plano, etc., aunque el más utilizado es JSON. Dado que no hay un formato estándar, es más flexible que el protocolo SOAP y por lo tanto más utilizado, en un estudio del 2017, 81% de los APIs hosteados por [Programmingweb](https://www.programmableweb.com/news/which-api-types-and-architectural-styles-are-most-used/research/2017/11/26) eran `REST` vs 9% `SOAP`.
 
-Cabe mencionar que el protocolo SOAP aún es muy utilizado en empresas financieras donde la comunicación entre sistemas legacy se realiza a través del protocolo SOAP.
+Cabe mencionar que el protocolo SOAP aún es muy utilizado en empresas financieras donde la comunicación entre intra sistemas legacy se realiza a través del protocolo SOAP.
 
-El protocolo REST, también ocupa los métodos de HTTP para la transferencia de datos: PUT, POST, GET, etc.
+El protocolo REST, también ocupa los métodos de `HTTP` para la transferencia de datos: `PUT`, `POST`, `GET`, etc.
 
-+ Otros como GraphQL que empieza a tener cierta popularidad (desarrollada por Facebook).
++ Otros como `GraphQL` que empieza a tener cierta popularidad (desarrollada por Facebook).
 
 
 #### Historia
@@ -52,11 +53,9 @@ Los API como tal existen desde el año 2000 y en los primeros 10 años, eran las
 
 Hoy en día hay APIs en casi todos los sectores de la industria.
 
-Desde 2014 las API correspondientes a servicios de datos, financieros, analítica hay ido en aunmeto.
+Desde 2014 las API correspondientes a servicios de datos, financieros, analítica han ido en aunmeto.
 
 El top 5 para 2019: Facebook, Google maps, Twitter, YouTube, Accuweather.
-
-Seguro para el análisis de 2020 las API más llamadas serán de datos relacionados a COVID-19.
 
 Por lo pronto estamos a punto de llegar al **Trillon** de *endpoints*! (Dell Technologies Capital).
 
@@ -197,6 +196,7 @@ También exite la solución clásica de *dashboard*, en ésta si es necesario po
 
 ### Referencias
 
++ [API Best practices](https://stoplight.io/blog/rest-api-standards-do-they-even-exist/)
 + [Forbes: API Economy](https://www.forbes.com/sites/tomtaulli/2020/01/18/api-economy--is-it-the-next-big-thing/#22c51ef642ff)
 + [Flask Documentación](https://flask.palletsprojects.com/en/1.1.x/)
 + [Flask API Reference](https://flask.palletsprojects.com/en/1.1.x/#api-reference)
