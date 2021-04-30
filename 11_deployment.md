@@ -21,6 +21,13 @@ Si esta es la forma de entrega recuerda establecer un estándar en el nombre de 
 
 Para que esto funcione previamente se deberá haber definido junto con el cliente el formato y tipo de datos que van en el csv para que no se modifique.
 
+```
+## Rob notes
+- Esta es una salida un poco chafa porque no está incorporado en el flujo.
+- Esto es latoso porque hay que poner muchas convenciones.
+- Con esta forma de entrega nos "lavamos las manos". 
+```
+
 ### API
 
 Acrónimo de *Application Programming Interface*. Un(a) API nos permite comunicar dos componentes o sistemas de forma programática. O bien, interactuar con un sistema o componente de forma programática. Este sistema o componente puede ser una empresa, un módulo, un sistema, una ONG, etc.
@@ -33,6 +40,13 @@ Por ejemplo: La mayoría sus proyectos utilizan una API a través de la cuál ob
 
 También preferimos ocupar APIs porque de esta manera nos aseguramos que el desarrollo o implementación de los modelos están bien hechos -los hicimos nosotros con nuestras herramientas de trabajo: R, Sklearn, PySpark, etc.- y que no hubo ningún cambio en el código que pueda ser problema. --> ¡No queremos que ingenieros de *software* implementen nuestra solución!.
 
+```
+## Rob notes
+- Con esto podemos evitar conectarnos al sistema de la otra persona.
+- A TI no le interesa nuestro modelo.
+- API es la mejor manera de entregar resultados.
+  - Obligamos al cliente a que jale información.
+```
 
 #### Protocolos para API
 
@@ -46,6 +60,12 @@ El protocolo REST, también ocupa los métodos de `HTTP` para la transferencia d
 
 + Otros como `GraphQL` que empieza a tener cierta popularidad (desarrollada por Facebook).
 
+```
+## Rob notes
+- El SOAP es muy viejito.
+  - Se usa en sistemas legacy (viejitos y obsoletos)
+- REST es lo más popular hoy.
+```
 
 #### Historia
 
@@ -78,6 +98,11 @@ También conocidos como verbos, cada uno de estos métodos tiene un estatus de r
 |GET|200 (OK)|404 (NOT FOUND)<br>400 (BAD REQUEST)|
 |PUT|200 (OK)<br> 201 si se creó|204 (NO CONTENT)<br>404 (NOT FOUND)|
 |DELETE|200 (OK)|404 (NOT FOUND)|
+
+```
+## Rob notes
+- Nosotros casi que solo vamos a usar "GET".
+```
 
 
 #### Frameworks para API
