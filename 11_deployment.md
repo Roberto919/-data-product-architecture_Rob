@@ -108,7 +108,7 @@ Es posible agregar los métodos que cada *endpoint* resuelve, agregándolos al d
 
 ![](./images/pointer.png) Ir al *script* `flask_script_1.py`.
 
-Para levantar el servidor de Flask necesitamos definir como variable de ambiente dónde está la clase que implementa Flask. `$export FLASK_APP=script_python.py` o el directorio que tiene los *scripts* que definen el *routing* y los servicios a exponer.
+Para levantar el servidor de Flask necesitamos definir como variable de ambiente dónde está la clase que implementa Flask. `$ export FLASK_APP=script_python.py` o el directorio que tiene los *scripts* que definen el *routing* y los servicios a exponer.
 
 Después solo se necesita correr flask `flask run`, esto levantará un pequeño servidor que expone a través de tu localhost en el puerto 5000 (por default).  
 
