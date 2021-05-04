@@ -13,7 +13,7 @@ Abril 2021
 * Se agregan al pipeline de entrenamiento 3 tasks:
   + Cuantificacion de sesgos e inequidades
   + Prueba unitaria de sesgos e inequidades
-  + Metadata de sesgose e inequidades.
+  + Metadata de sesgos e inequidades.
 
 
 ¿Qué es entrega?
@@ -21,6 +21,10 @@ Abril 2021
 + `README.md` actualizado con las instrucciones necesarias para correr todo su *pipeline*.
 + Código actualizado.
 + DAG en verde actualizado.
++ ¿Cuáles son los atributos protegidos?
++ ¿Qué grupos de referencia tiene cada atributo protegido?, explica el por qué
++ ¿Tu modelo es punitivo o asistivo? explica por qué
++ ¿Qué métricas cuantificarás ocuparás en sesgo e inequidad? explica por qué
 
 
 #### Demo
@@ -40,4 +44,3 @@ Tienes 5 minutos para mostrar:
    + La prueba unitaria truena, se muestra mensaje de contexto de Marbles
    + No se genera metadata
    + DAG en rojo
-   
