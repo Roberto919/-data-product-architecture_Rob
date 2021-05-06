@@ -91,7 +91,7 @@ Si en tu equipo de trabajo hay un ingenieró de datos entonces la opción uno de
 
 ##### Flask
 
-Es un *micro-framework* para APIs escrito en Python. Para instalarlo únicamente requieres bajarlo con pip `pip install Flask` en tu ambiente virtual de la clase.
+Es un *micro-framework* para APIs escrito en Python. Para instalarlo únicamente requieres bajarlo con pip `pip install flask` en tu ambiente virtual de la clase.
 
 Para utilizar Flask ocuparemos decoradores que nos permitarán "exponer" funciones a través de una API.
 
