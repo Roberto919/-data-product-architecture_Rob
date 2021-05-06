@@ -59,11 +59,9 @@ Fuente: [Monitoring models in production, PyData Amsterdam 2018](https://www.you
 <br>
 Fuente: [CausalImpact Python](https://github.com/dafiti/causalimpact)
 
-+ *Canary models*. Modelos que se considerán *champions* del problema a resolver, el que está en producción es el *champion* -por un tiempo-.
++ *Canary deployment*. Despliegue de un modelo -supuestamente mejor- a solo una pequeña proporción de usuarios. Este despliegue sucede a lo más por un par de horas -depende del problema y ciclo de negocio- y la idea es identificar si hay fallas en el producto, de haberlas se quita la versión nueva desplegada y se mantiene la versión actual.
 
-![](./images/canary_models.png)
-<br>
-Fuente: [Monitoring Machine Learning Results and Canary Models](https://www.youtube.com/watch?v=LK9D249SgCw)
+![](./images/pointer.png) ¿Por qué crees que se llama *Canary Deployment*?
 
 ![](./images/model_monitoring_metrics.png)
 <br>
