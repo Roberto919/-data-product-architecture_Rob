@@ -113,6 +113,16 @@ Ocuparemos Flask porque es muy sencillo de implementar y trae lo mínimo necesar
 
 Si en tu equipo de trabajo hay un ingenieró de datos entonces la opción uno debería ser Django que trae todo lo que pudieras necesitar: seguridad en las llamdas, soporte para aguantar `n` llamadas por segundo, tiempo de respuesta, etc.
 
+```
+## Rob notes
+- Flask es una solución eficiente y rápida para hacer prototipo de APIs.
+- Django es un framework muy robusto para funcionalidades complejas.
+  - Puedes agregar seguridad por ejemplo.
+- El servicio de AWS te hace las cosas más fáciles
+  - Solo hay que mandarle datos para que los exponga.
+  - Maneja todo por ti.
+```
+
 
 ##### Flask
 
