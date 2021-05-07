@@ -12,6 +12,12 @@ Mayo 2021
 + Dudas
 
 ### Monitoreo de modelos
+```
+## Rob Notes
+- Podemos hacer un README.md por cada sección del modelo.
+- Airflow te puede mostrar tu pipeline y tasks.
+- Se puede usar gliphy (es un add de google chrome).
+```
 
 ¿A qué nos referimos cuando hablamos de monitoreo de modelos?
 
@@ -28,6 +34,11 @@ Lo monitoreamos porque los modelos forman parte de un sistema dinámico, si hici
 > En particuar en *machine learning* los datos no son algo estático -o muy pocas veces lo son-, se van modificando conforme pasa el tiempo.
 
 **Concept Drift:** En *machine learning* este concepto se refiere a identificar el cambio entre los datos de entrada y la salida con el paso del tiempo.
+
+```
+## Rob Notes
+- data drift se refiere a como van evolucionando los datos.
+```
 
 > "In most challenging data analysis applications, data evolve over time and must be analyzed in near real time. Patterns and relations in such data often evolve over time, thus, models built for analyzing such data quickly become obsolete over time. In machine learning and data mining this phenomenon is referred to as concept drift."
 

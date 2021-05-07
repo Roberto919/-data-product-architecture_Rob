@@ -172,6 +172,12 @@ Fuente: [AWS API Management](https://aws.amazon.com/api-gateway/api-management/)
 
 ### Dashboards
 
+```
+## Rob notes
+- Es la forma de incorporar al cliente.
+- Hay demasiados dashboards en el mercado.
+```
+
 **Python**
 
 #### Bokeh
@@ -192,6 +198,12 @@ Para instalar Bokeh solo necesitas poner `pip install bokeh` en el pyenv/virtual
 + En general parece que el sentimiento es que Bokeh es más difícil que Dash y que es menos intuitivo
 + Mantenimiento por Anaconda
 + De licencia abierta
+
+```
+## Rob notes
+- Está cobrando más fuerza.
+- Parece que es más difícil Bokeh que Dash.
+```
 
 #### Dash
 
